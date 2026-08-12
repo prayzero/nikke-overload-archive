@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import overloadJson from "./overloads.json";
 import rosterJson from "./roster.json";
 
 type NikkeClass = "attacker" | "defender" | "supporter";
@@ -31,8 +32,28 @@ type StatKey =
   | "defense";
 
 type Scope = "all" | "owned" | "unowned";
+type BuildPriority = "meta" | "high" | "medium" | "low" | "skip";
+type BuildConfidence = "guide" | "mechanic" | "recent-guide" | "recent-kit";
+
+type OverloadBuild = {
+  name: string;
+  primary: Array<{
+    stat: StatKey;
+    count: number;
+    grade: "essential" | "ideal" | "filler";
+  }>;
+  alternatives: StatKey[];
+  avoid: StatKey[];
+  priority: BuildPriority;
+  mode: string;
+  note: string;
+  confidence: BuildConfidence;
+  verifiedAt: string;
+};
 
 const roster = rosterJson as Nikke[];
+const overloads = overloadJson as OverloadBuild[];
+const overloadByName = new Map(overloads.map((build) => [build.name, build]));
 const STORAGE_KEY = "nikke-overload-archive:roster:v1";
 
 const classLabels: Record<NikkeClass, string> = {
@@ -88,111 +109,30 @@ const gearSlots = [
   { code: "LEGS", label: "다리" },
 ] as const;
 
-const lastBulletNames = new Set([
-  "Dorothy",
-  "Anis: Sparkling Summer",
-  "Privaty",
-  "Privaty: Unkind Maid",
-  "Pepper",
-  "Marciana",
-  "Soline",
-]);
-
-const specialBuilds: Record<string, { stats: StatKey[]; note: string }> = {
-  Alice: {
-    stats: ["chargeSpeed", "element", "attack"],
-    note: "차지 속도 임계값을 먼저 맞춘 뒤 우월 코드와 공격력을 확보하세요.",
-  },
-  "Red Hood": {
-    stats: ["element", "attack", "chargeSpeed"],
-    note: "보스전 기준 우월 코드와 공격력이 핵심이며 차지 속도로 운용감을 보완합니다.",
-  },
-  "Snow White": {
-    stats: ["chargeDamage", "element", "attack"],
-    note: "버스트 한 발의 피해를 높이는 차지 대미지를 우선합니다.",
-  },
-  Modernia: {
-    stats: ["maxAmmo", "element", "attack"],
-    note: "지속 사격 시간을 늘리는 장탄 수가 최우선입니다.",
-  },
-  Scarlet: {
-    stats: ["maxAmmo", "element", "attack"],
-    note: "낮은 기본 탄창을 보완한 뒤 우월 코드와 공격력을 챙깁니다.",
-  },
-  "Scarlet: Black Shadow": {
-    stats: ["element", "attack", "maxAmmo"],
-    note: "우월 코드와 공격력을 중심으로 장탄 수를 보완합니다.",
-  },
-  "2B": {
-    stats: ["element", "critDamage", "attack"],
-    note: "자체 공격력 전환 효율을 고려해 우월 코드와 크리티컬 대미지를 우선합니다.",
-  },
-  Cinderella: {
-    stats: ["element", "attack", "chargeDamage"],
-    note: "우월 코드와 공격력을 기반으로 차지 대미지를 더합니다.",
-  },
-  "Cinderella: Crystal Wave": {
-    stats: ["element", "attack", "maxAmmo"],
-    note: "우월 코드와 공격력 4줄을 우선하고 장탄 수로 지속 화력을 보완합니다.",
-  },
-  "Snow White: Heavy Arms": {
-    stats: ["element", "attack", "critDamage"],
-    note: "우월 코드와 공격력이 핵심이며 크리티컬 대미지를 보조로 사용합니다.",
-  },
-  "Neon: Vision Eye": {
-    stats: ["element", "attack", "chargeSpeed"],
-    note: "우월 코드와 공격력을 중심으로 차지 속도를 보완합니다.",
-  },
+const priorityLabels: Record<BuildPriority, string> = {
+  meta: "META",
+  high: "HIGH",
+  medium: "MID",
+  low: "LOW",
+  skip: "재설정 비추천",
 };
 
-function getBuild(nikke: Nikke) {
-  if (specialBuilds[nikke.name]) return specialBuilds[nikke.name];
+const confidenceLabels: Record<BuildConfidence, string> = {
+  guide: "개별 가이드 검토",
+  mechanic: "기믹 규칙 기반",
+  "recent-guide": "최신 가이드",
+  "recent-kit": "최신 키트 기반",
+};
 
-  if (lastBulletNames.has(nikke.name)) {
-    return {
-      stats: ["element", "attack", "critDamage"] as StatKey[],
-      note: "막탄 기믹을 위해 최대 장탄 수는 피하고 화력 옵션을 우선합니다.",
-    };
-  }
-
-  if (nikke.class === "attacker") {
-    if (nikke.weapon === "MG") {
-      return {
-        stats: ["maxAmmo", "element", "attack"] as StatKey[],
-        note: "지속 화력형 세팅입니다. 장탄 수, 우월 코드, 공격력을 4줄씩 목표로 합니다.",
-      };
-    }
-    if (nikke.weapon === "SR" || nikke.weapon === "RL") {
-      return {
-        stats: ["element", "attack", "chargeSpeed"] as StatKey[],
-        note: "차지 무기 범용 세팅입니다. 캐릭터별 임계값이 있다면 차지 속도를 먼저 맞추세요.",
-      };
-    }
-    return {
-      stats: ["element", "attack", "maxAmmo"] as StatKey[],
-      note: "일반 PvE 화력형 범용 세팅입니다. 우월 코드와 공격력을 우선합니다.",
-    };
-  }
-
-  if (nikke.weapon === "SR" || nikke.weapon === "RL") {
-    return {
-      stats: ["chargeSpeed", "attack", "maxAmmo"] as StatKey[],
-      note: "지원 운용과 버스트 수급을 위한 차지 속도 중심의 범용 세팅입니다.",
-    };
-  }
-
-  if (nikke.weapon === "MG") {
-    return {
-      stats: ["maxAmmo", "attack", "hitRate"] as StatKey[],
-      note: "지속 사격과 스킬 계수를 보조하는 유틸리티 세팅입니다.",
-    };
-  }
-
-  return {
-    stats: ["attack", "maxAmmo", "hitRate"] as StatKey[],
-    note: "지원·방어형 범용 세팅입니다. 스킬 구조와 콘텐츠에 따라 투자 우선순위가 낮을 수 있습니다.",
-  };
+function getBuild(nikke: Nikke): OverloadBuild {
+  const build = overloadByName.get(nikke.name);
+  if (!build) throw new Error(`${nikke.name}의 오버로드 데이터가 없습니다.`);
+  return build;
 }
+
+const featuredNikkes = ["Rapi: Red Hood", "Cinderella", "Red Hood"]
+  .map((name) => roster.find((nikke) => nikke.name === name))
+  .filter((nikke): nikke is Nikke => Boolean(nikke));
 
 function getInitials(name: string) {
   return name
@@ -227,16 +167,28 @@ function NikkeArtwork({
         {getInitials(nikke.name)}
       </span>
       {source && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          className="nikke-artwork__image"
-          src={source}
-          alt={`${nikke.nameKo} 캐릭터 전신 일러스트`}
-          loading={variant === "card" ? "lazy" : "eager"}
-          decoding="async"
-          referrerPolicy="no-referrer"
-          onError={() => setSourceIndex((current) => current + 1)}
-        />
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="nikke-artwork__backdrop"
+            src={source}
+            alt=""
+            aria-hidden="true"
+            loading={variant === "card" ? "lazy" : "eager"}
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="nikke-artwork__image"
+            src={source}
+            alt={`${nikke.nameKo} 캐릭터 전신 일러스트`}
+            loading={variant === "card" ? "lazy" : "eager"}
+            decoding="async"
+            referrerPolicy="no-referrer"
+            onError={() => setSourceIndex((current) => current + 1)}
+          />
+        </>
       )}
       <span className="nikke-artwork__shade" aria-hidden="true" />
     </span>
@@ -320,6 +272,7 @@ export default function RosterArchive() {
 
   const ownedCount = ownedIds.size;
   const progress = Math.round((ownedCount / roster.length) * 100);
+  const selectedBuild = selected ? getBuild(selected) : null;
 
   function toggleOwned(nikke: Nikke) {
     setOwnedIds((current) => {
@@ -376,7 +329,7 @@ export default function RosterArchive() {
         </a>
         <div className="topbar-status">
           <span className="status-dot" aria-hidden="true" />
-          <span>DATA SNAPSHOT</span>
+          <span>196 BUILDS ONLINE</span>
           <strong>2026.08.12</strong>
         </div>
       </header>
@@ -385,11 +338,11 @@ export default function RosterArchive() {
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-grid" aria-hidden="true" />
           <div className="hero-copy">
-            <p className="eyebrow"><span>ARK DATABASE</span> / COMMANDER&apos;S INDEX</p>
-            <h1 id="hero-title">내 니케,<br /><em>한눈에.</em></h1>
+            <p className="eyebrow"><span>ARK DATABASE</span> / OVERLOAD LAB</p>
+            <h1 id="hero-title"><span>196명의</span><br /><em>오버로드.</em></h1>
             <p className="hero-description">
-              보유 니케를 체크하고, 각 니케의 오버로드 4부위 × 3옵션 목표를 바로 확인하세요.
-              선택한 목록은 이 기기에 자동 저장됩니다.
+              모든 니케의 추천 옵션을 4부위 × 3칸으로 정리했습니다.
+              흑백 일러스트를 눌러 보유 캐릭터를 컬러로 해제하고, 캐릭터별 목표 줄 수까지 확인하세요.
             </p>
             <div className="hero-actions">
               <a className="primary-action" href="#roster">전체 니케 보기 <span aria-hidden="true">↓</span></a>
@@ -397,7 +350,16 @@ export default function RosterArchive() {
             </div>
           </div>
 
-          <div className="hero-dashboard" aria-label="보유 현황">
+          <div className="hero-visual">
+            <div className="hero-portraits" aria-hidden="true">
+              {featuredNikkes.map((nikke, index) => (
+                <span className={`hero-portrait hero-portrait--${["secondary", "primary", "tertiary"][index]}`} key={nikke.id}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={nikke.artwork} alt="" decoding="async" referrerPolicy="no-referrer" />
+                </span>
+              ))}
+            </div>
+            <div className="hero-dashboard" aria-label="보유 현황">
             <div className="dashboard-topline">
               <span>ROSTER SYNC</span>
               <span>{hydrated ? "ONLINE" : "LOADING"}</span>
@@ -419,6 +381,7 @@ export default function RosterArchive() {
             <div className="matrix-motif" aria-hidden="true">
               {Array.from({ length: 12 }, (_, index) => <span key={index} className={index < Math.max(1, Math.round(progress / 9)) ? "active" : ""} />)}
             </div>
+            </div>
           </div>
         </section>
 
@@ -426,8 +389,8 @@ export default function RosterArchive() {
           <div className="section-heading">
             <div>
               <p className="eyebrow"><span>01</span> PERSONNEL ROSTER</p>
-              <h2 id="roster-title">전체 니케 아카이브</h2>
-              <p>일러스트를 누르면 미보유의 흑백 상태가 컬러로 전환됩니다.</p>
+              <h2 id="roster-title">전체 니케 빌드 아카이브</h2>
+              <p>일러스트를 누르면 흑백에서 컬러로 전환됩니다. OL 버튼에서 캐릭터별 추천을 확인하세요.</p>
             </div>
             <div className="section-tools">
               <button type="button" className="text-button" onClick={exportRoster} disabled={!ownedCount}>목록 내보내기</button>
@@ -495,6 +458,7 @@ export default function RosterArchive() {
             <div className="character-grid">
               {filteredRoster.map((nikke, index) => {
                 const isOwned = ownedIds.has(nikke.id);
+                const build = getBuild(nikke);
                 return (
                   <article className={`nikke-card ${isOwned ? "owned" : ""}`} key={nikke.id}>
                     <button
@@ -507,6 +471,7 @@ export default function RosterArchive() {
                       <span className="card-index" aria-hidden="true">{String(index + 1).padStart(3, "0")}</span>
                       <NikkeArtwork nikke={nikke} owned={isOwned} variant="card" />
                       <span className="owned-badge"><b aria-hidden="true">✓</b>{isOwned ? "보유 중" : "미보유"}</span>
+                      <span className={`ol-rank ol-rank--${build.priority}`}>OL {priorityLabels[build.priority]}</span>
                       <span className="scan-line" aria-hidden="true" />
                     </button>
                     <div className="card-body">
@@ -518,7 +483,7 @@ export default function RosterArchive() {
                       <h3>{nikke.nameKo}</h3>
                       <p>{nikke.name}</p>
                       <button type="button" className="overload-button" onClick={() => setSelected(nikke)}>
-                        오버로드 보기 <span aria-hidden="true">↗</span>
+                        {build.mode} 빌드 보기 <span aria-hidden="true">↗</span>
                       </button>
                     </div>
                   </article>
@@ -538,12 +503,12 @@ export default function RosterArchive() {
         <section className="guide-section" aria-labelledby="guide-title">
           <div>
             <p className="eyebrow"><span>02</span> LOADOUT PROTOCOL</p>
-            <h2 id="guide-title">오버로드 추천을 읽는 법</h2>
+            <h2 id="guide-title">12칸을 낭비하지 않는 법</h2>
           </div>
           <div className="guide-grid">
-            <article><span>01</span><h3>4부위 × 3옵션</h3><p>머리·몸통·팔·다리마다 목표 옵션 3개를 우선순위대로 보여줍니다.</p></article>
-            <article><span>02</span><h3>범용 PvE 기준</h3><p>우월 코드와 공격력을 기본으로 무기와 캐릭터 기믹을 반영합니다.</p></article>
-            <article><span>03</span><h3>세팅은 달라질 수 있음</h3><p>큐브, 파티, 보스, PvP, 차지 임계값에 따라 최종 세팅은 달라질 수 있습니다.</p></article>
+            <article><span>01</span><h3>4부위 × 3옵션</h3><p>머리·몸통·팔·다리의 세 줄을 그대로 배치합니다. 목표 개수 밖은 자유 옵션으로 표시됩니다.</p></article>
+            <article><span>02</span><h3>기믹별 개별 추천</h3><p>막탄, 차지 임계값, 지속 사격, HP 스케일링처럼 캐릭터마다 다른 조건을 반영합니다.</p></article>
+            <article><span>03</span><h3>투자 우선도 표시</h3><p>META부터 재설정 비추천까지 구분해 커스텀 모듈을 어디에 먼저 쓸지 보여줍니다.</p></article>
           </div>
         </section>
       </main>
@@ -558,7 +523,7 @@ export default function RosterArchive() {
         </div>
       </footer>
 
-      {selected && (
+      {selected && selectedBuild && (
         <div
           className="drawer-backdrop"
           role="presentation"
@@ -585,43 +550,61 @@ export default function RosterArchive() {
                 <h2 id="drawer-title">{selected.nameKo}</h2>
                 <span>{selected.name}</span>
                 <div className="identity-tags">
-                  <b>BURST {selected.burst}</b><b>{selected.weapon}</b><b>{classLabels[selected.class]}</b>
+                  <b>BURST {selected.burst}</b><b>{selected.weapon}</b><b>{classLabels[selected.class]}</b><b>{selectedBuild.mode}</b>
                 </div>
               </div>
             </div>
 
             <div className="loadout-heading">
-              <div><p>RECOMMENDED OVERLOAD</p><h3>목표 옵션 매트릭스</h3></div>
+              <div><p>RECOMMENDED OVERLOAD</p><h3>4부위 × 3줄 목표</h3></div>
               <span>4 × 3</span>
             </div>
 
             <div className="gear-matrix">
-              {gearSlots.map((slot) => {
-                const build = getBuild(selected);
-                return (
-                  <article key={slot.code}>
-                    <header><span>{slot.code}</span><strong>{slot.label}</strong></header>
-                    <ol>
-                      {build.stats.map((stat, index) => (
-                        <li key={stat} className={`stat-${stat}`}>
-                          <span>0{index + 1}</span><strong>{statLabels[stat]}</strong>
+              {gearSlots.map((slot, slotIndex) => (
+                <article key={slot.code}>
+                  <header><span>{slot.code}</span><strong>{slot.label}</strong></header>
+                  <ol>
+                    {selectedBuild.primary.map((target, optionIndex) => {
+                      const isTargetSlot = slotIndex < target.count;
+                      return (
+                        <li
+                          key={target.stat}
+                          className={`${isTargetSlot ? `stat-${target.stat} target-${target.grade}` : "stat-free is-flex"}`}
+                        >
+                          <span>0{optionIndex + 1}</span>
+                          <strong>{isTargetSlot ? statLabels[target.stat] : "자유 옵션"}</strong>
+                          <small>{isTargetSlot ? `${target.count}/4 목표` : "KEEP / FLEX"}</small>
                         </li>
-                      ))}
-                    </ol>
-                  </article>
-                );
-              })}
+                      );
+                    })}
+                  </ol>
+                </article>
+              ))}
             </div>
 
             <div className="build-summary">
-              <p>CORE TARGET</p>
-              <div>{getBuild(selected).stats.map((stat) => <span key={stat}>{statShortLabels[stat]} ×4</span>)}</div>
-              <p className="build-note">{getBuild(selected).note}</p>
+              <div className="build-meta">
+                <span className={`build-priority build-priority--${selectedBuild.priority}`}>{priorityLabels[selectedBuild.priority]}</span>
+                <span>{selectedBuild.mode}</span>
+                <span>{confidenceLabels[selectedBuild.confidence]}</span>
+              </div>
+              <p>CORE TARGET · 4부위 합산</p>
+              <div className="core-targets">
+                {selectedBuild.primary.map((target) => (
+                  <span key={target.stat}>{statShortLabels[target.stat]} ×{target.count}</span>
+                ))}
+              </div>
+              <div className="option-groups">
+                <p><b>대체/유효</b>{selectedBuild.alternatives.length ? selectedBuild.alternatives.map((stat) => statShortLabels[stat]).join(" · ") : "자유 옵션"}</p>
+                <p className={selectedBuild.avoid.length ? "is-avoid" : ""}><b>회피</b>{selectedBuild.avoid.length ? selectedBuild.avoid.map((stat) => statShortLabels[stat]).join(" · ") : "없음"}</p>
+              </div>
+              <p className="build-note">{selectedBuild.note}</p>
             </div>
 
             <div className="drawer-caution">
               <span aria-hidden="true">!</span>
-              <p><strong>일반 PvE 1차 목표</strong>수치 임계, 파티 조합, 큐브와 콘텐츠에 따라 옵션 우선순위가 달라질 수 있습니다.</p>
+              <p><strong>{selectedBuild.verifiedAt} 데이터 · 부위 순서 무관</strong>목표 줄 수를 4부위에 배치한 예시입니다. 큐브·파티·보스·PvP 임계값에 따라 최종 세팅은 달라질 수 있습니다.</p>
             </div>
 
             <button type="button" className={`drawer-owned ${ownedIds.has(selected.id) ? "active" : ""}`} onClick={() => toggleOwned(selected)}>

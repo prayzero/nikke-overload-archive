@@ -36,7 +36,7 @@ jobs:
       - name: Build static site
         run: npm run build
         env:
-          NEXT_PUBLIC_ASSET_PREFIX: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_ASSET_PREFIX: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
 
       - name: Upload Pages artifact
@@ -54,3 +54,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Checkout smoke-test script
+        uses: actions/checkout@v6
+
+      - name: Verify deployed CSS and JavaScript
+        run: node scripts/check-deployed.mjs "${{ steps.deployment.outputs.page_url }}"

@@ -38,6 +38,7 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+/.artifacts/
 /.dev-output.log
 /.dev-error.log
 /.preview-output.log

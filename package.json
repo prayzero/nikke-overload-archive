@@ -6,12 +6,14 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "prebuild": "npm run overload:build",
     "dev": "node scripts/run-vinext.mjs dev",
     "build": "node scripts/run-vinext.mjs build",
     "start": "node scripts/run-vinext.mjs start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "artwork:refresh": "node scripts/refresh-artwork.mjs",
+    "overload:build": "node scripts/build-overloads.mjs",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
