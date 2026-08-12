@@ -788,11 +788,12 @@ a {
 }
 
 .portrait-toggle {
-  aspect-ratio: 1 / 1.05;
+  aspect-ratio: 4 / 5;
   background:
-    radial-gradient(circle at 50% 45%, #303844 0, #1b2027 45%, #101419 76%);
+    radial-gradient(circle at 50% 34%, #3b4653 0, #202731 48%, #0d1116 82%);
   cursor: pointer;
   display: block;
+  isolation: isolate;
   overflow: hidden;
   padding: 0;
   position: relative;
@@ -805,37 +806,69 @@ a {
     linear-gradient(transparent 49.5%, rgba(85, 214, 255, 0.12) 50%, transparent 50.5%);
   content: "";
   inset: 0;
+  opacity: 0.58;
+  pointer-events: none;
+  position: absolute;
+  z-index: 3;
+}
+
+.nikke-artwork {
+  display: block;
+  height: 100%;
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.nikke-artwork__image {
+  height: 100%;
+  inset: 0;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 5px 3px 0;
+  position: absolute;
+  transform: scale(1.02);
+  transform-origin: center bottom;
+  transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
+  width: 100%;
+  z-index: 1;
+}
+
+.nikke-artwork.is-unowned .nikke-artwork__image {
+  filter: grayscale(1) contrast(0.96) brightness(0.82);
+  opacity: 0.93;
+}
+
+.nikke-artwork.is-owned .nikke-artwork__image {
+  filter: grayscale(0) contrast(1.03) brightness(1.03) saturate(1.06);
+  opacity: 1;
+}
+
+.nikke-card:hover .nikke-artwork__image {
+  transform: scale(1.06);
+}
+
+.nikke-card:not(.owned):hover .nikke-artwork__image {
+  filter: grayscale(1) contrast(1) brightness(0.92);
+}
+
+.nikke-card.owned:hover .nikke-artwork__image {
+  filter: grayscale(0) contrast(1.04) brightness(1.08) saturate(1.08);
+}
+
+.nikke-artwork__shade {
+  background:
+    linear-gradient(to top, rgba(7, 10, 13, 0.82), transparent 28%),
+    linear-gradient(to right, rgba(85, 214, 255, 0.07), transparent 38%);
+  inset: 0;
   pointer-events: none;
   position: absolute;
   z-index: 2;
 }
 
-.portrait-toggle img {
-  filter: grayscale(1) contrast(0.84) brightness(0.55);
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  position: absolute;
-  transform: scale(1.01);
-  transition: filter 220ms ease, transform 220ms ease;
-  width: 100%;
-  z-index: 1;
-}
-
-.nikke-card:hover .portrait-toggle img {
-  filter: grayscale(1) contrast(0.95) brightness(0.68);
-  transform: scale(1.04);
-}
-
-.nikke-card.owned .portrait-toggle img {
-  filter: grayscale(0) contrast(1.03) brightness(1);
-}
-
-.nikke-card.owned:hover .portrait-toggle img {
-  filter: grayscale(0) contrast(1.04) brightness(1.07);
-}
-
-.portrait-fallback {
+.nikke-artwork__fallback {
   color: #38434e;
   font-family: var(--font-mono);
   font-size: 52px;
@@ -847,7 +880,7 @@ a {
   transform: translate(-50%, -50%);
 }
 
-.image-failed .portrait-fallback {
+.nikke-artwork.is-failed .nikke-artwork__fallback {
   color: var(--muted);
 }
 
@@ -1197,17 +1230,19 @@ footer > p {
 }
 
 .drawer-identity {
-  align-items: center;
+  align-items: stretch;
   display: grid;
-  gap: 27px;
-  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 28px;
+  grid-template-columns: minmax(220px, 250px) minmax(0, 1fr);
+  min-height: 330px;
   padding: 27px 0;
 }
 
 .drawer-portrait {
-  aspect-ratio: 1;
-  background: var(--panel);
+  aspect-ratio: 3 / 4;
+  background: radial-gradient(circle at 50% 32%, #35404c, #171d24 58%, #0d1116);
   border: 1px solid var(--line-bright);
+  min-height: 310px;
   overflow: hidden;
   position: relative;
 }
@@ -1222,32 +1257,20 @@ footer > p {
   z-index: 3;
 }
 
-.drawer-portrait > span {
-  color: var(--muted-low);
-  font-family: var(--font-mono);
-  font-size: 36px;
-  font-weight: 900;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.drawer-portrait img {
-  filter: grayscale(1) brightness(0.6);
-  height: 100%;
-  object-fit: cover;
-  position: relative;
-  width: 100%;
-  z-index: 1;
+.drawer-portrait .nikke-artwork__image {
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 8px 4px 0;
+  transform: scale(1.01);
 }
 
 .drawer-portrait.owned {
   border-color: var(--lime);
 }
 
-.drawer-portrait.owned img {
-  filter: none;
+.drawer-identity > div:last-child {
+  align-self: end;
+  padding-bottom: 18px;
 }
 
 .drawer-identity > div:last-child > p {
@@ -1734,7 +1757,21 @@ footer > p {
 
   .drawer-identity {
     gap: 17px;
-    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .drawer-portrait {
+    aspect-ratio: 4 / 5;
+    margin-inline: auto;
+    max-height: 52vh;
+    min-height: 280px;
+    width: min(100%, 320px);
+  }
+
+  .drawer-identity > div:last-child {
+    align-self: auto;
+    padding-bottom: 0;
   }
 
   .drawer-identity h2 {

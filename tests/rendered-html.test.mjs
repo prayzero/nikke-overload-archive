@@ -24,3 +24,15 @@ test("includes Pages and social assets", async () => {
     access(new URL("public/og.png", root)),
   ]);
 });
+
+test("maps full-body artwork for every playable Nikke", async () => {
+  const roster = JSON.parse(await readFile(new URL("app/roster.json", root), "utf8"));
+
+  assert.equal(roster.length, 196);
+  assert.equal(roster.filter((nikke) => nikke.artwork).length, 196);
+  assert.ok(
+    roster.every((nikke) =>
+      nikke.artwork.startsWith("https://static.wikia.nocookie.net/"),
+    ),
+  );
+});

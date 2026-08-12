@@ -11,6 +11,7 @@ type Nikke = {
   name: string;
   nameKo: string;
   image: string;
+  artwork: string;
   class: NikkeClass;
   weapon: Weapon;
   burst: string;
@@ -201,6 +202,45 @@ function getInitials(name: string) {
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+}
+
+function NikkeArtwork({
+  nikke,
+  owned,
+  variant,
+}: {
+  nikke: Nikke;
+  owned: boolean;
+  variant: "card" | "detail";
+}) {
+  const sources = [nikke.artwork, nikke.image].filter(
+    (source, index, allSources) => source && allSources.indexOf(source) === index,
+  );
+  const [sourceIndex, setSourceIndex] = useState(0);
+  const source = sources[sourceIndex];
+
+  return (
+    <span
+      className={`nikke-artwork nikke-artwork--${variant} ${owned ? "is-owned" : "is-unowned"} ${source ? "" : "is-failed"}`}
+    >
+      <span className="nikke-artwork__fallback" aria-hidden="true">
+        {getInitials(nikke.name)}
+      </span>
+      {source && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          className="nikke-artwork__image"
+          src={source}
+          alt={`${nikke.nameKo} 캐릭터 전신 일러스트`}
+          loading={variant === "card" ? "lazy" : "eager"}
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => setSourceIndex((current) => current + 1)}
+        />
+      )}
+      <span className="nikke-artwork__shade" aria-hidden="true" />
+    </span>
+  );
 }
 
 export default function RosterArchive() {
@@ -465,18 +505,7 @@ export default function RosterArchive() {
                       onClick={() => toggleOwned(nikke)}
                     >
                       <span className="card-index" aria-hidden="true">{String(index + 1).padStart(3, "0")}</span>
-                      <span className="portrait-fallback" aria-hidden="true">{getInitials(nikke.name)}</span>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={nikke.image}
-                        alt={`${nikke.nameKo} 캐릭터 일러스트`}
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                        onError={(event) => {
-                          event.currentTarget.hidden = true;
-                          event.currentTarget.parentElement?.classList.add("image-failed");
-                        }}
-                      />
+                      <NikkeArtwork nikke={nikke} owned={isOwned} variant="card" />
                       <span className="owned-badge"><b aria-hidden="true">✓</b>{isOwned ? "보유 중" : "미보유"}</span>
                       <span className="scan-line" aria-hidden="true" />
                     </button>
@@ -521,9 +550,9 @@ export default function RosterArchive() {
 
       <footer>
         <div className="footer-brand"><span>{"//"}</span> NIKKE OVERLOAD ARCHIVE</div>
-        <p>GODDESS OF VICTORY: NIKKE 비공식·비상업 팬 아카이브입니다. 게임 및 캐릭터 권리는 SHIFT UP에 있습니다.</p>
+        <p>비공식·비상업 팬 프로젝트입니다. NIKKE의 캐릭터·명칭·이미지 권리는 © Proxima Beta Pte. Limited, © SHIFT UP CORP. 및 각 라이선스 제공자에게 있습니다.</p>
         <div className="footer-links">
-          <a href="https://nikke-goddess-of-victory-international.fandom.com/wiki/Category:Playable_characters" target="_blank" rel="noreferrer">명단·대표 이미지 출처 (CC BY-SA)</a>
+          <a href="https://nikke-goddess-of-victory-international.fandom.com/wiki/Category:Playable_characters" target="_blank" rel="noreferrer">명단·이미지 참고</a>
           <a href="https://nikke.gg/overload-equipment/" target="_blank" rel="noreferrer">오버로드 기본 원리</a>
           <a href="https://policy.shiftup.co.kr/ip/en/index.html" target="_blank" rel="noreferrer">SHIFT UP IP 가이드</a>
         </div>
@@ -549,9 +578,7 @@ export default function RosterArchive() {
             </div>
             <div className="drawer-identity">
               <div className={`drawer-portrait ${ownedIds.has(selected.id) ? "owned" : ""}`}>
-                <span>{getInitials(selected.name)}</span>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={selected.image} alt={`${selected.nameKo} 일러스트`} referrerPolicy="no-referrer" />
+                <NikkeArtwork key={selected.id} nikke={selected} owned={ownedIds.has(selected.id)} variant="detail" />
               </div>
               <div>
                 <p>{manufacturerLabels[selected.manufacturer] ?? selected.manufacturer} / {codeLabels[selected.code] ?? selected.code}</p>
