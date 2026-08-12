@@ -5,6 +5,11 @@ const outputPath = new URL("../app/overloads.json", import.meta.url);
 const roster = JSON.parse((await readFile(rosterPath, "utf8")).replace(/^\uFEFF/, ""));
 
 const line = (stat, count, grade = "ideal") => ({ stat, count, grade });
+const validStats = new Set([
+  "attack", "element", "maxAmmo", "chargeSpeed", "chargeDamage",
+  "hitRate", "critRate", "critDamage", "defense",
+]);
+const validGrades = new Set(["essential", "ideal", "filler"]);
 const make = ({
   primary,
   alternatives = [],
@@ -14,6 +19,20 @@ const make = ({
   note,
   confidence = "mechanic",
 }) => ({ primary, alternatives, avoid, priority, mode, note, confidence });
+
+const unique = (values) => [...new Set(values)];
+
+function normalizeBuild(build) {
+  const avoid = unique(build.avoid);
+  const excludedAlternatives = new Set([
+    ...build.primary.map(({ stat }) => stat),
+    ...avoid,
+  ]);
+  const alternatives = unique(build.alternatives)
+    .filter((stat) => !excludedAlternatives.has(stat));
+
+  return { ...build, alternatives, avoid };
+}
 
 const profiles = {
   ar: make({
@@ -467,7 +486,7 @@ const overrides = {
   }),
 };
 
-const output = roster.map((nikke) => ({
+const output = roster.map((nikke) => normalizeBuild({
   name: nikke.name,
   ...defaultProfile(nikke),
   ...(overrides[nikke.name] ?? {}),
@@ -490,8 +509,27 @@ for (const entry of output) {
   if (entry.primary.some(({ count }) => count < 1 || count > 4)) {
     throw new Error(`${entry.name}: option counts must stay between 1 and 4.`);
   }
+  if (entry.primary.some(({ stat, grade }) => !validStats.has(stat) || !validGrades.has(grade))) {
+    throw new Error(`${entry.name}: primary options must use supported stats and grades.`);
+  }
+  if ([...entry.alternatives, ...entry.avoid].some((stat) => !validStats.has(stat))) {
+    throw new Error(`${entry.name}: alternatives and avoided options must use supported stats.`);
+  }
+  if (entry.primary.reduce((total, { count }) => total + count, 0) > 12) {
+    throw new Error(`${entry.name}: target lines cannot exceed four gear pieces by three slots.`);
+  }
   if (entry.primary.some(({ stat }) => entry.avoid.includes(stat))) {
     throw new Error(`${entry.name}: a primary option cannot also be avoided.`);
+  }
+  if (new Set(entry.alternatives).size !== entry.alternatives.length) {
+    throw new Error(`${entry.name}: alternative option names must be unique.`);
+  }
+  if (new Set(entry.avoid).size !== entry.avoid.length) {
+    throw new Error(`${entry.name}: avoided option names must be unique.`);
+  }
+  const primaryStats = new Set(entry.primary.map(({ stat }) => stat));
+  if (entry.alternatives.some((stat) => primaryStats.has(stat) || entry.avoid.includes(stat))) {
+    throw new Error(`${entry.name}: alternatives must be disjoint from primary and avoided options.`);
   }
 }
 

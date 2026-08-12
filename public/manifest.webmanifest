@@ -1,0 +1,25 @@
+{
+  "name": "NIKKE Overload Archive",
+  "short_name": "NIKKE OL",
+  "description": "196명 전체 니케의 보유 현황과 캐릭터별 오버로드 추천 아카이브",
+  "lang": "ko",
+  "start_url": "/nikke-overload-archive/",
+  "scope": "/nikke-overload-archive/",
+  "display": "standalone",
+  "background_color": "#070a0d",
+  "theme_color": "#d8ff3e",
+  "icons": [
+    {
+      "src": "/nikke-overload-archive/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/nikke-overload-archive/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -206,6 +206,8 @@ export default function RosterArchive() {
   const [selected, setSelected] = useState<Nikke | null>(null);
   const [toast, setToast] = useState("");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const dialogOpenerRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -227,10 +229,14 @@ export default function RosterArchive() {
 
   useEffect(() => {
     if (!hydrated) return;
-    window.localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ version: 1, ownedIds: [...ownedIds], updatedAt: new Date().toISOString() }),
-    );
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ version: 1, ownedIds: [...ownedIds], updatedAt: new Date().toISOString() }),
+      );
+    } catch {
+      // Storage can be disabled or full; the in-memory roster must remain usable.
+    }
   }, [ownedIds, hydrated]);
 
   useEffect(() => {
@@ -242,15 +248,50 @@ export default function RosterArchive() {
   useEffect(() => {
     if (!selected) return;
     const previousOverflow = document.body.style.overflow;
+    const opener = dialogOpenerRef.current;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelected(null);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setSelected(null);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => element.getAttribute("aria-hidden") !== "true");
+
+      if (!focusable.length) {
+        event.preventDefault();
+        dialog.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && (active === first || !dialog.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !dialog.contains(active))) {
+        event.preventDefault();
+        first.focus();
+      }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      if (opener?.isConnected) opener.focus();
     };
   }, [selected]);
 
@@ -370,9 +411,14 @@ export default function RosterArchive() {
               <span className="count-total">{roster.length}</span>
             </div>
             <div className="progress-label"><span>보유율</span><strong>{progress}%</strong></div>
-            <div className="progress-track" aria-label={`보유율 ${progress}%`}>
-              <span style={{ width: `${progress}%` }} />
-            </div>
+            <progress
+              className="progress-track"
+              aria-label={`보유율 ${progress}%`}
+              value={ownedCount}
+              max={roster.length}
+            >
+              {progress}%
+            </progress>
             <div className="dashboard-metrics">
               <div><span>TOTAL</span><strong>{roster.length}</strong><small>전체 니케</small></div>
               <div><span>OWNED</span><strong>{ownedCount}</strong><small>보유 니케</small></div>
@@ -482,7 +528,15 @@ export default function RosterArchive() {
                       </div>
                       <h3>{nikke.nameKo}</h3>
                       <p>{nikke.name}</p>
-                      <button type="button" className="overload-button" onClick={() => setSelected(nikke)}>
+                      <button
+                        type="button"
+                        className="overload-button"
+                        aria-label={`${nikke.nameKo} (${nikke.name}) ${build.mode} 오버로드 빌드 보기`}
+                        onClick={(event) => {
+                          dialogOpenerRef.current = event.currentTarget;
+                          setSelected(nikke);
+                        }}
+                      >
                         {build.mode} 빌드 보기 <span aria-hidden="true">↗</span>
                       </button>
                     </div>
@@ -532,10 +586,12 @@ export default function RosterArchive() {
           }}
         >
           <aside
+            ref={dialogRef}
             className="detail-drawer"
             role="dialog"
             aria-modal="true"
             aria-labelledby="drawer-title"
+            tabIndex={-1}
           >
             <div className="drawer-header">
               <p><span>LOADOUT FILE</span> / {selected.id}</p>

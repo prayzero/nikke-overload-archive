@@ -23,6 +23,15 @@ npm run dev
 
 프로덕션 정적 빌드는 `npm run build`로 생성되며 결과물은 `dist/client/` 폴더에 저장됩니다.
 
+## 품질·보안 검사
+
+```bash
+npm run qa
+npm run artwork:check
+```
+
+`qa`는 타입, 린트, 정적 빌드와 196명 데이터·배포 자산 테스트를 실행합니다. 빌드 결과에는 해시 기반 Content Security Policy가 자동 적용되며, 외부 일러스트 주소는 별도의 주간 GitHub Actions 검사로 확인합니다.
+
 ## 데이터와 권리
 
 캐릭터 명단·한국어 이름·대표 이미지는 NIKKE International Wiki를 참고해 2026-08-12에 스냅샷했습니다. 이미지에는 위키 본문의 CC BY-SA가 자동으로 적용된다고 보지 않습니다. 오버로드 값은 범용 PvE 원칙과 캐릭터 기믹을 바탕으로 작성한 1차 목표이며, 파티·콘텐츠·큐브와 수치 임계에 따라 달라질 수 있습니다.

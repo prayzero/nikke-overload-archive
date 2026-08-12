@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /nikke-overload-archive/
+
+Sitemap: https://prayzero.github.io/nikke-overload-archive/sitemap.xml
