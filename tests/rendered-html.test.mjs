@@ -11,8 +11,12 @@ test("exports the complete static archive", async () => {
   assert.match(html, /<html[^>]+lang="ko"/i);
   assert.match(html, /<title>NIKKE \/\/ OVERLOAD ARCHIVE<\/title>/i);
   assert.match(html, /전체 니케 빌드 아카이브/);
-  assert.match(html, /196/);
-  assert.match(html, /빌드 보기/);
+  assert.match(html, /199/);
+  assert.match(html, /세팅 보기/);
+  assert.match(html, /퀸\(니지마 마코토\)/);
+  assert.match(html, /아마기 유키코/);
+  assert.match(html, /아이기스/);
+  assert.match(html, /추천 오버로드와 큐브/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 
@@ -43,6 +47,7 @@ test("includes hardened metadata and Pages assets", async () => {
   assert.match(html.slice(0, 180), /<head><meta charSet="utf-8"\/><meta http-equiv="Content-Security-Policy"/i);
   assert.ok(html.indexOf(cspMeta[0]) < html.indexOf("<script"));
   assert.match(cspMeta[1], /script-src 'self' 'sha256-/);
+  assert.match(cspMeta[1], /img-src[^;]+https:\/\/nikke-db-legacy\.pages\.dev/);
   assert.doesNotMatch(cspMeta[1], /unsafe-inline/);
   assert.match(html, /name="referrer" content="no-referrer"/i);
   assert.ok(canonical);
@@ -74,12 +79,25 @@ test("includes hardened metadata and Pages assets", async () => {
 test("maps full-body artwork for every playable Nikke", async () => {
   const roster = JSON.parse(await readFile(new URL("app/roster.json", root), "utf8"));
 
-  assert.equal(roster.length, 196);
-  assert.equal(roster.filter((nikke) => nikke.artwork).length, 196);
+  assert.equal(roster.length, 199);
+  assert.equal(roster.filter((nikke) => nikke.artwork).length, 199);
   assert.ok(
     roster.every((nikke) =>
       nikke.artwork.startsWith("https://static.wikia.nocookie.net/"),
     ),
+  );
+  assert.ok(roster.every(({ image }) => /^https:\/\//.test(image)));
+  assert.deepEqual(
+    roster
+      .filter(({ id }) => ["c870", "c871", "c872"].includes(id))
+      .map(({ name }) => name)
+      .sort(),
+    ["Aigis", "Queen (Makoto Niijima)", "Yukiko Amagi"],
+  );
+  assert.ok(
+    roster
+      .filter(({ id }) => ["c870", "c871", "c872"].includes(id))
+      .every(({ image }) => image.startsWith("https://nikke-db-legacy.pages.dev/")),
   );
 });
 
@@ -116,4 +134,44 @@ test("provides one validated overload build for every playable Nikke", async () 
     return [...primaryStats].every((stat) => !alternatives.has(stat) && !avoid.has(stat))
       && [...alternatives].every((stat) => !avoid.has(stat));
   }));
+});
+
+test("provides one validated cube recommendation for every playable Nikke", async () => {
+  const roster = JSON.parse(await readFile(new URL("app/roster.json", root), "utf8"));
+  const recommendations = JSON.parse(await readFile(new URL("app/cubes.json", root), "utf8"));
+  const validCubeIds = new Set([
+    "assault", "onslaught", "resilience", "bastion", "adjutant", "wingman",
+    "quantum", "vigor", "endurance", "healing", "tempering", "assist",
+    "destruction", "piercing", "crush", "cover", "divide",
+  ]);
+  const validConfidence = new Set(["guide", "mechanic"]);
+
+  assert.equal(recommendations.length, roster.length);
+  assert.deepEqual(
+    recommendations.map(({ name }) => name).sort(),
+    roster.map(({ name }) => name).sort(),
+  );
+  assert.equal(new Set(recommendations.map(({ name }) => name)).size, roster.length);
+  assert.ok(recommendations.every(({ primary }) => validCubeIds.has(primary)));
+  assert.ok(recommendations.every(({ alternatives }) =>
+    Array.isArray(alternatives)
+      && alternatives.every((cubeId) => validCubeIds.has(cubeId))
+      && new Set(alternatives).size === alternatives.length));
+  assert.ok(recommendations.every(({ primary, alternatives }) => !alternatives.includes(primary)));
+  assert.ok(recommendations.every(({ mode, note }) =>
+    typeof mode === "string" && mode.trim().length > 0
+      && typeof note === "string" && note.trim().length > 0));
+  assert.ok(recommendations.every(({ confidence }) => validConfidence.has(confidence)));
+  assert.ok(recommendations.every(({ verifiedAt }) => /^\d{4}-\d{2}-\d{2}$/.test(verifiedAt)));
+});
+
+test("renders accessible cube guidance in the character detail drawer", async () => {
+  const component = await readFile(new URL("app/roster-archive.tsx", root), "utf8");
+
+  assert.match(component, /추천 큐브/);
+  assert.match(component, /className="card-cube"/);
+  assert.match(component, /className="cube-recommendation"/);
+  assert.match(component, /aria-labelledby=\{`drawer-cube-title-/);
+  assert.match(component, /aria-describedby=\{`drawer-cube-note-/);
+  assert.match(component, /<ol className="cube-options" aria-label=/);
 });

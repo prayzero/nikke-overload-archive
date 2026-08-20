@@ -33,14 +33,16 @@ if (isWindowsBuild && result.status !== 0) {
   // runtime/build; both values are the same exact 0xC0000409 status.
   const expectedStatuses = new Set([-1073740791, 3221226505]);
   const expectedSuccessLine = "Build complete. Run `vinext start` to start the production server.";
-  const expectedAssertion =
-    "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\\win\\async.c, line 76";
+  const expectedAssertions = new Set([
+    "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\\win\\async.c, line 76",
+    "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\\win\\async.c, line 94",
+  ]);
 
   try {
     const output = statSync(fileURLToPath(new URL("../dist/client/index.html", import.meta.url)));
     const outputIsFresh = output.size > 1_000 && output.mtimeMs >= startedAt - 1_000;
     const exportCompleted = result.stdout?.includes(expectedSuccessLine);
-    const assertionMatches = result.stderr?.trim() === expectedAssertion;
+    const assertionMatches = expectedAssertions.has(result.stderr?.trim());
 
     if (expectedStatuses.has(result.status) && outputIsFresh && exportCompleted && assertionMatches) {
       console.warn("[build] Static export completed; ignored vinext Windows cleanup assertion.");

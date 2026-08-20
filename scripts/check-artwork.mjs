@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 
 const rosterPath = new URL("../app/roster.json", import.meta.url);
 const roster = JSON.parse((await readFile(rosterPath, "utf8")).replace(/^\uFEFF/, ""));
-const expectedArtworkCount = 196;
+const expectedArtworkCount = 199;
 const concurrency = 12;
 const retries = 2;
 const timeoutMs = 10_000;

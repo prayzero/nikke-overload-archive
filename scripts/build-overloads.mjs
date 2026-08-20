@@ -114,6 +114,21 @@ const overrides = {
     alternatives: ["maxAmmo", "chargeDamage"], priority: "low", mode: "보스/PvP",
     note: "부위가 많은 보스용. 우월 코드·공격력 뒤 차지 속도를 확보하고 장탄 수는 1~2줄만 사용합니다.", confidence: "guide",
   }),
+  "Aigis": make({
+    primary: [line("attack", 1, "filler"), line("maxAmmo", 1, "filler"), line("element", 1, "filler")],
+    alternatives: ["hitRate", "critRate", "defense"], priority: "skip", mode: "범용",
+    note: "지원형 SR이라 4부위 개조와 자연스럽게 붙은 유효 줄만 사용합니다. 커스텀 모듈을 써서 재설정하는 것은 권장하지 않습니다.", confidence: "recent-kit",
+  }),
+  "Queen (Makoto Niijima)": make({
+    primary: [line("element", 4, "essential"), line("attack", 4), line("maxAmmo", 2)],
+    alternatives: ["critRate", "critDamage", "hitRate"], priority: "medium", mode: "보스",
+    note: "작열 약점 보스에서 우월 코드와 공격력을 우선하고, 장탄 수 1~2줄로 샷건 재장전 공백을 줄입니다. 출시 직후 키트 기준 임시 권장안입니다.", confidence: "recent-kit",
+  }),
+  "Yukiko Amagi": make({
+    primary: [line("element", 4, "essential"), line("maxAmmo", 4), line("attack", 4)],
+    alternatives: ["critRate", "critDamage"], priority: "medium", mode: "보스",
+    note: "작열 약점 보스에서 우월 코드·장탄 수·공격력의 3유효를 목표로 기관총 사격과 분배 피해를 유지합니다. 출시 직후 키트 기준 임시 권장안입니다.", confidence: "recent-kit",
+  }),
   "Ada Wong": make({
     primary: [line("element", 4), line("maxAmmo", 2), line("attack", 4)],
     alternatives: ["critDamage", "chargeSpeed"], priority: "medium", mode: "보스",
@@ -490,7 +505,7 @@ const output = roster.map((nikke) => normalizeBuild({
   name: nikke.name,
   ...defaultProfile(nikke),
   ...(overrides[nikke.name] ?? {}),
-  verifiedAt: "2026-08-12",
+  verifiedAt: "2026-08-20",
 }));
 
 const names = new Set(output.map((entry) => entry.name));

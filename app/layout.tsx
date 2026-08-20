@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import rosterJson from "./roster.json";
+
+const rosterCount = rosterJson.length;
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const assetPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX ?? "";
@@ -27,7 +30,7 @@ const contentSecurityPolicy = [
 export const metadata: Metadata = {
   metadataBase: canonicalUrl,
   title: "NIKKE // OVERLOAD ARCHIVE",
-  description: "196명 전체 니케의 보유 현황과 캐릭터별 4×3 오버로드 추천을 관리하는 비공식 팬 아카이브.",
+  description: `${rosterCount}명 전체 니케의 보유 현황과 캐릭터별 4×3 오버로드·하모니 큐브 추천을 관리하는 비공식 팬 아카이브.`,
   referrer: "no-referrer",
   alternates: {
     canonical: canonicalUrl,
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "NIKKE // OVERLOAD ARCHIVE",
-    description: "196명 전원의 보유 현황과 캐릭터별 4×3 오버로드 세팅을 한곳에서.",
+    description: `${rosterCount}명 전원의 보유 현황과 캐릭터별 4×3 오버로드·하모니 큐브 세팅을 한곳에서.`,
     type: "website",
     locale: "ko_KR",
     url: canonicalUrl,
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "NIKKE // OVERLOAD ARCHIVE",
-    description: "196명 전원의 보유 현황과 캐릭터별 4×3 오버로드 세팅을 한곳에서.",
+    description: `${rosterCount}명 전원의 보유 현황과 캐릭터별 4×3 오버로드·하모니 큐브 세팅을 한곳에서.`,
     images: [previewImage],
   },
 };
