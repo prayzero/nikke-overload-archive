@@ -6,7 +6,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "prebuild": "npm run overload:build",
+    "prebuild": "npm run overload:build && npm run cube:build",
     "dev": "node scripts/run-vinext.mjs dev",
     "build": "node scripts/run-vinext.mjs build",
     "postbuild": "node scripts/harden-static-html.mjs",
@@ -18,7 +18,8 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "artwork:refresh": "node scripts/refresh-artwork.mjs",
     "artwork:check": "node scripts/check-artwork.mjs",
-    "overload:build": "node scripts/build-overloads.mjs"
+    "overload:build": "node scripts/build-overloads.mjs",
+    "cube:build": "node scripts/build-cubes.mjs"
   },
   "dependencies": {
     "react": "19.2.8",

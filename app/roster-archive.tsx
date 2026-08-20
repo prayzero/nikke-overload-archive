@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { getCubeDetails, type CubeRecommendation } from "./cube-catalog";
+import cubesJson from "./cubes.json";
 import overloadJson from "./overloads.json";
 import rosterJson from "./roster.json";
 
@@ -52,9 +54,16 @@ type OverloadBuild = {
 };
 
 const roster = rosterJson as Nikke[];
+const cubeRecommendations = cubesJson as CubeRecommendation[];
 const overloads = overloadJson as OverloadBuild[];
+const cubeByName = new Map(cubeRecommendations.map((recommendation) => [recommendation.name, recommendation]));
 const overloadByName = new Map(overloads.map((build) => [build.name, build]));
 const STORAGE_KEY = "nikke-overload-archive:roster:v1";
+const archiveUpdatedAt = [...cubeRecommendations, ...overloads]
+  .map(({ verifiedAt }) => verifiedAt)
+  .sort()
+  .at(-1)
+  ?.replaceAll("-", ".") ?? "—";
 
 const classLabels: Record<NikkeClass, string> = {
   attacker: "화력형",
@@ -128,6 +137,10 @@ function getBuild(nikke: Nikke): OverloadBuild {
   const build = overloadByName.get(nikke.name);
   if (!build) throw new Error(`${nikke.name}의 오버로드 데이터가 없습니다.`);
   return build;
+}
+
+function getCubeRecommendation(nikke: Nikke): CubeRecommendation | null {
+  return cubeByName.get(nikke.name) ?? null;
 }
 
 const featuredNikkes = ["Rapi: Red Hood", "Cinderella", "Red Hood"]
@@ -314,6 +327,7 @@ export default function RosterArchive() {
   const ownedCount = ownedIds.size;
   const progress = Math.round((ownedCount / roster.length) * 100);
   const selectedBuild = selected ? getBuild(selected) : null;
+  const selectedCube = selected ? getCubeRecommendation(selected) : null;
 
   function toggleOwned(nikke: Nikke) {
     setOwnedIds((current) => {
@@ -370,8 +384,8 @@ export default function RosterArchive() {
         </a>
         <div className="topbar-status">
           <span className="status-dot" aria-hidden="true" />
-          <span>196 BUILDS ONLINE</span>
-          <strong>2026.08.12</strong>
+          <span>{roster.length} BUILDS ONLINE</span>
+          <strong>{archiveUpdatedAt}</strong>
         </div>
       </header>
 
@@ -380,10 +394,10 @@ export default function RosterArchive() {
           <div className="hero-grid" aria-hidden="true" />
           <div className="hero-copy">
             <p className="eyebrow"><span>ARK DATABASE</span> / OVERLOAD LAB</p>
-            <h1 id="hero-title"><span>196명의</span><br /><em>오버로드.</em></h1>
+            <h1 id="hero-title"><span>{roster.length}명의</span><br /><em>오버로드.</em></h1>
             <p className="hero-description">
-              모든 니케의 추천 옵션을 4부위 × 3칸으로 정리했습니다.
-              흑백 일러스트를 눌러 보유 캐릭터를 컬러로 해제하고, 캐릭터별 목표 줄 수까지 확인하세요.
+              모든 니케의 추천 오버로드와 큐브를 한곳에 정리했습니다.
+              흑백 일러스트를 눌러 보유 캐릭터를 컬러로 해제하고, 4부위 × 3칸 목표 줄 수까지 확인하세요.
             </p>
             <div className="hero-actions">
               <a className="primary-action" href="#roster">전체 니케 보기 <span aria-hidden="true">↓</span></a>
@@ -436,7 +450,7 @@ export default function RosterArchive() {
             <div>
               <p className="eyebrow"><span>01</span> PERSONNEL ROSTER</p>
               <h2 id="roster-title">전체 니케 빌드 아카이브</h2>
-              <p>일러스트를 누르면 흑백에서 컬러로 전환됩니다. OL 버튼에서 캐릭터별 추천을 확인하세요.</p>
+              <p>일러스트를 누르면 흑백에서 컬러로 전환됩니다. 세팅 버튼에서 오버로드와 추천 큐브를 함께 확인하세요.</p>
             </div>
             <div className="section-tools">
               <button type="button" className="text-button" onClick={exportRoster} disabled={!ownedCount}>목록 내보내기</button>
@@ -505,6 +519,8 @@ export default function RosterArchive() {
               {filteredRoster.map((nikke, index) => {
                 const isOwned = ownedIds.has(nikke.id);
                 const build = getBuild(nikke);
+                const cube = getCubeRecommendation(nikke);
+                const primaryCube = cube ? getCubeDetails(cube.primary) : null;
                 return (
                   <article className={`nikke-card ${isOwned ? "owned" : ""}`} key={nikke.id}>
                     <button
@@ -528,16 +544,20 @@ export default function RosterArchive() {
                       </div>
                       <h3>{nikke.nameKo}</h3>
                       <p>{nikke.name}</p>
+                      <div className="card-cube">
+                        <span>CUBE 01</span>
+                        <strong>{primaryCube?.name.replace(/ 큐브$/, "") ?? "검토 중"}</strong>
+                      </div>
                       <button
                         type="button"
                         className="overload-button"
-                        aria-label={`${nikke.nameKo} (${nikke.name}) ${build.mode} 오버로드 빌드 보기`}
+                        aria-label={`${nikke.nameKo} (${nikke.name}) ${build.mode} 오버로드와 추천 큐브 세팅 보기`}
                         onClick={(event) => {
                           dialogOpenerRef.current = event.currentTarget;
                           setSelected(nikke);
                         }}
                       >
-                        {build.mode} 빌드 보기 <span aria-hidden="true">↗</span>
+                        {build.mode} 세팅 보기 <span aria-hidden="true">↗</span>
                       </button>
                     </div>
                   </article>
@@ -561,7 +581,7 @@ export default function RosterArchive() {
           </div>
           <div className="guide-grid">
             <article><span>01</span><h3>4부위 × 3옵션</h3><p>머리·몸통·팔·다리의 세 줄을 그대로 배치합니다. 목표 개수 밖은 자유 옵션으로 표시됩니다.</p></article>
-            <article><span>02</span><h3>기믹별 개별 추천</h3><p>막탄, 차지 임계값, 지속 사격, HP 스케일링처럼 캐릭터마다 다른 조건을 반영합니다.</p></article>
+            <article><span>02</span><h3>기믹별 개별 추천</h3><p>막탄, 차지 임계값, 지속 사격, HP 스케일링을 반영해 오버로드와 1순위·대안 큐브를 함께 제시합니다.</p></article>
             <article><span>03</span><h3>투자 우선도 표시</h3><p>META부터 재설정 비추천까지 구분해 커스텀 모듈을 어디에 먼저 쓸지 보여줍니다.</p></article>
           </div>
         </section>
@@ -573,6 +593,7 @@ export default function RosterArchive() {
         <div className="footer-links">
           <a href="https://nikke-goddess-of-victory-international.fandom.com/wiki/Category:Playable_characters" target="_blank" rel="noreferrer">명단·이미지 참고</a>
           <a href="https://nikke.gg/overload-equipment/" target="_blank" rel="noreferrer">오버로드 기본 원리</a>
+          <a href="https://gamewith.jp/nikke/article/show/373305" target="_blank" rel="noreferrer">하모니 큐브 효과 참고</a>
           <a href="https://policy.shiftup.co.kr/ip/en/index.html" target="_blank" rel="noreferrer">SHIFT UP IP 가이드</a>
         </div>
       </footer>
@@ -610,6 +631,46 @@ export default function RosterArchive() {
                 </div>
               </div>
             </div>
+
+            {selectedCube && (
+              <section
+                className="cube-recommendation"
+                aria-labelledby={`drawer-cube-title-${selected.id}`}
+                aria-describedby={`drawer-cube-note-${selected.id}`}
+              >
+                <div className="cube-recommendation__header">
+                  <div>
+                    <p>RECOMMENDED HARMONY CUBE</p>
+                    <h3 id={`drawer-cube-title-${selected.id}`}>추천 큐브</h3>
+                  </div>
+                  <div className="cube-recommendation__meta" aria-label="큐브 추천 데이터 정보">
+                    <span>{selectedCube.mode}</span>
+                    <span>{confidenceLabels[selectedCube.confidence]}</span>
+                    <span>{selectedCube.verifiedAt}</span>
+                  </div>
+                </div>
+                <ol className="cube-options" aria-label={`${selected.nameKo} 추천 큐브 순위`}>
+                  {[selectedCube.primary, ...selectedCube.alternatives].map((cubeId, index) => {
+                    const cube = getCubeDetails(cubeId);
+                    return (
+                      <li className="cube-option" key={cubeId}>
+                        <span className="cube-option__rank" aria-hidden="true">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <div className="cube-option__name">
+                          <strong>{cube.name}</strong>
+                          <span>{cube.shortName} / {cube.effect}</span>
+                        </div>
+                        <small>{index === 0 ? "1순위" : `대안 ${index}`}</small>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <p className="cube-recommendation__note" id={`drawer-cube-note-${selected.id}`}>
+                  {selectedCube.note}
+                </p>
+              </section>
+            )}
 
             <div className="loadout-heading">
               <div><p>RECOMMENDED OVERLOAD</p><h3>4부위 × 3줄 목표</h3></div>

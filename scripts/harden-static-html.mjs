@@ -32,7 +32,7 @@ const contentSecurityPolicy = [
   "script-src-attr 'none'",
   "style-src 'self'",
   "style-src-attr 'none'",
-  "img-src 'self' data: https://static.wikia.nocookie.net",
+  "img-src 'self' data: https://static.wikia.nocookie.net https://nikke-db-legacy.pages.dev",
   "font-src 'self' data:",
   "connect-src 'self'",
   "manifest-src 'self'",
