@@ -56,7 +56,7 @@ const enriched = roster.map((nikke) => {
   const artwork = filename ? artworkByFile.get(filename) : null;
   if (!artwork) {
     missing.push(nikke.name);
-    return { ...nikke, nameKo: cleanKoreanName(nikke.nameKo), artwork: nikke.image };
+    return { ...nikke, nameKo: cleanKoreanName(nikke.nameKo), artwork: nikke.artwork || nikke.image };
   }
   matched += 1;
   return { ...nikke, nameKo: cleanKoreanName(nikke.nameKo), artwork: artwork.url };
@@ -64,4 +64,4 @@ const enriched = roster.map((nikke) => {
 
 await writeFile(rosterPath, `${JSON.stringify(enriched)}\n`, "utf8");
 console.log(`Full-body artwork: ${matched}/${roster.length}`);
-if (missing.length) console.log(`Icon fallback (${missing.length}): ${missing.join(", ")}`);
+if (missing.length) console.log(`Existing artwork preserved (${missing.length}): ${missing.join(", ")}`);

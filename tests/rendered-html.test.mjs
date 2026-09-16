@@ -11,11 +11,13 @@ test("exports the complete static archive", async () => {
   assert.match(html, /<html[^>]+lang="ko"/i);
   assert.match(html, /<title>NIKKE \/\/ OVERLOAD ARCHIVE<\/title>/i);
   assert.match(html, /전체 니케 빌드 아카이브/);
-  assert.match(html, /199/);
+  const roster = JSON.parse(await readFile(new URL("app/roster.json", root), "utf8"));
+  assert.ok(html.replace(/<!--[\s\S]*?-->/g, "").includes(`${roster.length}명의`));
   assert.match(html, /세팅 보기/);
   assert.match(html, /퀸\(니지마 마코토\)/);
   assert.match(html, /아마기 유키코/);
   assert.match(html, /아이기스/);
+  assert.match(html, /드레이크 : 그레이트 빌런/);
   assert.match(html, /추천 오버로드와 큐브/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
@@ -79,8 +81,10 @@ test("includes hardened metadata and Pages assets", async () => {
 test("maps full-body artwork for every playable Nikke", async () => {
   const roster = JSON.parse(await readFile(new URL("app/roster.json", root), "utf8"));
 
-  assert.equal(roster.length, 199);
-  assert.equal(roster.filter((nikke) => nikke.artwork).length, 199);
+  assert.ok(roster.length >= 200);
+  assert.equal(new Set(roster.map(({ id }) => id)).size, roster.length);
+  assert.equal(new Set(roster.map(({ name }) => name)).size, roster.length);
+  assert.equal(roster.filter((nikke) => nikke.artwork).length, roster.length);
   assert.ok(
     roster.every((nikke) =>
       nikke.artwork.startsWith("https://static.wikia.nocookie.net/"),
@@ -93,11 +97,6 @@ test("maps full-body artwork for every playable Nikke", async () => {
       .map(({ name }) => name)
       .sort(),
     ["Aigis", "Queen (Makoto Niijima)", "Yukiko Amagi"],
-  );
-  assert.ok(
-    roster
-      .filter(({ id }) => ["c870", "c871", "c872"].includes(id))
-      .every(({ image }) => image.startsWith("https://nikke-db-legacy.pages.dev/")),
   );
 });
 
@@ -116,12 +115,12 @@ test("provides one validated overload build for every playable Nikke", async () 
     roster.map((nikke) => nikke.name).sort(),
   );
   assert.equal(new Set(builds.map((build) => build.name)).size, roster.length);
-  assert.ok(builds.every((build) => build.primary.length === 3));
+  assert.ok(builds.every((build) => build.primary.length >= 1 && build.primary.length <= 3));
   assert.ok(builds.every((build) => build.primary.every(({ stat, count, grade }) =>
     validStats.has(stat) && count >= 1 && count <= 4 && validGrades.has(grade))));
   assert.ok(builds.every((build) =>
     build.primary.reduce((total, { count }) => total + count, 0) <= 12));
-  assert.ok(builds.every((build) => new Set(build.primary.map(({ stat }) => stat)).size === 3));
+  assert.ok(builds.every((build) => new Set(build.primary.map(({ stat }) => stat)).size === build.primary.length));
   assert.ok(builds.every((build) => build.alternatives.every((stat) => validStats.has(stat))));
   assert.ok(builds.every((build) => build.avoid.every((stat) => validStats.has(stat))));
   assert.ok(builds.every((build) => new Set(build.alternatives).size === build.alternatives.length));

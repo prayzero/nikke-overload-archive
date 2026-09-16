@@ -22,6 +22,11 @@ const make = ({
 
 const unique = (values) => [...new Set(values)];
 
+// Only reviewed builds receive a new date; running the generator is not a review.
+const reviewedNames = new Set([
+  "Drake: Great Villain", "Queen (Makoto Niijima)", "Yukiko Amagi", "Privaty", "Centi",
+]);
+
 function normalizeBuild(build) {
   const avoid = unique(build.avoid);
   const excludedAlternatives = new Set([
@@ -120,14 +125,25 @@ const overrides = {
     note: "지원형 SR이라 4부위 개조와 자연스럽게 붙은 유효 줄만 사용합니다. 커스텀 모듈을 써서 재설정하는 것은 권장하지 않습니다.", confidence: "recent-kit",
   }),
   "Queen (Makoto Niijima)": make({
-    primary: [line("element", 4, "essential"), line("attack", 4), line("maxAmmo", 2)],
-    alternatives: ["critRate", "critDamage", "hitRate"], priority: "medium", mode: "보스",
-    note: "작열 약점 보스에서 우월 코드와 공격력을 우선하고, 장탄 수 1~2줄로 샷건 재장전 공백을 줄입니다. 출시 직후 키트 기준 임시 권장안입니다.", confidence: "recent-kit",
+    primary: [line("element", 4, "essential")],
+    alternatives: ["attack", "critRate", "critDamage", "maxAmmo"], priority: "medium", mode: "보스",
+    note: "우월 코드 4줄을 우선합니다. 자체·유키코 공격력 버프가 커서 남는 줄은 공격력과 크리 계열을 비교합니다. 토브 산탄 팀은 장탄 OL 합계 약 177~178%를 목표로 하지만, 재장전 팀에서는 장탄이 필수가 아닙니다.", confidence: "guide",
   }),
   "Yukiko Amagi": make({
-    primary: [line("element", 4, "essential"), line("maxAmmo", 4), line("attack", 4)],
-    alternatives: ["critRate", "critDamage"], priority: "medium", mode: "보스",
-    note: "작열 약점 보스에서 우월 코드·장탄 수·공격력의 3유효를 목표로 기관총 사격과 분배 피해를 유지합니다. 출시 직후 키트 기준 임시 권장안입니다.", confidence: "recent-kit",
+    primary: [line("element", 4, "essential"), line("maxAmmo", 2)],
+    alternatives: ["attack", "critRate", "critDamage"], priority: "medium", mode: "보스",
+    note: "재장전 버프 팀 기준 우월 코드 4줄과 높은 수치의 장탄 2~3줄이 기본입니다. 재장전 지원이 부족하면 장탄을 추가합니다. 자체·퀸 공격력 버프가 커서 공격력 4줄을 고정 목표로 삼지 말고 크리 계열과 비교하세요.", confidence: "guide",
+  }),
+  "Drake: Great Villain": make({
+    primary: [line("element", 4, "essential")],
+    alternatives: ["critRate", "critDamage", "chargeDamage", "attack"],
+    avoid: ["maxAmmo", "chargeSpeed", "hitRate"], priority: "medium", mode: "보스",
+    note: "HP를 공격력으로 전환하므로 우월 코드 4줄과 HP 장비 레벨을 우선합니다. 변환 무기는 장탄·차지 시간이 고정입니다. 남는 크리·차지 대미지는 유지하고, 공격력은 효율이 낮아 추가 재설정 목표로 삼지 않습니다.", confidence: "guide",
+  }),
+  "Centi": make({
+    primary: [line("chargeSpeed", 1, "filler")],
+    alternatives: ["maxAmmo", "attack", "element"], priority: "skip", mode: "PvE/PvP",
+    note: "기본형은 장비 레벨을 먼저 올리고 옵션 재설정은 아낍니다. 애장품형을 집중 육성할 때는 PvE 차지 속도 4줄·장탄 2줄, PvP 차지 속도 임계를 별도로 목표로 합니다. 표의 1줄은 기본형의 자연 롤 유지 후보입니다.", confidence: "guide",
   }),
   "Ada Wong": make({
     primary: [line("element", 4), line("maxAmmo", 2), line("attack", 4)],
@@ -392,7 +408,7 @@ const overrides = {
   "Privaty": make({
     primary: [line("element", 1, "filler"), line("critDamage", 1, "filler"), line("hitRate", 1, "filler")],
     alternatives: ["critRate", "attack"], avoid: ["maxAmmo"], priority: "skip", mode: "범용",
-    note: "기본형은 재설정 비추천입니다. 마지막 탄환을 늦추는 장탄 수를 피하고, 수영복 아니스와 함께 쓰면 공격력으로 최고 공격력 타게팅을 바꾸지 않도록 주의합니다.", confidence: "guide",
+    note: "표는 기본형의 자연 롤 유지 후보이며 재설정은 비추천입니다. 애장품 장착 후 딜러로 쓰면 공격력·우월 코드 각 4줄이 별도 목표입니다. 두 형태 모두 마지막 탄환을 늦추는 장탄 수를 피하세요. 순수 지원 운용은 고투자가 필요하지 않습니다.", confidence: "guide",
   }),
   "Privaty: Unkind Maid": make({
     primary: [line("maxAmmo", 4, "essential"), line("element", 4), line("attack", 4)],
@@ -505,7 +521,7 @@ const output = roster.map((nikke) => normalizeBuild({
   name: nikke.name,
   ...defaultProfile(nikke),
   ...(overrides[nikke.name] ?? {}),
-  verifiedAt: "2026-08-20",
+  verifiedAt: reviewedNames.has(nikke.name) ? "2026-09-16" : "2026-08-20",
 }));
 
 const names = new Set(output.map((entry) => entry.name));
@@ -517,8 +533,10 @@ for (const name of [...skipInvestment, ...Object.keys(overrides)]) {
   if (!rosterNames.has(name)) throw new Error(`${name}: overload rule does not match the roster.`);
 }
 for (const entry of output) {
-  if (entry.primary.length !== 3) throw new Error(`${entry.name}: expected exactly 3 primary lines.`);
-  if (new Set(entry.primary.map(({ stat }) => stat)).size !== 3) {
+  if (entry.primary.length < 1 || entry.primary.length > 3) {
+    throw new Error(`${entry.name}: expected between 1 and 3 primary options.`);
+  }
+  if (new Set(entry.primary.map(({ stat }) => stat)).size !== entry.primary.length) {
     throw new Error(`${entry.name}: primary option names must be unique.`);
   }
   if (entry.primary.some(({ count }) => count < 1 || count > 4)) {

@@ -8,7 +8,33 @@ updates:
       time: "11:00"
       timezone: Asia/Seoul
     open-pull-requests-limit: 10
+    ignore:
+      # The React/accessibility plugins currently support up to ESLint 9. Revisit
+      # these two constraints together once every plugin supports ESLint 10.
+      - dependency-name: eslint
+        update-types:
+          - version-update:semver-major
+      - dependency-name: "@eslint/js"
+        update-types:
+          - version-update:semver-major
+      # typescript-eslint 8 supports TypeScript <6.1. Review newer compilers with
+      # a compatible parser rather than proposing an uninstallable standalone PR.
+      - dependency-name: typescript
+        versions: [">=6.1.0"]
     groups:
+      # React, React DOM and RSC must move together across dependency types.
+      # Vinext and the Vite/Cloudflare plugins also enforce peer versions.
+      framework:
+        patterns:
+          - react
+          - react-dom
+          - react-server-dom-webpack
+          - vinext
+          - vite
+          - "@vitejs/*"
+          - "@cloudflare/vite-plugin"
+          - "@cloudflare/workers-types"
+          - wrangler
       production-dependencies:
         dependency-type: production
         update-types:
