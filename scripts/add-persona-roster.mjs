@@ -42,16 +42,15 @@ const personaCharacters = [
   },
 ];
 
-const personaIds = new Set(personaCharacters.map(({ id }) => id));
-const personaNames = new Set(personaCharacters.map(({ name }) => name));
+// This historical migration only inserts missing units. Never replace reviewed
+// artwork or IDs when it is run again after a later roster update.
+const existingIds = new Set(roster.map(({ id }) => id));
+const existingNames = new Set(roster.map(({ name }) => name));
+const additions = personaCharacters.filter(({ id, name }) => !existingIds.has(id) && !existingNames.has(name));
 const merged = roster
-  .filter(({ id, name }) => !personaIds.has(id) && !personaNames.has(name))
-  .concat(personaCharacters)
+  .concat(additions)
   .sort((left, right) => left.name.localeCompare(right.name, "en", { sensitivity: "base" }));
 
-if (merged.length !== 199) {
-  throw new Error(`Expected 199 playable characters after Persona update, received ${merged.length}.`);
-}
 if (new Set(merged.map(({ id }) => id)).size !== merged.length) {
   throw new Error("Roster IDs must be unique.");
 }
@@ -60,4 +59,4 @@ if (new Set(merged.map(({ name }) => name)).size !== merged.length) {
 }
 
 await writeFile(rosterPath, `${JSON.stringify(merged)}\n`, "utf8");
-console.log(`Persona roster synced: ${personaCharacters.length} added, ${merged.length} total`);
+console.log(`Persona roster synced: ${additions.length} added, ${merged.length} total`);

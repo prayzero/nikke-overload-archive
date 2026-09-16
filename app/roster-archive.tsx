@@ -682,11 +682,12 @@ export default function RosterArchive() {
                 <article key={slot.code}>
                   <header><span>{slot.code}</span><strong>{slot.label}</strong></header>
                   <ol>
-                    {selectedBuild.primary.map((target, optionIndex) => {
-                      const isTargetSlot = slotIndex < target.count;
+                    {Array.from({ length: 3 }, (_, optionIndex) => {
+                      const target = selectedBuild.primary[optionIndex];
+                      const isTargetSlot = target && slotIndex < target.count;
                       return (
                         <li
-                          key={target.stat}
+                          key={target?.stat ?? `free-${optionIndex}`}
                           className={`${isTargetSlot ? `stat-${target.stat} target-${target.grade}` : "stat-free is-flex"}`}
                         >
                           <span>0{optionIndex + 1}</span>

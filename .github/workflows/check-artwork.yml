@@ -27,5 +27,8 @@ jobs:
         with:
           node-version: 24
 
-      - name: Check all remote artwork URLs
+      - name: Test image checker
+        run: node --test tests/artwork-check.test.mjs
+
+      - name: Check artwork and fallback icon URLs
         run: node scripts/check-artwork.mjs

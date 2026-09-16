@@ -52,9 +52,9 @@ export const cubeCatalog: Record<CubeId, CubeDetails> = {
   assist: { name: "렐릭 어시스트 큐브", shortName: "Assist", effect: "위기 시 최대 HP" },
   destruction: { name: "렐릭 디스트로이 큐브", shortName: "Destruction", effect: "파츠 대미지" },
   piercing: { name: "렐릭 피어싱 큐브", shortName: "Piercing", effect: "관통 대미지" },
-  crush: { name: "렐릭 크러쉬 큐브", shortName: "Crush", effect: "방어력 무시 대미지" },
-  cover: { name: "렐릭 커버 큐브", shortName: "Cover", effect: "엄폐물 최대 HP" },
-  divide: { name: "렐릭 디바이드 큐브", shortName: "Divide", effect: "분배 대미지" },
+  crush: { name: "렐릭 크러쉬 큐브", shortName: "Rupture", effect: "방어력 무시 대미지" },
+  cover: { name: "렐릭 커버 큐브", shortName: "Stealth", effect: "엄폐물 최대 HP" },
+  divide: { name: "렐릭 디바이드 큐브", shortName: "Diffusion", effect: "분배 대미지" },
 };
 
 export function getCubeDetails(id: CubeId): CubeDetails {
