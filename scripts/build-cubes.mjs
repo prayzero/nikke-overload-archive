@@ -1,8 +1,10 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { applyReview, loadReviews } from "./reviewed-recommendations.mjs";
 
 const rosterPath = new URL("../app/roster.json", import.meta.url);
 const outputPath = new URL("../app/cubes.json", import.meta.url);
 const roster = JSON.parse((await readFile(rosterPath, "utf8")).replace(/^\uFEFF/, ""));
+const individualReviews = await loadReviews(roster);
 
 const verifiedAt = "2026-08-20";
 // Rebuilds preserve the previous date unless this unit's advice was reviewed.
@@ -189,14 +191,14 @@ const recommendations = roster.map((nikke) => {
   const sources = reviewSources[nikke.name];
   const alternatives = [...new Set(recommendation.alternatives)]
     .filter((cubeId) => cubeId !== recommendation.primary);
-  return {
+  return applyReview({
     name: nikke.name,
     ...recommendation,
     alternatives,
     note: override ? recommendation.note : `개별 스킬 검증 전 무기 기반 범용안입니다. ${recommendation.note}`,
     ...(sources ? { sources } : {}),
     verifiedAt: sources ? "2026-10-23" : reviewedNames.has(nikke.name) ? "2026-09-16" : recommendation.verifiedAt,
-  };
+  }, individualReviews.get(nikke.name), "cube");
 });
 
 if (recommendations.length !== roster.length) {
@@ -206,11 +208,17 @@ if (new Set(recommendations.map(({ name }) => name)).size !== roster.length) {
   throw new Error("Cube recommendation names must be unique.");
 }
 for (const recommendation of recommendations) {
-  if (!validCubeIds.has(recommendation.primary)) {
+  if (!validCubeIds.has(recommendation.primary)
+    && !(recommendation.primary === null && recommendation.reviewStatus === "unavailable")) {
     throw new Error(`${recommendation.name}: invalid primary cube ${recommendation.primary}.`);
   }
-  if (recommendation.alternatives.some((cubeId) => !validCubeIds.has(cubeId))) {
+  if ([...recommendation.alternatives, ...(recommendation.pvp ?? [])].some((cubeId) => !validCubeIds.has(cubeId))) {
     throw new Error(`${recommendation.name}: invalid alternative cube.`);
+  }
+  if (new Set(recommendation.alternatives).size !== recommendation.alternatives.length
+    || recommendation.alternatives.includes(recommendation.primary)
+    || new Set(recommendation.pvp ?? []).size !== (recommendation.pvp ?? []).length) {
+    throw new Error(`${recommendation.name}: cube choices must be unique within each mode.`);
   }
   if (!recommendation.note || !recommendation.mode) {
     throw new Error(`${recommendation.name}: missing cube explanation.`);

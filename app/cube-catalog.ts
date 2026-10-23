@@ -23,8 +23,10 @@ export type CubeConfidence = "guide" | "mechanic";
 
 export type CubeRecommendation = {
   name: string;
-  primary: CubeId;
+  primary: CubeId | null;
   alternatives: CubeId[];
+  pvp?: CubeId[];
+  reviewStatus?: "reviewed" | "unavailable";
   mode: string;
   note: string;
   confidence: CubeConfidence;

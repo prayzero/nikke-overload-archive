@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getCubeDetails, type CubeRecommendation } from "./cube-catalog";
+import { getCubeDetails, type CubeId, type CubeRecommendation } from "./cube-catalog";
 import { createGearLayout } from "./gear-layout.mjs";
 import cubesJson from "./cubes.json";
 import overloadJson from "./overloads.json";
@@ -53,6 +53,7 @@ type OverloadBuild = {
   confidence: BuildConfidence;
   verifiedAt: string;
   sources?: Array<{ label: string; url: string }>;
+  reviewStatus?: "reviewed" | "no-target" | "unavailable";
 };
 
 const roster = rosterJson as Nikke[];
@@ -134,6 +135,12 @@ const confidenceLabels: Record<BuildConfidence, string> = {
   "recent-guide": "최신 가이드",
   "recent-kit": "최신 키트 기반",
 };
+
+function reviewLabel(record: { confidence: BuildConfidence; reviewStatus?: string }) {
+  if (record.reviewStatus === "unavailable") return "개별 추천 근거 부족";
+  if (record.reviewStatus === "no-target") return "목표 옵션 미지정";
+  return confidenceLabels[record.confidence];
+}
 
 function getBuild(nikke: Nikke): OverloadBuild {
   const build = overloadByName.get(nikke.name);
@@ -536,7 +543,7 @@ export default function RosterArchive() {
                 const isOwned = ownedIds.has(nikke.id);
                 const build = getBuild(nikke);
                 const cube = getCubeRecommendation(nikke);
-                const primaryCube = cube ? getCubeDetails(cube.primary) : null;
+                const primaryCube = cube?.primary ? getCubeDetails(cube.primary) : null;
                 return (
                   <article className={`nikke-card ${isOwned ? "owned" : ""}`} key={nikke.id}>
                     <button
@@ -562,7 +569,7 @@ export default function RosterArchive() {
                       <p>{nikke.name}</p>
                       <div className="card-cube">
                         <span>CUBE 01</span>
-                        <strong>{primaryCube?.name.replace(/ 큐브$/, "") ?? "검토 중"}</strong>
+                        <strong>{primaryCube?.name.replace(/ 큐브$/, "") ?? "추천 근거 부족"}</strong>
                       </div>
                       <button
                         type="button"
@@ -597,7 +604,7 @@ export default function RosterArchive() {
           </div>
           <div className="guide-grid">
             <article><span>01</span><h3>4부위 × 3옵션</h3><p>머리·몸통·팔·다리의 세 줄을 그대로 배치합니다. 목표 개수 밖은 자유 옵션으로 표시됩니다.</p></article>
-            <article><span>02</span><h3>기믹별 개별 추천</h3><p>막탄, 차지 임계값, 지속 사격, HP 스케일링을 반영해 오버로드와 1순위·대안 큐브를 함께 제시합니다.</p></article>
+            <article><span>02</span><h3>기믹별 개별 추천</h3><p>막탄, 차지 임계값, 지속 사격, HP 스케일링을 반영해 오버로드와 조건별 큐브 후보를 함께 제시합니다.</p></article>
             <article><span>03</span><h3>투자 우선도 표시</h3><p>META부터 재설정 비추천까지 구분해 커스텀 모듈을 어디에 먼저 쓸지 보여줍니다.</p></article>
           </div>
         </section>
@@ -661,12 +668,12 @@ export default function RosterArchive() {
                   </div>
                   <div className="cube-recommendation__meta" aria-label="큐브 추천 데이터 정보">
                     <span>{selectedCube.mode}</span>
-                    <span>{confidenceLabels[selectedCube.confidence]}</span>
-                    <span>{selectedCube.verifiedAt}</span>
+                    <span>{reviewLabel(selectedCube)}</span>
+                    <span>자료 확인 {selectedCube.verifiedAt}</span>
                   </div>
                 </div>
-                <ol className="cube-options" aria-label={`${selected.nameKo} 추천 큐브 순위`}>
-                  {[selectedCube.primary, ...selectedCube.alternatives].map((cubeId, index) => {
+                <ol className="cube-options" aria-label={`${selected.nameKo} 추천 큐브 후보`}>
+                  {[selectedCube.primary, ...selectedCube.alternatives].filter((id): id is CubeId => id !== null).map((cubeId, index) => {
                     const cube = getCubeDetails(cubeId);
                     return (
                       <li className="cube-option" key={cubeId}>
@@ -677,11 +684,20 @@ export default function RosterArchive() {
                           <strong>{cube.name}</strong>
                           <span>{cube.shortName} / {cube.effect}</span>
                         </div>
-                        <small>{index === 0 ? "1순위" : `대안 ${index}`}</small>
+                        <small>{index === 0 ? "기본 후보" : `대안 ${index}`}</small>
                       </li>
                     );
                   })}
                 </ol>
+                {selectedCube.primary === null && <p className="recommendation-empty">확인한 공략에 개별 큐브 추천이 없습니다.</p>}
+                {Boolean(selectedCube.pvp?.length) && (
+                  <div className="cube-pvp" aria-label={`${selected.nameKo} PvP 큐브 후보`}>
+                    <strong>PvP 후보</strong>
+                    <ul>{selectedCube.pvp?.map((cubeId) => (
+                      <li key={cubeId}>{getCubeDetails(cubeId).name}<span>{getCubeDetails(cubeId).effect}</span></li>
+                    ))}</ul>
+                  </div>
+                )}
                 <p className="cube-recommendation__note" id={`drawer-cube-note-${selected.id}`}>
                   {selectedCube.note}
                 </p>
@@ -690,11 +706,11 @@ export default function RosterArchive() {
             )}
 
             <div className="loadout-heading">
-              <div><p>RECOMMENDED OVERLOAD</p><h3>4부위 × 3줄 목표</h3></div>
-              <span>4 × 3</span>
+              <div><p>RECOMMENDED OVERLOAD</p><h3>{selectedBuild.primary.length ? "4부위 목표 배치 예시" : "오버로드 목표 미지정"}</h3></div>
+              {selectedBuild.primary.length > 0 && <span>4 × 3</span>}
             </div>
 
-            <div className="gear-matrix">
+            {selectedBuild.primary.length > 0 ? <div className="gear-matrix">
               {gearSlots.map((slot, slotIndex) => (
                 <article key={slot.code}>
                   <header><span>{slot.code}</span><strong>{slot.label}</strong></header>
@@ -716,23 +732,23 @@ export default function RosterArchive() {
                   </ol>
                 </article>
               ))}
-            </div>
+            </div> : <p className="recommendation-empty">부위별 목표를 확정하지 않아 배치를 표시하지 않습니다. 아래 공략의 투자 조건과 선택지를 먼저 확인해 주세요.</p>}
 
             <div className="build-summary">
               <div className="build-meta">
                 <span className={`build-priority build-priority--${selectedBuild.priority}`}>{priorityLabels[selectedBuild.priority]}</span>
                 <span>{selectedBuild.mode}</span>
-                <span>{confidenceLabels[selectedBuild.confidence]}</span>
+                <span>{reviewLabel(selectedBuild)}</span>
               </div>
-              <p>CORE TARGET · 4부위 합산</p>
+              {selectedBuild.primary.length > 0 && <p>CORE TARGET · 4부위 합산</p>}
               <div className="core-targets">
                 {selectedBuild.primary.map((target) => (
                   <span key={target.stat}>{statShortLabels[target.stat]} ×{target.count}</span>
                 ))}
               </div>
               <div className="option-groups">
-                <p><b>대체/유효</b>{selectedBuild.alternatives.length ? selectedBuild.alternatives.map((stat) => statShortLabels[stat]).join(" · ") : "자유 옵션"}</p>
-                <p className={selectedBuild.avoid.length ? "is-avoid" : ""}><b>회피</b>{selectedBuild.avoid.length ? selectedBuild.avoid.map((stat) => statShortLabels[stat]).join(" · ") : "없음"}</p>
+                <p><b>대체/유효</b>{selectedBuild.alternatives.length ? selectedBuild.alternatives.map((stat) => statShortLabels[stat]).join(" · ") : "별도 지정 없음"}</p>
+                <p className={selectedBuild.avoid.length ? "is-avoid" : ""}><b>회피</b>{selectedBuild.avoid.length ? selectedBuild.avoid.map((stat) => statShortLabels[stat]).join(" · ") : "별도 지정 없음"}</p>
               </div>
               <p className="build-note">{selectedBuild.note}</p>
               <RecommendationSources sources={selectedBuild.sources} />
@@ -740,7 +756,7 @@ export default function RosterArchive() {
 
             <div className="drawer-caution">
               <span aria-hidden="true">!</span>
-              <p><strong>{selectedBuild.verifiedAt} 데이터 · 부위 순서 무관</strong>목표 줄 수를 4부위에 배치한 예시입니다. 큐브·파티·보스·PvP 임계값에 따라 최종 세팅은 달라질 수 있습니다.</p>
+              <p><strong>자료 확인 {selectedBuild.verifiedAt}</strong>{selectedBuild.primary.length > 0 ? "목표 줄 수를 4부위에 배치한 예시이며 부위 순서는 무관합니다. " : "목표 미지정은 최적 세팅이 확정되었다는 뜻이 아닙니다. "}큐브·파티·보스·PvP 임계값에 따라 최종 세팅은 달라질 수 있습니다. 날짜는 공략 게시일이 아닌 이 아카이브의 확인일입니다.</p>
             </div>
 
             <button type="button" className={`drawer-owned ${ownedIds.has(selected.id) ? "active" : ""}`} onClick={() => toggleOwned(selected)}>

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { applyReview, loadReviews, validateReviews } from "../scripts/reviewed-recommendations.mjs";
 
 const root = new URL("../", import.meta.url);
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, root), "utf8"));
@@ -49,22 +50,78 @@ test("mechanic-specific advice replaces misleading weapon defaults", () => {
   assert.equal(byName(cubes, "Label").primary, "tempering");
   assert.equal(byName(cubes, "Maxwell: Ordinary Mechanic").primary, "vigor");
   assert.match(byName(cubes, "Mint").note, /3초/);
-  assert.equal(byName(overloads, "Belorta: Pumpkin Witch").priority, "skip");
-  assert.equal(byName(overloads, "Belorta: Pumpkin Witch").confidence, "mechanic");
+  const belorta = byName(overloads, "Belorta: Pumpkin Witch");
+  assert.deepEqual(belorta.primary, [{ stat: "maxAmmo", count: 1, grade: "ideal" }]);
+  assert.equal(belorta.confidence, "guide");
+  assert.match(belorta.note, /1~2줄/);
 });
 
-test("review dates remain record-specific and generic recommendations disclose their limits", () => {
+test("every character has individual source evidence or an explicit lack-of-guidance status", () => {
   for (const records of [overloads, cubes]) {
-    assert.equal(byName(records, "Dorothy").verifiedAt, "2026-08-20");
-    assert.equal(byName(records, "Privaty").verifiedAt, "2026-09-16");
-    const generic = byName(records, "Product 08");
-    assert.equal(generic.confidence, "mechanic");
-    assert.equal(generic.verifiedAt, "2026-08-20");
-    assert.match(generic.note, /개별 스킬 검증 전.*범용안/);
-    for (const record of records.filter(({ verifiedAt }) => verifiedAt === "2026-10-23")) {
-      assert.ok(record.sources?.length, `${record.name}: a new review date requires evidence`);
+    for (const record of records) {
+      assert.ok(record.sources?.length, `${record.name}: individual source evidence required`);
+      assert.doesNotMatch(record.note, /개별 스킬 검증 전.*범용안/);
+      if (record.reviewStatus === "unavailable") {
+        assert.ok(records === overloads ? record.primary.length === 0 : record.primary === null);
+      }
     }
   }
+});
+
+test("source reviews and shipped records agree without silently losing a reviewed character", async () => {
+  const reviews = await loadReviews(roster);
+  for (const [name, review] of reviews) for (const [kind, records] of [["overload", overloads], ["cube", cubes]]) {
+    if (!review[kind]) continue;
+    const record = byName(records, name);
+    assert.equal(record.verifiedAt, review.checkedAt);
+    assert.equal(record.reviewStatus, review[kind].reviewStatus);
+    assert.deepEqual(record.primary, review[kind].primary);
+    assert.equal(record.note, review[kind].note);
+    assert.deepEqual(record.sources, review.sources);
+  }
+});
+
+test("rebuilding cannot refresh a date or overwrite an independently reviewed section", () => {
+  const previous = { name: "Example", verifiedAt: "2026-08-20", primary: "resilience" };
+  assert.deepEqual(applyReview(previous, undefined, "cube"), previous);
+  assert.deepEqual(applyReview(previous, { overload: {} }, "cube"), previous);
+  assert.equal(applyReview(previous, { checkedAt: "2026-10-23", sources: [], cube: { primary: "vigor" } }, "cube").verifiedAt, "2026-10-23");
+});
+
+test("no-target guidance does not invent reroll targets for Admi, Volume, and basic Privaty", () => {
+  for (const name of ["Admi", "Volume", "Privaty"]) {
+    const build = byName(overloads, name);
+    assert.deepEqual(build.primary, []);
+    assert.equal(build.reviewStatus, "no-target");
+    assert.equal(build.priority, "skip");
+  }
+  assert.equal(byName(cubes, "Volume").primary, "vigor");
+  assert.ok(byName(cubes, "Admi").pvp.includes("adjutant"));
+});
+
+test("Dorothy's last-bullet rotation excludes magazine inflation", () => {
+  const build = byName(overloads, "Dorothy");
+  const cube = byName(cubes, "Dorothy");
+  assert.ok(build.avoid.includes("maxAmmo"));
+  assert.ok(!build.primary.some(({ stat }) => stat === "maxAmmo"));
+  assert.equal(cube.primary, "resilience");
+  assert.ok(![cube.primary, ...cube.alternatives].some((id) => ["bastion", "wingman"].includes(id)));
+});
+
+test("invalid evidence and contradictory review statuses fail before generation", () => {
+  const base = {
+    name: "Example", checkedAt: "2026-10-23",
+    sources: [{ label: "Individual guide", url: "https://www.prydwen.gg/nikke/characters/example" }],
+    overload: { primary: [], alternatives: [], avoid: [], priority: "skip", mode: "PvE", note: "No specific targets.", confidence: "guide", reviewStatus: "no-target" },
+  };
+  const names = new Set(["Example"]);
+  assert.equal(validateReviews([base], names).size, 1);
+  for (const records of [
+    [base, base], [{ ...base, name: "Missing" }], [{ ...base, checkedAt: "2026-02-30" }],
+    [{ ...base, sources: [] }], [{ ...base, sources: [{ label: "Bad", url: "javascript:alert(1)" }] }],
+    [{ ...base, overload: { ...base.overload, reviewStatus: "reviewed" } }],
+    [{ ...base, cube: { primary: "vigor", alternatives: [], mode: "PvE", note: "Missing advice", reviewStatus: "unavailable" } }],
+  ]) assert.throws(() => validateReviews(records, names));
 });
 
 test("recommendation sources use labelled secure links without duplicates", () => {
