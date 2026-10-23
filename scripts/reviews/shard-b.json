@@ -1,0 +1,2935 @@
+[
+  {
+    "name": "Frima",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/frima"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "애장품 미적용 기본형 가이드에는 구체적인 OL 목표가 없습니다. 최대 HP 지원을 이유로 딜러용 옵션이나 필수 줄 수를 임의로 추가하지 않으며, 옵션 재설정 근거가 부족합니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "healing",
+      "alternatives": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "기본형 투자 표는 PvE에서 힐링, PvP에서 비거를 먼저 제시합니다. 생존이 필요한 상황은 비거·템퍼링·인듀어런스를 비교하며, 애장품 운용과는 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Grave",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/grave"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "critDamage",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "주력 딜러 육성이 끝난 뒤 우월 코드·공격력·크리 대미지 각 4줄을 고려합니다. 버스트의 높은 크리 확률과 무한 탄창 때문에 크리 확률·장탄을 추가 재설정 목표로 삼을 필요가 없습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "destruction",
+        "assault"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "특정 큐브가 필수는 아니며, 본문이 권하는 고레벨 택티컬 베어를 기본 후보로 둡니다. 파츠 보스는 디스트로이, 명중이 필요한 전투는 어설트를 비교합니다. 느린 버스트 순환에서는 재장전 단축이 지원 버프를 일찍 끝낼 수 있습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Guillotine",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/guillotine"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "자체 공격력 보정이 커서 장탄과 우월 코드를 먼저 확보하고 공격력을 보완합니다. 전격 약점 보스용 이상적인 표는 세 옵션 각 4줄이지만 공략의 투자 우선도는 미지정이므로 낮은 투자로 보수적으로 분류했습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "destruction",
+        "wingman"
+      ],
+      "pvp": [
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "장탄 OL을 갖추면 택티컬 베어로 사격을 유지합니다. 장탄이 부족할 때 프리바티·여름 아니스와 재장전 보조를 묶으면 렐릭 베어를 비교할 수 있으며, 해당 운용에는 수동 재장전이 필요합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Guillotine: Winter Slayer",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/guillotine-winter-slayer"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 2,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "hitRate"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "우월 코드 4줄·장탄 2줄·공격력 4줄이 투자 표의 목표입니다. 추가 장탄이나 명중은 남는 줄의 후보이며, 코어를 맞혀 경험치와 탄환 회수 효과를 빠르게 쌓는 운용이 중요합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "wingman",
+        "destruction"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "재장전 지원이 없는 팀에서는 택티컬 베어, 재장전 속도 버퍼를 편성한 팀에서는 렐릭 베어를 우선 비교합니다. 장탄이 부족하면 부스트, 파츠 전투에서는 디스트로이가 표의 대안입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Guilty",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/guilty"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "풍압 약점 보스에 투자할 때 우월 코드·공격력 각 4줄과 장탄 1~2줄을 사용합니다. 표시는 장탄 범위의 하한인 1줄이며, 사격을 이어 가며 스택을 유지하는 데 맞춰 추가 장탄을 조정합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction",
+        "wingman",
+        "assault"
+      ],
+      "pvp": [
+        "bastion",
+        "resilience",
+        "vigor",
+        "quantum"
+      ],
+      "mode": "PvE",
+      "note": "스택 유지에 필요한 사격 횟수를 확보하도록 렐릭 베어·택티컬 베어를 비교합니다. 장탄과 명중 OL이 충분하고 주력 딜러에게 큐브를 우선 배정해야 할 때는 본문이 어설트도 보조 후보로 언급합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Harran",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/harran"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "chargeSpeed",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "공격력·차지 속도·우월 코드 각 4줄은 광역 버스트를 강화하려는 투자 표의 목표입니다. 사용 범위가 좁고 공략 우선도는 미지정이므로 낮은 투자로 보수적으로 분류했습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "wingman",
+        "onslaught"
+      ],
+      "pvp": [
+        "adjutant",
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "본문은 렐릭 베어와 온슬로트를 유효한 후보로 설명하며, 부스트는 그다음 대안입니다. PvP의 차지·생존 후보는 별도 목록에서 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Helm",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/helm"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "element",
+        "attack"
+      ],
+      "avoid": [],
+      "priority": "low",
+      "mode": "수동 속사/PvE",
+      "note": "애장품 미적용 기준입니다. 장탄 1~2줄은 수동 속사로 버스트 게이지를 채울 때만 고려합니다. 마지막 탄환 효과가 있으므로 자동 운용에 일괄 적용하지 않으며, 공략도 이 기본형의 재설정을 권하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "healing"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "마지막 탄환 효과를 자주 발동시키려면 렐릭 베어를 사용합니다. 회복을 중시하면 힐링을 비교하며, 애장품 적용 빌드와 혼합하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Helm: Aquamarine",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/aqua-marine-helm"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "버스트 쿨타임 지원과 레이드 생존이 주요 목적이며, 개별 OL 표에는 구체적인 옵션 목표가 없습니다. 장비 기본 능력치·전투력 확보와 옵션 재설정을 구분하고 재설정 목표는 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "wingman"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "개별 투자 표가 제시한 렐릭 베어·택티컬 베어를 기본 후보로 사용합니다. 장탄 보완이 필요하면 부스트를 비교하며, PvP 생존 후보는 별도로 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Himeno",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/himeno"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표의 OL 목표가 비어 있어 필수 줄 수를 정할 근거가 없습니다. 풀 차지 관련 지원은 스킬과 큐브 선택으로 확인하고 임의의 딜러용 완성 세팅을 부여하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "adjutant"
+      ],
+      "pvp": [
+        "adjutant",
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "PvE 투자 표는 렐릭 베어와 차지 속도 큐브를 제시합니다. 풀 차지로 연결되는 스킬 1 유지가 필요하면 렐릭 부스트를 비교하며, PvP에서는 차지 속도와 생존 후보를 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "IDoll Flower",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/idoll-flower"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 가이드에 OL 목표가 제시되어 있지 않습니다. 마지막 탄환 운용을 이유로 특정 옵션 줄 수를 새로 만들지 않으며 옵션 재설정은 권장 목표에서 제외합니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "마지막 탄환 효과를 다시 발동시키는 시간을 줄이도록 렐릭 베어를 사용합니다. PvP에서는 비거·템퍼링·인듀어런스가 별도 생존 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "IDoll Ocean",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/idoll-ocean"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표의 이상적 옵션과 보조 옵션이 모두 비어 있습니다. 마지막 탄환 운용의 구체적인 OL 검증 수치가 없어 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "SMG의 마지막 탄환 효과를 반복하기 위해 공략은 렐릭 베어를 권합니다. 생존 목적의 PvP 큐브는 별도로 표시합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "IDoll Sun",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/idoll-sun"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 가이드가 OL 옵션을 지정하지 않아 무기 유형만으로 공격력·장탄 필수 줄 수를 추가하지 않습니다. 현재 확인한 근거로는 옵션 재설정 목표가 없습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "개별 표의 PvE 후보는 렐릭 베어와 택티컬 베어입니다. 사격 공백과 보유 큐브 레벨을 비교하고, PvP에서는 생존용 후보를 사용합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Isabel",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/isabel"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "우월 코드·공격력·장탄 각 4줄은 아르카나도 함께 육성하는 보스 운용 조건의 목표입니다. 해당 편성을 준비하지 않는다면 이 12줄 세팅을 일괄 투자 목표로 삼지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction",
+        "wingman",
+        "assault"
+      ],
+      "pvp": [
+        "resilience",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "근거리 사격에서는 렐릭 베어를 기본 후보로 두고 장탄 운용에 따라 택티컬 베어를 비교합니다. 공략 본문은 먼 거리 명중 보완용 어설트도 언급하므로 전투 거리에 따라 별도로 판단합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Jackal",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/jackal"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "chargeSpeed",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "defense"
+      ],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvP",
+      "note": "PvP 차지 속도 임계와 철갑 상성을 위한 투자 표입니다. 차지 속도·우월 코드·공격력 각 4줄이 제시되지만, 실제 차지 수치와 팀의 버스트 순환을 우선 확인합니다. 방어력은 자연스럽게 붙은 보조 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "vigor"
+      ],
+      "pvp": [
+        "quantum",
+        "adjutant",
+        "vigor",
+        "tempering"
+      ],
+      "mode": "PvE",
+      "note": "PvE 표의 재장전·탄환 환급 후보와 PvP 후보를 구분합니다. 버스트 수급 역할에서는 퀀텀, 생존이 우선이면 비거를 비교하며, PvP 차지 임계가 필요할 때 렐릭 부스트를 고려합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Jill Valentine",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/jill-valentine"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [
+        "maxAmmo"
+      ],
+      "priority": "low",
+      "mode": "보스",
+      "note": "우월 코드 4줄을 먼저 목표로 하고 공격력은 자연스럽게 붙은 줄을 유지합니다. 표에는 공격력 4줄도 있으나 본문은 이를 적극 재설정할 필요가 낮다고 설명합니다. 장탄은 자동 운용을 해칠 수 있어 피하고, 수동 보정이 가능한 경우만 별도로 판단합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "destruction"
+      ],
+      "pvp": [
+        "resilience",
+        "tempering",
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "버스트 밖 재장전 공백에는 렐릭 베어가 유효하고, 지속적으로 공격할 파츠가 있으면 디스트로이를 비교합니다. 택티컬 베어는 마지막 탄환 운용과 충돌하므로 일반 추천에서 제외합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Julia",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/julia"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "기본형 개별 투자 표에 구체적인 OL 목표가 없습니다. 마지막 탄환 스택을 고려하되 검증되지 않은 옵션 수량을 넣지 않고 재설정 목표를 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [],
+      "pvp": [
+        "resilience"
+      ],
+      "mode": "PvE",
+      "note": "마지막 탄환 효과를 자주 발동시키도록 공략은 PvE·PvP 모두 렐릭 베어를 제시합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "K",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/k"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critDamage"
+      ],
+      "avoid": [
+        "maxAmmo"
+      ],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "우월 코드·공격력 각 4줄을 고려하되 장탄 옵션은 피해야 합니다. 마지막 탄환 도달을 늦추는 방향은 기믹에 맞지 않으며, 크리 대미지는 보조 후보입니다. 공략의 우선도는 미지정이므로 낮게 분류했습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [],
+      "pvp": [
+        "resilience"
+      ],
+      "mode": "PvE",
+      "note": "빠른 재장전을 위한 렐릭 베어가 PvE·PvP의 단일 추천입니다. 탄환 환급이나 장탄 증가로 마지막 탄환 도달을 늦추지 않도록 합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Kilo",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/kilo"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "critRate",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "critDamage",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "HP 기반 광역 버스트는 우월 코드·크리 확률·크리 대미지를 중심으로 강화합니다. 공격력 OL을 기본 목표로 넣지 않습니다. 표의 우선도는 미지정이므로 실제 사용 시에만 낮은 투자로 접근합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [],
+      "pvp": [
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "버스트와 보호막이 HP에 연동되므로 비거가 PvE·PvP 모두의 개별 추천입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Kurumi",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/kurumi"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표에 OL 옵션이나 수량이 제시되지 않았습니다. 확인된 추천이 없는 상태에서 무기별 기본 세팅을 필수 목표처럼 표시하지 않으며 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience"
+      ],
+      "pvp": [
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "개별 표는 PvE에 택티컬 베어·렐릭 베어, PvP에 비거를 제시합니다. 본문에 세부 우열 조건이 없으므로 특정 큐브를 절대 필수로 해석하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Label",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/label"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvP",
+      "note": "지원에는 장비 기본 능력치가 우선이며 OL 줄 자체의 중요도는 낮습니다. 개인 화력까지 투자할 때 우월 코드 4줄·장탄 1~2줄·공격력 4줄을 고려합니다. 표시 장탄은 하한 1줄이고, 자체 공격력 버프로 공격력 효율이 희석됩니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Laplace",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/laplace"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "chargeSpeed"
+      ],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "애장품 미적용 기준으로 공격력·우월 코드 각 4줄, 차지 속도는 보조 후보입니다. 기본형 투자 우선도는 매우 낮으며, 애장품 준비와 기본형의 옵션 재설정 효율을 혼동하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "destruction"
+      ],
+      "pvp": [
+        "adjutant",
+        "onslaught"
+      ],
+      "mode": "PvE",
+      "note": "기본형 개별 표의 PvE 후보는 택티컬 베어·렐릭 베어·디스트로이입니다. 애장품 적용형 또는 얼티밋 히어로의 큐브 조건과 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Laplace: Ultimate Hero",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/laplace-ultimate-hero"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "attack",
+        "critRate",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "high",
+      "mode": "PvE",
+      "note": "우월 코드와 장탄 각 4줄이 주요 목표이며, HP→공격력 전환 때문에 공격력은 크리 계열과 비교하는 보조 후보입니다. 본문은 장탄 합계 약 260%와 팀별 순환 임계를 설명하므로 줄 수만 채우고 수치를 과도하게 올리지 않도록 합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "piercing",
+      "alternatives": [
+        "vigor",
+        "destruction",
+        "resilience"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering"
+      ],
+      "mode": "PvE",
+      "note": "일반 공격 비중이 큰 팀은 피어싱, 트리나 중심 버스트 팀은 비거, 오래 남는 파츠는 디스트로이를 비교합니다. 레이저에 탄환 환급이 적용되지 않아 택티컬 베어는 사용하지 않습니다. 렐릭 베어는 권장 큐브 레벨이 크게 낮을 때의 대안입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Leona",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/leona"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "장탄 1~3줄로 스킬 1의 적정 사거리 버프 유지를 보완하고, 수냉 약점 보스용 화력에 우월 코드·공격력 각 4줄을 고려합니다. 표시 장탄은 범위의 하한인 1줄입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "destruction"
+      ],
+      "pvp": [
+        "bastion",
+        "resilience"
+      ],
+      "mode": "PvE",
+      "note": "스킬 1 스택을 유지하는 데 택티컬 베어의 긴 사격이나 렐릭 베어의 빠른 재장전을 비교합니다. 파츠 전투에서는 디스트로이도 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Liberalio",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/liberalio"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "chargeSpeed",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "meta",
+      "mode": "PvE",
+      "note": "우월 코드·공격력 각 4줄과 장탄 1줄이 우선입니다. 자체 공격력 버프가 풀버스트 초반에 제한되므로 공격력의 가치가 높고, 차지 속도·크리 대미지는 남는 줄의 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "adjutant",
+        "destruction"
+      ],
+      "pvp": [
+        "tempering",
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "상성 전투에서는 높은 큐브 레벨의 우월 코드 효과를 우선 비교합니다. 재장전 버퍼 팀은 렐릭 베어가 편하며, 재장전이 이미 충분할 때만 차지 속도 큐브를 검토합니다. 그 용도로 큐브를 새로 육성할 필요는 낮습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Lily",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/lily"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 OL 투자 표에 구체적인 옵션 목표가 없어 재설정 목표를 비워 둡니다. 택티컬 베어 추천만으로 장탄 OL 필수 수량을 추정하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience"
+      ],
+      "pvp": [
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "PvE 표에는 택티컬 베어·렐릭 베어, PvP에는 비거가 제시됩니다. 세부 수치나 필수 큐브 조건은 공략에 없어 보유 레벨과 역할에 맞춰 선택합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Liter",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/liter"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "공략은 장비 전투력 확보를 설명하지만 OL 옵션 목표는 지정하지 않습니다. 주력 딜러를 먼저 육성하고 리타의 무작위 옵션을 위해 재설정 자원을 쓰지 않는 쪽으로 정리합니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "resilience",
+        "bastion"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "투자 표의 선두 후보인 비거와 템퍼링으로 생존을 확보하고, 사격 공백이 문제일 때 렐릭 베어·택티컬 베어를 비교합니다. 본문의 일반 사격 설명을 필수 공격 큐브 조건으로 확대하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Little Mermaid",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/siren"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage",
+        "maxAmmo"
+      ],
+      "avoid": [],
+      "priority": "high",
+      "mode": "PvE",
+      "note": "Prydwen의 Siren, 즉 리틀 머메이드 가이드 기준입니다. 지원 기능만 필요하면 특정 OL 줄이 필수는 아니며, 개인 화력까지 키울 때 우월 코드·공격력 각 4줄을 목표로 합니다. 주력 딜러 이후 투자하고 크리·장탄은 보조 후보로 남깁니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "vigor",
+        "tempering"
+      ],
+      "pvp": [
+        "tempering",
+        "bastion",
+        "vigor",
+        "resilience"
+      ],
+      "mode": "PvE",
+      "note": "상성 전투는 보유 큐브 레벨과 우월 코드 효과를 먼저 비교합니다. 재장전 팀에서는 렐릭 베어, 그 밖에는 택티컬 베어가 후보이나 일반 공격 비중이 낮아 큐브 종류의 차이를 과장하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Ludmilla",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/ludmilla"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "기본형 개별 투자 표에 OL 목표가 없습니다. 마지막 탄환 효과와 생존 역할을 고려하되 필수 줄 수를 임의로 정하지 않고 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "마지막 탄환 효과를 반복하기 위한 렐릭 베어가 PvE 기본 후보입니다. 생존을 우선하는 전투에서는 비거·템퍼링·인듀어런스를 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Ludmilla: Winter Owner",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/ludmilla-winter-owner"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 2,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "장탄 2줄로 OL 장탄 합계 120% 초과를 목표로 하고 우월 코드·공격력 각 4줄을 보완합니다. 줄 수가 같아도 실제 장탄 합계가 다르므로 수치를 확인하며, 추가 장탄은 편의상 선택하는 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction"
+      ],
+      "pvp": [
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "장탄 OL과 버스트 육성이 부족하면 택티컬 베어가 사격 유지에 유리합니다. 장탄 2줄을 갖추고 버스트를 충분히 육성한 뒤에는 렐릭 베어로 재장전 공백을 줄이는 운용을 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Maiden",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/maiden"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "기본형 광역 버스트 강화를 위해 공격력·우월 코드 각 4줄이 제시됩니다. 투자 우선도는 매우 낮으며 전격 상성을 활용하는 PvP 등 실제 사용하는 전투에 한정해 검토합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "wingman",
+        "destruction"
+      ],
+      "pvp": [
+        "quantum",
+        "bastion",
+        "vigor",
+        "tempering"
+      ],
+      "mode": "PvE",
+      "note": "PvE의 사격 유지 후보와 PvP의 퀀텀·생존 후보를 분리합니다. 근거리에서는 렐릭 베어를 우선 비교하고, 사거리가 멀어 명중이 부족하면 본문의 어설트 언급을 참고할 수 있습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Maiden: Ice Rose",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/maiden-ice-rose"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "chargeSpeed"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "우월 코드·공격력 각 4줄과 장탄 1~2줄이 표의 목표이며, 장탄은 1줄을 표시했습니다. 버스트 딜러로 쓰면 풀버스트 10초 사격을 유지하는 장탄이 중요하고, 차지 속도는 HP 스택과 사격 횟수 보조 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "vigor",
+        "bastion",
+        "destruction"
+      ],
+      "pvp": [
+        "adjutant",
+        "onslaught",
+        "quantum"
+      ],
+      "mode": "PvE",
+      "note": "재장전 버퍼를 쓰는 전격 팀에서는 렐릭 베어를 우선 비교합니다. 버퍼가 없으면 택티컬 베어와 비슷하므로 보유 레벨과 풀버스트 10초 사격 유지 여부를 확인합니다. 투자 표의 비거도 별도 후보로 보존합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Makima",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/makima"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표에는 구체적인 OL 목표가 없고 PvP 전투력 확보만 언급됩니다. 장비 능력치 확보와 재설정을 구분하며, 딜러용 필수 줄 수는 추가하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "wingman"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "resilience",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "탄창을 비운 뒤 도발하는 운용에는 렐릭 베어의 재장전 단축이 유효합니다. PvP에서는 비거·템퍼링으로 생존을 우선할 수 있어 별도 후보로 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mana",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mana"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "개인 공격 성능을 올릴 때 우월 코드·공격력 각 4줄을 고려합니다. 지원 효과만 필요하다면 이 옵션들을 재설정으로 맞출 필요는 없다는 본문의 조건을 적용합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "vigor",
+        "healing",
+        "destruction",
+        "resilience"
+      ],
+      "pvp": [
+        "tempering",
+        "healing",
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "본문은 일반 공격 지속을 위해 택티컬 베어 또는 렐릭 베어 중 높은 레벨을 권합니다. 회복·생존 목적은 힐링·비거, 파츠가 지속되는 전투는 디스트로이를 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Marciana",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/marciana"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "힐러로서는 OL이 없어도 회복량이 충분하다는 공략 조건을 먼저 적용합니다. 철갑 약점 보스에서 개인 화력까지 키울 때만 우월 코드·공격력 각 4줄을 참고하며, 지원 목적의 필수 옵션으로 해석하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "healing",
+        "vigor",
+        "tempering"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "투자 표는 힐링을 앞에 두지만 본문은 마지막 탄환 스킬 1을 자주 발동시키는 렐릭 베어를 명확히 권합니다. 여기서는 재장전 회전을 기본으로 두고 힐링을 대안으로 둡니다. 탄환 환급·장탄 증가 큐브는 피합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Marciana: Marine Study",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/marciana-marine-study"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "critDamage",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "철갑 약점 보스에서 우월 코드를 먼저 확보하고 공격력·크리 대미지 각 4줄을 고려합니다. 애장품 미란다와 함께 확정 크리를 만드는 편성에서는 크리 확률을 추가 목표로 삼지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion"
+      ],
+      "pvp": [
+        "tempering",
+        "vigor",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "개별 투자 표의 렐릭 베어·택티컬 베어를 비교합니다. PvP에서는 템퍼링·비거 등 생존 후보가 별도로 제시되어 있으므로 PvE 재장전 추천을 그대로 고정하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mari Makinami Illustrious",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mari-makinami-illustrious"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "현재 투자 표의 목표는 버스트 게이지 수급용 장탄 1~2줄이며 표시에는 1줄을 반영했습니다. 먼저 주력 딜러를 육성하고, 장비 기본 공격력으로 지원을 보완합니다. 본문의 공격력·우월 코드 4줄 언급을 지원형의 필수 목표로 합치지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance",
+        "adjutant"
+      ],
+      "mode": "PvE",
+      "note": "수동 속사로 버스트 게이지를 채우는 운용은 렐릭 베어가 편하며, 특히 장탄 OL이 없을 때 유효합니다. 긴 전투의 총 사격 횟수는 택티컬 베어와 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mary",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mary"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표에 OL 옵션 목표가 없습니다. 마지막 탄환 회복을 위해 임의로 장탄이나 공격력 줄 수를 부여하지 않고 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "healing",
+      "alternatives": [
+        "resilience",
+        "vigor"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "투자 표는 회복용 힐링을 먼저 제시하고, 본문은 마지막 탄환 효과 회전을 위해 렐릭 베어를 권합니다. 회복량과 발동 빈도 중 필요한 쪽을 비교하며 비거는 생존 대안입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mary: Bay Goddess",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/bay-goddess-mary"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "회복량은 OL 없이도 충분하므로 공략이 옵션 재설정을 권하지 않습니다. 장탄 1~2줄은 레이드 수동 사격으로 버스트 게이지를 채울 때의 편의 후보이며, 표시한 1줄을 회복 성능의 필수 조건으로 보지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "healing",
+      "alternatives": [
+        "vigor",
+        "resilience"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "공략은 현재 회복 목적의 힐링을 기본으로 권합니다. HP·생존은 비거, 수동 사격의 재장전 공백은 렐릭 베어를 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mast",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mast"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "기본형 가이드는 장비의 기본 방어력 증가를 설명하지만 OL 옵션 재설정은 필요하지 않다고 명시합니다. 목표 옵션 표도 비어 있어 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "assault"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "개별 표는 렐릭 베어·택티컬 베어·어설트를 PvE 후보로 제시합니다. 먼 거리 명중 보완이 필요할 때 어설트를 비교하고, 근거리에서는 재장전 보조의 가치를 확인합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mast: Romantic Maid",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mast-romantic-maid"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "hitRate"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "주력 딜러 이후에 우월 코드·공격력 각 4줄과 장탄 1줄을 고려합니다. 추가 장탄이나 명중은 보조 후보이며, 지원 역할의 장비 기본 공격력 확보를 완성형 OL 재설정과 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "공략의 재장전 지속 사격 조건은 렐릭 베어 7레벨 이상과 앵커: 이노센트 메이드 또는 크라운 조합입니다. 해당 조건이 아니어도 큐브 기본 공격력과 레벨이 중요하므로 저레벨 큐브를 무조건 고정하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Maxwell",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/maxwell"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "critDamage",
+          "count": 2,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "maxAmmo"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "우월 코드·공격력 각 4줄과 크리 대미지 2~4줄을 고려하며, 표시는 크리 대미지 2줄입니다. 장탄 0~2줄은 레이드 버스트 수급용 선택 사항이므로 필수 줄에 넣지 않았습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction",
+        "adjutant",
+        "onslaught"
+      ],
+      "pvp": [
+        "vigor",
+        "bastion",
+        "adjutant"
+      ],
+      "mode": "PvE",
+      "note": "현재 투자 표의 렐릭 베어를 기본 후보로 두고 택티컬 베어·디스트로이·차지 속도 큐브를 상황에 맞춰 비교합니다. 본문이 언급한 온슬로트도 차지 공격용 대안이며, 표와 본문의 후보를 절대 순위로 해석하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Maxwell: Ordinary Mechanic",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/maxwell-ordinary-mechanic"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "chargeSpeed",
+        "attack"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "개인 화력까지 육성할 때 우월 코드 4줄·장탄 1줄을 시작 목표로 둡니다. 지원만 필요하면 HP 장비를 먼저 올리고, 장탄은 속사 버스트 수급용입니다. 최종 범위는 장탄 1~3줄·차지 속도 0~4줄·공격력 0~4줄이므로 이를 한 세팅에 모두 합치지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mica",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mica"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 OL 투자 표에 구체적인 옵션이나 수량이 없습니다. 지원용 캐릭터에 무기별 딜러 세팅을 일괄 부여하지 않고 재설정 목표를 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "endurance",
+        "adjutant"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance",
+        "adjutant"
+      ],
+      "mode": "PvE",
+      "note": "투자 표의 생존 후보인 비거·템퍼링·인듀어런스를 우선 비교하고, 차지 속도가 필요한 운용에는 렐릭 부스트가 후보입니다. 본문에 필수 큐브 조건은 제시되어 있지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mica: Snow Buddy",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mica-snow-buddy"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvP",
+      "note": "공략은 PvP 전투력과 소폭의 생존 증가를 설명하지만 OL 옵션은 지정하지 않습니다. 그 목적을 임의의 공격력·장탄 목표로 바꾸지 않고 옵션 재설정은 권장 목표에서 제외합니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance",
+        "quantum"
+      ],
+      "mode": "PvE",
+      "note": "PvE 스택 유지에는 렐릭 베어·택티컬 베어를 비교합니다. PvP 본문은 버스트 수급용 퀀텀도 언급하며, 버스트 전에 쓰러지면 비거 등 생존 후보를 우선 검토합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mihara",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mihara"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "기본형 개별 투자 표의 OL 목표는 비어 있습니다. 본딩 체인 버전의 세팅을 가져오지 않으며 옵션 재설정의 구체적 근거가 없습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [],
+      "pvp": [
+        "resilience",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "기본형의 마지막 탄환 효과에는 렐릭 베어가 공략의 우선 후보입니다. 본딩 체인의 지속 대미지·탄환 환급 운용과 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Milk",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/milk"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "애장품 미적용 기본형 투자 표에는 OL 목표가 없습니다. 애장품의 추가 효과를 기본형에 적용하지 않고 구체적인 재설정 목표는 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "healing",
+      "alternatives": [
+        "vigor",
+        "bastion",
+        "resilience"
+      ],
+      "pvp": [
+        "healing",
+        "vigor",
+        "tempering",
+        "adjutant"
+      ],
+      "mode": "PvE",
+      "note": "기본형 투자 표의 힐링·비거를 회복 및 생존 후보로 두고, 사격 유지에는 택티컬 베어·렐릭 베어를 비교합니다. 애장품 적용 가이드의 조건과 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Milk: Blooming Bunny",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/milk-blooming-bunny"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "현재 투자 표는 장탄·우월 코드·공격력 각 4줄을 제시합니다. 본문은 최소 장탄 3줄과 적극적인 수동 사격을 강조하므로 장탄을 먼저 확보하고, 철갑 약점 레이드와 타워의 상성 차이에 맞춰 나머지를 조정합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction",
+        "piercing"
+      ],
+      "pvp": [
+        "resilience",
+        "bastion",
+        "vigor",
+        "tempering"
+      ],
+      "mode": "PvE",
+      "note": "렐릭 베어가 안정적인 기본 후보이며, 장탄 수치와 팀의 사격 임계에 따라 택티컬 베어를 비교합니다. 탄약 문제가 해결된 뒤 오래 남는 파츠는 디스트로이, 관통 운용은 피어싱을 별도 검토할 수 있습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mint",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mint"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "일반적인 지원 운용에는 옵션 재설정이 필요하지 않습니다. 장탄 1~2줄은 수동 속사로 버스트 게이지를 채우거나 전투력을 더 확보할 때의 선택이며, 표시는 범위의 하한인 1줄입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Miranda",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/miranda"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "애장품 미적용 기본형 기준으로 공략은 레이드 생존을 언급하지만 OL 옵션 목표는 비워 두었습니다. 애장품의 공격 지원 조건을 혼합하지 않고 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "기본형 투자 표는 비거·템퍼링·인듀어런스의 생존 후보를 제시합니다. 본문의 탄환 환급·재장전 언급은 스킬 유지용 보조 설명으로 구분하며, 애장품 큐브 추천과 혼동하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Misato Katsuragi",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/misato-katsuragi"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표에 OL 옵션 목표가 없습니다. 구체적인 수량 근거 없이 지원형 기본 세팅을 만들지 않으며 재설정 목표를 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "PvE·PvP 모두 비거·템퍼링·인듀어런스가 투자 표의 후보입니다. 생존을 보완하는 선택지이며 특정 하나가 필수라는 세부 조건은 공략에 없습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Modernia",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/modernia"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "hitRate",
+        "critRate"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "장탄·공격력·우월 코드 각 4줄이 우선입니다. 명중 1줄은 레드 후드를 단독 버스트 I로 사용하는 캠페인의 특정 공백에 한정된 보조 후보이며, 일반 필수 옵션으로 취급하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "wingman",
+        "destruction"
+      ],
+      "pvp": [
+        "bastion",
+        "assault",
+        "resilience",
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "OL 이전에도 택티컬 베어가 사격 유지에 유효하다는 공략을 따릅니다. 풀버스트에서 명중 효과를 확보하므로 명중 큐브를 상시 필수로 볼 필요가 없고, 재장전·장탄·파츠 상황에 따라 대안을 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Moran",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/moran"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvP",
+      "note": "애장품 미적용 기본형 투자 표에는 옵션 목표가 없으며 PvP 전투력·생존 증가만 언급됩니다. 장비 기본 능력치 확보와 옵션 재설정을 구분하고 목표 줄 수는 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "healing",
+        "tempering",
+        "destruction"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "HP를 늘리는 비거를 기본으로 생존 후보를 비교합니다. 버스트 밖 도발을 더 자주 발동시키고 싶으면 본문의 렐릭 베어를 검토할 수 있으나, 도발을 늦추기 위한 택티컬 베어는 본문도 권장하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Mori",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/mori"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 가이드에서 구체적인 OL 목표를 제시하지 않습니다. 큐브의 생존 추천만으로 방어력이나 HP 연동 공격 옵션의 수량을 추정하지 않고 재설정 목표를 두지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "resilience"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "assist"
+      ],
+      "mode": "PvE",
+      "note": "PvE는 비거·템퍼링·렐릭 베어, PvP는 비거·템퍼링·렐릭 어시스트가 표에 제시됩니다. 모드별 후보가 달라 하나의 공격 큐브로 통일하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "N102",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/n102"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표에 OL 목표가 없어 재설정 목표를 두지 않습니다. 장탄 지원이 일부 아군의 마지막 탄환 운용을 방해할 수 있다는 가이드의 팀 편성 주의사항도 함께 확인합니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "adjutant",
+      "alternatives": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance",
+        "adjutant"
+      ],
+      "mode": "PvE",
+      "note": "본문이 풀 차지 도달을 빠르게 하는 렐릭 부스트를 명확히 권해 기본 후보로 두었습니다. 표의 비거·템퍼링·인듀어런스는 생존이 더 필요한 경우의 대안입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Naga",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/naga"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "지원 공격력 버프에는 장비 레벨로 얻는 기본 공격력이 반영되며, OL 공격력 옵션은 해당 버프에 반영되지 않습니다. 지원 목적의 재설정은 필요하지 않고, 전격 약점 보스의 보조 딜러로 운용할 때만 공격력·우월 코드·장탄 각 4줄의 표를 참고합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "vigor",
+        "destruction",
+        "wingman"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "사격 횟수 기반 효과를 이어 가도록 렐릭 베어·택티컬 베어를 비교합니다. 장탄이 부족하면 본문이 언급한 부스트도 대안이며, 회복·생존용 PvP 후보는 별도로 표시합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Nayuta",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/nayuta"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage",
+        "chargeDamage"
+      ],
+      "avoid": [
+        "chargeSpeed",
+        "maxAmmo"
+      ],
+      "priority": "high",
+      "mode": "PvE",
+      "note": "개인 화력을 키울 때 우월 코드·공격력 각 4줄이 우선이고, 크리·차지 대미지는 자연스럽게 붙는 보조 줄입니다. 지원만 필요하면 장비 레벨을 먼저 올립니다. 차지 속도는 적용되지 않고 빠른 순환에서 장탄의 이득도 없어 재설정 목표로 삼지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "destruction",
+      "alternatives": [
+        "resilience",
+        "bastion",
+        "vigor"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "resilience"
+      ],
+      "mode": "PvE",
+      "note": "파츠를 계속 공격할 수 있을 때 디스트로이를 시험하되, 일반적으로 보유 최고 레벨 큐브의 기본 공격력·우월 코드 효과를 먼저 비교합니다. PvP는 비거·템퍼링 등 생존 후보를 사용합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Neon",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/neon"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "기본형 네온의 투자 표에는 OL 목표가 없습니다. 블루 오션·비전 아이와 구분하고 확인되지 않은 장탄·공격력 줄 수를 추가하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "quantum",
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "개별 표는 PvE에 비거·템퍼링·인듀어런스, PvP에는 퀀텀을 포함한 생존 후보를 제시합니다. 다른 네온 버전의 사격 큐브를 이 기본형에 그대로 적용하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Neon: Blue Ocean",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/blue-ocean-neon"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "우월 코드·공격력·장탄 각 4줄은 공략의 화력용 목표입니다. 투자 우선도는 미지정이고 낮은 등급의 대체 딜러 용도로 설명되어 있으므로 낮은 투자로 보수적으로 분류했습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "destruction",
+        "wingman"
+      ],
+      "pvp": [
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "기관총 사격 시간을 늘리는 택티컬 베어가 기본 후보입니다. 큐브 육성이 부족하면 렐릭 베어를 비교하며, 본문은 장탄 보완용 부스트도 대안으로 언급합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Neon: Vision Eye",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/neon-vision-eye"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "chargeSpeed",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 2,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "essential"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "meta",
+      "mode": "PvE",
+      "note": "우월 코드 4줄·차지 속도 4줄을 중심으로 공격력 2~3줄·장탄 1~2줄을 배분합니다. 표시는 각 범위의 하한인 총 11줄이며, 장탄 최소 1줄이 필요합니다. 차지 속도가 높아질수록 탄약·재장전 요구도 커져 남은 줄은 팀과 수치에 맞춰 조정합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction"
+      ],
+      "pvp": [
+        "bastion",
+        "resilience",
+        "tempering",
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "재장전 버퍼 팀은 렐릭 베어를 먼저 비교합니다. 그 밖에는 리버렐리오 동행 여부, 약 10발 또는 13발 이상 탄창, 차지 속도 수치에 따라 택티컬 베어와 우열이 달라집니다. 재장전이 충분하고 지속 파츠가 있으면 디스트로이도 조건부 후보입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Nero",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/nero"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "defense"
+      ],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvP",
+      "note": "PvP 생존·전투력 확보와 최대 스택 반격 피해를 위한 낮은 우선도 투자입니다. 공격력·우월 코드 각 4줄을 참고하고, 방어력은 보조 후보로 남깁니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "vigor",
+      "alternatives": [
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "투자 표는 비거·템퍼링·인듀어런스를 PvE·PvP에 공통으로 제시합니다. 일반 SMG 재장전 설명보다 생존 역할을 우선해 선택합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Neve",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/neve"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "공격력·우월 코드 각 4줄이 낮은 등급의 대체 딜러용 목표로 제시됩니다. 투자 우선도는 매우 낮으므로 주력 딜러의 육성을 앞당기기 위해 이 세팅을 먼저 완성할 필요는 없습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "destruction",
+        "assault"
+      ],
+      "pvp": [
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "PvE 표는 택티컬 베어·렐릭 베어·디스트로이·어설트를 제시합니다. 근거리 사격에는 재장전 보조, 먼 거리 명중이 필요하면 어설트를 비교하며 PvP 표의 후보는 택티컬 베어입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Nihilister",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/nihilister"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "chargeSpeed",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvP",
+      "note": "PvP의 차지 속도 임계를 위한 차지 속도 4줄만 개별 표에 제시됩니다. 무기 유형을 이유로 공격력·우월 코드 완성 세팅을 추가하지 않으며, 실제 팀의 발사·버스트 순환을 확인합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": [
+        "bastion",
+        "destruction",
+        "adjutant"
+      ],
+      "pvp": [
+        "quantum",
+        "adjutant",
+        "onslaught",
+        "vigor"
+      ],
+      "mode": "PvE",
+      "note": "PvE에서는 렐릭 베어 또는 탄환 유지 후보를 비교합니다. PvP의 버스트 수급·차지 속도·차지 대미지 후보는 별도 목록에 두어 용도를 구분합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Noah",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/noah"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "chargeSpeed",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "attack",
+        "element"
+      ],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvP",
+      "note": "PvP 전투력과 생존을 보완하면서 차지 속도 4줄을 목표로 하는 표입니다. 공격력·우월 코드는 자연스럽게 붙은 보조 후보이며 주력 딜러처럼 추가 재설정할 필요가 없습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "adjutant",
+      "alternatives": [
+        "resilience",
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "quantum",
+        "adjutant"
+      ],
+      "mode": "PvE",
+      "note": "본문이 빠른 풀 차지를 위한 렐릭 부스트를 권하므로 차지 운용의 기본 후보로 두었습니다. 생존이 더 중요한 PvP에서는 비거·템퍼링, 버스트 수급은 퀀텀을 비교합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Noir",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/noir"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 2,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "low",
+      "mode": "PvE",
+      "note": "지원에는 장비 기본 공격력을 우선하고 옵션 재설정이 필수는 아닙니다. 풍압 약점 보조 딜러로 투자할 때 우월 코드 4줄·장탄 2~3줄·공격력 4줄을 고려합니다. 표시 장탄은 2줄이며 공격력 순위가 높아져 앨리스 등의 버프를 가져가지 않는지 확인합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience",
+        "destruction"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance",
+        "quantum"
+      ],
+      "mode": "PvE",
+      "note": "총 사격 횟수를 늘리는 택티컬 베어를 우선 비교하고 슬롯이 부족하면 렐릭 베어를 사용합니다. PvP의 생존·버스트 수급 후보는 별도로 표시합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Noise",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/noise"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "chargeSpeed",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "attack",
+        "element"
+      ],
+      "avoid": [
+        "maxAmmo"
+      ],
+      "priority": "medium",
+      "mode": "PvP",
+      "note": "차지 속도 4줄은 PvP용 목표이며, 재장전으로 최대 HP 버프와 회복을 다시 발동시키기 위해 장탄을 피합니다. PvE 지원 운용에는 특정 OL 목표가 없다는 본문의 조건을 함께 적용합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "healing",
+      "alternatives": [
+        "vigor",
+        "tempering",
+        "resilience"
+      ],
+      "pvp": [
+        "vigor",
+        "healing",
+        "tempering",
+        "resilience"
+      ],
+      "mode": "PvE",
+      "note": "공략이 현재 기본으로 제시하는 힐링을 사용하고, 최대 HP와 생존이 필요하면 비거·템퍼링을 비교합니다. 재장전 주기를 보완하는 렐릭 베어도 후보이며 모드와 회복 갱신 주기를 함께 봅니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Novel",
+    "checkedAt": "2026-10-23",
+    "sources": [
+      {
+        "label": "Prydwen 캐릭터별 투자 가이드",
+        "url": "https://www.prydwen.gg/nikke/characters/novel"
+      }
+    ],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "PvE",
+      "note": "개별 투자 표에 구체적인 OL 목표가 없습니다. 스택 유지에 도움을 주는 큐브 추천을 장탄 OL 필수 수량으로 확대하지 않고 재설정 목표를 비워 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [
+        "resilience"
+      ],
+      "pvp": [
+        "vigor",
+        "tempering",
+        "endurance"
+      ],
+      "mode": "PvE",
+      "note": "스킬 2 버프 유지를 위한 택티컬 베어가 본문의 후보이며, 재장전 공백을 줄이려면 렐릭 베어를 비교합니다. PvP 생존 후보는 별도 목록에 둡니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  }
+]

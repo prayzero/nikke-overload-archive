@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Belorta: Pumpkin Witch",
+    "checkedAt": "2026-10-23",
+    "sources": [{ "label": "Prydwen 개별 투자·운용 가이드", "url": "https://www.prydwen.gg/nikke/characters/belorta-pumpkin-witch" }],
+    "overload": {
+      "primary": [{ "stat": "maxAmmo", "count": 1, "grade": "ideal" }],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "보스 지원",
+      "note": "지원 공격력은 장비 기본 능력치를 먼저 올립니다. 버스트 게이지 수급을 위한 속사 운용에서는 장탄 1~2줄을 참고하며, 표시는 하한 1줄입니다. 추가 재설정은 필수가 아닙니다. PvP 차지 속도는 팀 임계에 맞춘 별도 선택이며 기본 목표로 요구하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "resilience",
+      "alternatives": ["bastion"],
+      "pvp": ["tempering", "vigor", "adjutant", "bastion", "resilience"],
+      "mode": "PvE",
+      "note": "장탄 OL이 적으면 렐릭 베어, 충분히 확보했으면 택티컬 베어를 비교합니다. PvP는 생존·블랑 불굴 대상 조정용 비거와 템퍼링, 팀 전체의 차지 속도 임계를 맞출 때 부스트를 고려합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  }
+]

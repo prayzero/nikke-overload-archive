@@ -1,8 +1,10 @@
 import { readFile, writeFile } from "node:fs/promises";
+import { applyReview, loadReviews } from "./reviewed-recommendations.mjs";
 
 const rosterPath = new URL("../app/roster.json", import.meta.url);
 const outputPath = new URL("../app/overloads.json", import.meta.url);
 const roster = JSON.parse((await readFile(rosterPath, "utf8")).replace(/^\uFEFF/, ""));
+const individualReviews = await loadReviews(roster);
 
 const line = (stat, count, grade = "ideal") => ({ stat, count, grade });
 const validStats = new Set([
@@ -559,13 +561,13 @@ const output = roster.map((nikke) => {
   const override = overrides[nikke.name];
   const build = override ?? defaultProfile(nikke);
   const sources = reviewSources[nikke.name];
-  return normalizeBuild({
+  return normalizeBuild(applyReview({
     name: nikke.name,
     ...build,
     note: override ? build.note : `개별 스킬 검증 전 무기·역할 기반 범용안입니다. ${build.note}`,
     ...(sources ? { sources } : {}),
     verifiedAt: sources ? "2026-10-23" : reviewedNames.has(nikke.name) ? "2026-09-16" : "2026-08-20",
-  });
+  }, individualReviews.get(nikke.name), "overload"));
 });
 
 const names = new Set(output.map((entry) => entry.name));
@@ -580,13 +582,14 @@ for (const name of Object.keys(reviewSources)) {
   if (!overrides[name]) throw new Error(`${name}: reviewed overload sources require a named build.`);
 }
 for (const entry of output) {
-  if (entry.primary.length < 1 || entry.primary.length > validStats.size) {
+  if ((entry.primary.length < 1 && !["no-target", "unavailable"].includes(entry.reviewStatus))
+    || entry.primary.length > validStats.size) {
     throw new Error(`${entry.name}: primary option count exceeds the supported stat types.`);
   }
   if (new Set(entry.primary.map(({ stat }) => stat)).size !== entry.primary.length) {
     throw new Error(`${entry.name}: primary option names must be unique.`);
   }
-  if (entry.primary.some(({ count }) => count < 1 || count > 4)) {
+  if (entry.primary.some(({ count }) => !Number.isInteger(count) || count < 1 || count > 4)) {
     throw new Error(`${entry.name}: option counts must stay between 1 and 4.`);
   }
   if (entry.primary.some(({ stat, grade }) => !validStats.has(stat) || !validGrades.has(grade))) {

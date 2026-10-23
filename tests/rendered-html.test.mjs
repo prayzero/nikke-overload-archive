@@ -115,9 +115,10 @@ test("provides one validated overload build for every playable Nikke", async () 
     roster.map((nikke) => nikke.name).sort(),
   );
   assert.equal(new Set(builds.map((build) => build.name)).size, roster.length);
-  assert.ok(builds.every((build) => build.primary.length >= 1 && build.primary.length <= validStats.size));
+  assert.ok(builds.every((build) => build.primary.length <= validStats.size
+    && (build.primary.length > 0 || ["no-target", "unavailable"].includes(build.reviewStatus))));
   assert.ok(builds.every((build) => build.primary.every(({ stat, count, grade }) =>
-    validStats.has(stat) && count >= 1 && count <= 4 && validGrades.has(grade))));
+    validStats.has(stat) && Number.isInteger(count) && count >= 1 && count <= 4 && validGrades.has(grade))));
   assert.ok(builds.every((build) =>
     build.primary.reduce((total, { count }) => total + count, 0) <= 12));
   assert.ok(builds.every((build) => new Set(build.primary.map(({ stat }) => stat)).size === build.primary.length));
@@ -151,7 +152,10 @@ test("provides one validated cube recommendation for every playable Nikke", asyn
     roster.map(({ name }) => name).sort(),
   );
   assert.equal(new Set(recommendations.map(({ name }) => name)).size, roster.length);
-  assert.ok(recommendations.every(({ primary }) => validCubeIds.has(primary)));
+  assert.ok(recommendations.every(({ primary, reviewStatus, alternatives }) => validCubeIds.has(primary)
+    || primary === null && reviewStatus === "unavailable" && alternatives.length === 0));
+  assert.ok(recommendations.every(({ pvp = [] }) => pvp.every((id) => validCubeIds.has(id))
+    && new Set(pvp).size === pvp.length));
   assert.ok(recommendations.every(({ alternatives }) =>
     Array.isArray(alternatives)
       && alternatives.every((cubeId) => validCubeIds.has(cubeId))
