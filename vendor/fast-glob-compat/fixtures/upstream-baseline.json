@@ -1,0 +1,370 @@
+{
+  "upstreamVersion": "3.3.1",
+  "files": [
+    "entry.js",
+    "src/one.js",
+    "src/two.ts",
+    "src/view.tsx",
+    "src/file1.js",
+    "src/file2.js",
+    "src/file3.js",
+    "src/.hidden.js",
+    "src/deep/leaf.js",
+    "packages/alpha/page.js",
+    "packages/beta/page.ts",
+    "packages/not-a-directory.txt",
+    "packages/.hidden/page.js",
+    "app/page.tsx",
+    "공백 폴더/화면.js",
+    "views/a.js",
+    "views/b.ts",
+    "views/nested/c.js",
+    "views/feature/index.ts"
+  ],
+  "directories": [
+    "empty"
+  ],
+  "cases": [
+    {
+      "name": "files-default",
+      "patterns": "**/*",
+      "expected": [
+        "app/page.tsx",
+        "entry.js",
+        "packages/alpha/page.js",
+        "packages/beta/page.ts",
+        "packages/not-a-directory.txt",
+        "src/deep/leaf.js",
+        "src/file1.js",
+        "src/file2.js",
+        "src/file3.js",
+        "src/one.js",
+        "src/two.ts",
+        "src/view.tsx",
+        "views/a.js",
+        "views/b.ts",
+        "views/feature/index.ts",
+        "views/nested/c.js",
+        "공백 폴더/화면.js"
+      ]
+    },
+    {
+      "name": "static-dir-as-file",
+      "patterns": "app",
+      "expected": []
+    },
+    {
+      "name": "static-dir",
+      "patterns": "app",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "app"
+      ]
+    },
+    {
+      "name": "static-slash",
+      "patterns": "app/",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "app/"
+      ]
+    },
+    {
+      "name": "static-leading-dot",
+      "patterns": "./app/",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "./app/"
+      ]
+    },
+    {
+      "name": "dynamic-slash",
+      "patterns": "app*/",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "app"
+      ]
+    },
+    {
+      "name": "static-globstar-base",
+      "patterns": "app/**",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": []
+    },
+    {
+      "name": "dynamic-globstar-base",
+      "patterns": "app*/**",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "app"
+      ]
+    },
+    {
+      "name": "nested-globstar-base",
+      "patterns": "packages/**",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "packages/alpha",
+        "packages/beta"
+      ]
+    },
+    {
+      "name": "nested-dynamic-globstar-base",
+      "patterns": "packages/*/**",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "packages/alpha",
+        "packages/beta"
+      ]
+    },
+    {
+      "name": "directories",
+      "patterns": "packages/*",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "packages/alpha",
+        "packages/beta"
+      ]
+    },
+    {
+      "name": "brace-extension",
+      "patterns": "src/*.{js,ts,tsx}",
+      "expected": [
+        "src/file1.js",
+        "src/file2.js",
+        "src/file3.js",
+        "src/one.js",
+        "src/two.ts",
+        "src/view.tsx"
+      ]
+    },
+    {
+      "name": "numeric-brace",
+      "patterns": "src/file{1..3}.js",
+      "expected": [
+        "src/file1.js",
+        "src/file2.js",
+        "src/file3.js"
+      ]
+    },
+    {
+      "name": "globstar",
+      "patterns": "src/**/*.js",
+      "expected": [
+        "src/deep/leaf.js",
+        "src/file1.js",
+        "src/file2.js",
+        "src/file3.js",
+        "src/one.js"
+      ]
+    },
+    {
+      "name": "leading-dot-glob",
+      "patterns": "./src/*.js",
+      "expected": [
+        "./src/file1.js",
+        "./src/file2.js",
+        "./src/file3.js",
+        "./src/one.js"
+      ]
+    },
+    {
+      "name": "exclusions",
+      "patterns": [
+        "**/*.js",
+        "!src/file*.js",
+        "!packages/**"
+      ],
+      "expected": [
+        "entry.js",
+        "src/deep/leaf.js",
+        "src/one.js",
+        "views/a.js",
+        "views/nested/c.js",
+        "공백 폴더/화면.js"
+      ]
+    },
+    {
+      "name": "negative-only",
+      "patterns": [
+        "!**/*.js"
+      ],
+      "expected": []
+    },
+    {
+      "name": "duplicates",
+      "patterns": [
+        "src/*.js",
+        "src/**/*.js"
+      ],
+      "expected": [
+        "src/deep/leaf.js",
+        "src/file1.js",
+        "src/file2.js",
+        "src/file3.js",
+        "src/one.js"
+      ]
+    },
+    {
+      "name": "parent-cwd",
+      "patterns": "../app/*.tsx",
+      "cwd": "src",
+      "expected": [
+        "../app/page.tsx"
+      ]
+    },
+    {
+      "name": "unicode-space-cwd",
+      "patterns": "*.js",
+      "cwd": "공백 폴더",
+      "expected": [
+        "화면.js"
+      ]
+    },
+    {
+      "name": "absolute-rootdirs",
+      "patterns": "<ROOT>/packages/*",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "<ROOT>/packages/alpha",
+        "<ROOT>/packages/beta"
+      ]
+    },
+    {
+      "name": "absolute-static",
+      "patterns": "<ROOT>/app/",
+      "options": {
+        "onlyDirectories": true
+      },
+      "expected": [
+        "<ROOT>/app/"
+      ]
+    },
+    {
+      "name": "mixed-absolute-relative",
+      "patterns": [
+        "<ROOT>/src/*.js",
+        "src/*.ts"
+      ],
+      "expected": [
+        "<ROOT>/src/file1.js",
+        "<ROOT>/src/file2.js",
+        "<ROOT>/src/file3.js",
+        "<ROOT>/src/one.js",
+        "src/two.ts"
+      ]
+    },
+    {
+      "name": "absolute-exclusion",
+      "patterns": [
+        "<ROOT>/src/*.js",
+        "!<ROOT>/src/file*.js"
+      ],
+      "expected": [
+        "<ROOT>/src/one.js"
+      ]
+    },
+    {
+      "name": "extglob",
+      "patterns": "src/+(one|two).+(js|ts)",
+      "expected": [
+        "src/one.js",
+        "src/two.ts"
+      ]
+    },
+    {
+      "name": "character-class",
+      "patterns": "src/file[12].js",
+      "expected": [
+        "src/file1.js",
+        "src/file2.js"
+      ]
+    },
+    {
+      "name": "empty",
+      "patterns": [],
+      "expected": []
+    },
+    {
+      "name": "nonexistent",
+      "patterns": "missing/**/*.js",
+      "expected": []
+    },
+    {
+      "name": "static-file",
+      "patterns": "src/one.js",
+      "expected": [
+        "src/one.js"
+      ]
+    },
+    {
+      "name": "static-dot-file",
+      "patterns": "src/.hidden.js",
+      "expected": [
+        "src/.hidden.js"
+      ]
+    },
+    {
+      "name": "explicit-dot-glob",
+      "patterns": "src/.*.js",
+      "expected": [
+        "src/.hidden.js"
+      ]
+    }
+  ],
+  "dynamicImports": [
+    {
+      "code": "export const load = (name) => import(`./views/${name}.js`);",
+      "imports": [
+        "./views/a.js",
+        "./views/nested/c.js"
+      ],
+      "cases": [
+        "./views/a",
+        "./views/a.js",
+        "./views/nested/c",
+        "./views/nested/c.js"
+      ]
+    },
+    {
+      "code": "export const load = (name) => import(`./views/${name}`);",
+      "imports": [
+        "./views/a.js",
+        "./views/b.ts",
+        "./views/feature/index.ts",
+        "./views/nested/c.js"
+      ],
+      "cases": [
+        "./views/a",
+        "./views/a.js",
+        "./views/b",
+        "./views/b.ts",
+        "./views/feature",
+        "./views/feature/index",
+        "./views/feature/index.ts",
+        "./views/nested/c",
+        "./views/nested/c.js"
+      ]
+    }
+  ]
+}

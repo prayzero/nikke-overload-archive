@@ -12,9 +12,10 @@
     "postbuild": "node scripts/harden-static-html.mjs",
     "start": "node scripts/run-vinext.mjs start",
     "test": "npm run build && npm run test:static",
-    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs",
+    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs tests/glob-compat.test.mjs",
     "typecheck": "tsc --noEmit",
     "qa": "npm run build && npm run typecheck && npm run lint && npm run test:static",
+    "security:audit": "npm audit --include=dev --audit-level=low",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "artwork:refresh": "node scripts/refresh-artwork.mjs",
     "artwork:check": "node scripts/check-artwork.mjs",
@@ -26,8 +27,8 @@
     "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.54.10",
-    "@cloudflare/workers-types": "5.20260916.1",
+    "@cloudflare/vite-plugin": "1.64.0",
+    "@cloudflare/workers-types": "5.20261023.1",
     "@eslint/js": "9.39.5",
     "@next/eslint-plugin-next": "16.2.6",
     "@tailwindcss/postcss": "4.2.1",
@@ -40,14 +41,23 @@
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
+    "fast-glob": "file:vendor/fast-glob-compat",
     "globals": "16.4.0",
     "react-server-dom-webpack": "19.3.1",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.59.3",
     "vinext": "1.0.0-beta.10",
-    "vite": "8.0.16",
-    "wrangler": "4.132.0"
+    "vite": "8.3.5",
+    "wrangler": "4.151.0"
+  },
+  "overrides": {
+    "@next/eslint-plugin-next": {
+      "fast-glob": "$fast-glob"
+    },
+    "vite-plugin-dynamic-import": {
+      "fast-glob": "$fast-glob"
+    }
   },
   "type": "module"
 }
