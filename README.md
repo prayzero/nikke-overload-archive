@@ -30,10 +30,13 @@ npm run dev
 
 ```bash
 npm run qa
+npm run security:audit
 npm run artwork:check
 ```
 
 `qa`는 타입, 린트, 정적 빌드, 데이터 완전성·보유 ID 보존·옵션 배치·의존성 버전 일치·배포 자산·이미지 검사기 테스트를 실행합니다. 빌드 결과에는 해시 기반 Content Security Policy가 자동 적용됩니다. 주간 및 명단·검사기 변경 PR의 GitHub Actions는 전신 일러스트와 대체 아이콘을 모두 검사하고, HEAD 실패는 GET으로 재확인하며, 실제로 없어진 파일은 실패로 보고합니다.
+
+`security:audit`는 개발 도구를 포함한 전체 의존성을 검사하고 낮음 이상의 알려진 취약점이 있으면 실패합니다. PR 검사와 배포 빌드 모두 이 검사를 실행합니다. 보안 의존성 변경의 근거와 호환 계층 유지 범위는 [보안 수정 기록](docs/security-update-2026-10-23.md)에 있습니다.
 
 ## 2026-10-23 갱신
 
