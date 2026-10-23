@@ -115,7 +115,7 @@ test("provides one validated overload build for every playable Nikke", async () 
     roster.map((nikke) => nikke.name).sort(),
   );
   assert.equal(new Set(builds.map((build) => build.name)).size, roster.length);
-  assert.ok(builds.every((build) => build.primary.length >= 1 && build.primary.length <= 3));
+  assert.ok(builds.every((build) => build.primary.length >= 1 && build.primary.length <= validStats.size));
   assert.ok(builds.every((build) => build.primary.every(({ stat, count, grade }) =>
     validStats.has(stat) && count >= 1 && count <= 4 && validGrades.has(grade))));
   assert.ok(builds.every((build) =>

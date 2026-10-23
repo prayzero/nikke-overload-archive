@@ -29,6 +29,7 @@ export type CubeRecommendation = {
   note: string;
   confidence: CubeConfidence;
   verifiedAt: string;
+  sources?: Array<{ label: string; url: string }>;
 };
 
 export type CubeDetails = {

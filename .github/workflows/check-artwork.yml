@@ -1,6 +1,12 @@
 name: Check remote artwork
 
 on:
+  pull_request:
+    paths:
+      - app/roster.json
+      - scripts/check-artwork.mjs
+      - tests/artwork-check.test.mjs
+      - .github/workflows/check-artwork.yml
   schedule:
     - cron: "17 3 * * 1"
   workflow_dispatch:
@@ -9,7 +15,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: artwork-health
+  group: artwork-health-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
