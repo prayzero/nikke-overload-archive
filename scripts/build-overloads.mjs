@@ -26,6 +26,16 @@ const unique = (values) => [...new Set(values)];
 const reviewedNames = new Set([
   "Drake: Great Villain", "Queen (Makoto Niijima)", "Yukiko Amagi", "Privaty", "Centi",
 ]);
+const reviewSources = {
+  "Guilty: Mighty Bunny": [{ label: "Nikke.gg 출시 후 분석 (2026-10-02)", url: "https://nikke.gg/guilty-mighty-bunny-analysis-should-you-pull/" }],
+  "Sin: Swift Bunny": [{ label: "Nikke.gg 출시 후 분석 (2026-10-02)", url: "https://nikke.gg/sin-swift-bunny-analysis-should-you-pull/" }],
+  "Belorta: Pumpkin Witch": [
+    { label: "Nikke.gg 출시 후 분석 (2026-10-16)", url: "https://nikke.gg/belorta-pumpkin-witch-analysis-should-you-pull/" },
+    { label: "Nikke.gg 초기 투자 가이드", url: "https://nikke.gg/belorta-pumpkin-witch-early-analysis/" },
+  ],
+  "Diesel: Winter Sweets": [{ label: "Nikke.gg 개별 빌드 분석", url: "https://nikke.gg/diesel-winter-sweets-analysis-should-you-pull/" }],
+  "Mihara: Bonding Chain": [{ label: "Nikke.gg 개별 빌드 가이드", url: "https://nikke.gg/mihara-bonding-chain-best-builds-teams-and-how-to-play/" }],
+};
 
 function normalizeBuild(build) {
   const avoid = unique(build.avoid);
@@ -104,6 +114,34 @@ function defaultProfile(nikke) {
 }
 
 const overrides = {
+  "Guilty: Mighty Bunny": make({
+    primary: [line("element", 4, "essential"), line("attack", 4), line("chargeSpeed", 2), line("maxAmmo", 2)],
+    alternatives: ["critRate", "critDamage"], avoid: ["chargeDamage", "hitRate", "defense"],
+    priority: "high", mode: "보스", confidence: "guide",
+    note: "우월 코드·공격력과 풀 차지 스킬 회전을 위한 차지 속도를 우선합니다. 표는 장탄 2줄을 포함한 12줄 예시이며, 장탄 수치와 팀에 따라 장탄 1~2줄·차지 속도 2~4줄로 조정합니다. 버스트 변환 사격의 차지 시간은 고정이며 차지 대미지는 재설정 목표에서 제외합니다.",
+  }),
+  "Sin: Swift Bunny": make({
+    primary: [line("element", 4, "essential"), line("attack", 4), line("chargeSpeed", 2), line("maxAmmo", 2)],
+    alternatives: ["critRate", "critDamage", "chargeDamage"], avoid: ["hitRate", "defense"],
+    priority: "high", mode: "보스/PvE", confidence: "guide",
+    note: "표는 장탄 2줄을 포함한 12줄 예시입니다. 우월 코드 4줄을 우선하고 공격력 2~4줄·차지 속도 2~4줄·장탄 1~2줄을 팀에 맞춰 배분합니다. 차지 속도는 버스트 밖 풀 차지 사격에 유효하고, 고정 차지 변환 무기에는 적용되지 않습니다. 크리 계열은 일반 대미지 모드에서 더 유리합니다.",
+  }),
+  "Belorta: Pumpkin Witch": make({
+    primary: [line("chargeSpeed", 1, "filler")], alternatives: ["maxAmmo"],
+    priority: "skip", mode: "보스 지원", confidence: "mechanic",
+    note: "오른쪽 아군의 공격력·지속 대미지를 지원하므로 장비 기본 능력치와 스킬을 먼저 올립니다. 가이드는 옵션 재설정을 최소화하도록 권합니다. 표의 차지 속도 1줄은 풀 차지 지원 회전용 자연 롤 유지 후보이며, 검증된 필수 줄 수나 딜러용 완성 세팅이 아닙니다.",
+  }),
+  "Diesel: Winter Sweets": make({
+    primary: [line("element", 4, "essential"), line("attack", 4), line("critRate", 2), line("critDamage", 2)],
+    alternatives: ["maxAmmo", "chargeSpeed"], avoid: ["hitRate", "defense"],
+    priority: "high", mode: "보스", confidence: "guide",
+    note: "지속 대미지 딜러라 우월 코드·공격력을 우선하고 크리 확률과 크리 대미지를 각 2줄씩 배분한 예시입니다. 장탄·차지 속도는 스택 유지가 필요할 때만 각각 0~1줄로 교체하며, 일반 차지 딜러처럼 차지 속도에 집중하지 않습니다. 재장전 큐브를 먼저 확보하세요.",
+  }),
+  "Mihara: Bonding Chain": make({
+    primary: [line("element", 4, "essential"), line("attack", 4), line("maxAmmo", 2)],
+    alternatives: ["critRate", "critDamage"], priority: "high", mode: "보스", confidence: "guide",
+    note: "지속 대미지와 낮은 자체 공격력 보정을 위해 우월 코드·공격력 4줄을 우선합니다. 풀버스트 중 사격을 유지하도록 장탄 2줄 이상, 약 600발을 목표로 팀의 재장전·탄환 보조에 맞춰 조정합니다. 장탄 4줄을 무조건 고정할 필요는 없습니다.",
+  }),
   "Ark Ranger Black": make({
     primary: [line("element", 4), line("critDamage", 4), line("attack", 4)],
     alternatives: ["critRate", "maxAmmo"], priority: "medium", mode: "보스",
@@ -517,12 +555,18 @@ const overrides = {
   }),
 };
 
-const output = roster.map((nikke) => normalizeBuild({
-  name: nikke.name,
-  ...defaultProfile(nikke),
-  ...(overrides[nikke.name] ?? {}),
-  verifiedAt: reviewedNames.has(nikke.name) ? "2026-09-16" : "2026-08-20",
-}));
+const output = roster.map((nikke) => {
+  const override = overrides[nikke.name];
+  const build = override ?? defaultProfile(nikke);
+  const sources = reviewSources[nikke.name];
+  return normalizeBuild({
+    name: nikke.name,
+    ...build,
+    note: override ? build.note : `개별 스킬 검증 전 무기·역할 기반 범용안입니다. ${build.note}`,
+    ...(sources ? { sources } : {}),
+    verifiedAt: sources ? "2026-10-23" : reviewedNames.has(nikke.name) ? "2026-09-16" : "2026-08-20",
+  });
+});
 
 const names = new Set(output.map((entry) => entry.name));
 if (output.length !== roster.length || names.size !== roster.length) {
@@ -532,9 +576,12 @@ const rosterNames = new Set(roster.map((nikke) => nikke.name));
 for (const name of [...skipInvestment, ...Object.keys(overrides)]) {
   if (!rosterNames.has(name)) throw new Error(`${name}: overload rule does not match the roster.`);
 }
+for (const name of Object.keys(reviewSources)) {
+  if (!overrides[name]) throw new Error(`${name}: reviewed overload sources require a named build.`);
+}
 for (const entry of output) {
-  if (entry.primary.length < 1 || entry.primary.length > 3) {
-    throw new Error(`${entry.name}: expected between 1 and 3 primary options.`);
+  if (entry.primary.length < 1 || entry.primary.length > validStats.size) {
+    throw new Error(`${entry.name}: primary option count exceeds the supported stat types.`);
   }
   if (new Set(entry.primary.map(({ stat }) => stat)).size !== entry.primary.length) {
     throw new Error(`${entry.name}: primary option names must be unique.`);

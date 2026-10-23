@@ -12,7 +12,7 @@
     "postbuild": "node scripts/harden-static-html.mjs",
     "start": "node scripts/run-vinext.mjs start",
     "test": "npm run build && npm run test:static",
-    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs",
+    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs",
     "typecheck": "tsc --noEmit",
     "qa": "npm run build && npm run typecheck && npm run lint && npm run test:static",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
@@ -22,8 +22,8 @@
     "cube:build": "node scripts/build-cubes.mjs"
   },
   "dependencies": {
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.54.10",
@@ -41,7 +41,7 @@
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "7.1.1",
     "globals": "16.4.0",
-    "react-server-dom-webpack": "19.3.0",
+    "react-server-dom-webpack": "19.3.1",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
     "typescript-eslint": "8.59.3",

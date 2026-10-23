@@ -1822,6 +1822,31 @@ footer > p {
   word-break: keep-all;
 }
 
+.recommendation-sources {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.recommendation-sources > span {
+  color: var(--muted);
+}
+
+.recommendation-sources a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.recommendation-sources a:hover,
+.recommendation-sources a:focus-visible {
+  color: var(--lime);
+}
+
 .loadout-heading {
   align-items: end;
   border-top: 1px solid var(--line);

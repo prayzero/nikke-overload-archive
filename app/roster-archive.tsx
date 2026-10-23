@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getCubeDetails, type CubeRecommendation } from "./cube-catalog";
+import { createGearLayout } from "./gear-layout.mjs";
 import cubesJson from "./cubes.json";
 import overloadJson from "./overloads.json";
 import rosterJson from "./roster.json";
@@ -51,6 +52,7 @@ type OverloadBuild = {
   note: string;
   confidence: BuildConfidence;
   verifiedAt: string;
+  sources?: Array<{ label: string; url: string }>;
 };
 
 const roster = rosterJson as Nikke[];
@@ -155,6 +157,19 @@ function getInitials(name: string) {
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+}
+
+function RecommendationSources({ sources }: { sources?: Array<{ label: string; url: string }> }) {
+  if (!sources?.length) return null;
+
+  return (
+    <div className="recommendation-sources" aria-label="추천 검토 출처">
+      <span>검토 출처</span>
+      {sources.map(({ label, url }) => (
+        <a key={url} href={url} target="_blank" rel="noreferrer">{label} ↗</a>
+      ))}
+    </div>
+  );
 }
 
 function NikkeArtwork({
@@ -328,6 +343,7 @@ export default function RosterArchive() {
   const progress = Math.round((ownedCount / roster.length) * 100);
   const selectedBuild = selected ? getBuild(selected) : null;
   const selectedCube = selected ? getCubeRecommendation(selected) : null;
+  const selectedGear = selectedBuild ? createGearLayout(selectedBuild.primary) : [];
 
   function toggleOwned(nikke: Nikke) {
     setOwnedIds((current) => {
@@ -669,6 +685,7 @@ export default function RosterArchive() {
                 <p className="cube-recommendation__note" id={`drawer-cube-note-${selected.id}`}>
                   {selectedCube.note}
                 </p>
+                <RecommendationSources sources={selectedCube.sources} />
               </section>
             )}
 
@@ -683,8 +700,8 @@ export default function RosterArchive() {
                   <header><span>{slot.code}</span><strong>{slot.label}</strong></header>
                   <ol>
                     {Array.from({ length: 3 }, (_, optionIndex) => {
-                      const target = selectedBuild.primary[optionIndex];
-                      const isTargetSlot = target && slotIndex < target.count;
+                      const target = selectedGear[slotIndex]?.[optionIndex];
+                      const isTargetSlot = Boolean(target);
                       return (
                         <li
                           key={target?.stat ?? `free-${optionIndex}`}
@@ -718,6 +735,7 @@ export default function RosterArchive() {
                 <p className={selectedBuild.avoid.length ? "is-avoid" : ""}><b>회피</b>{selectedBuild.avoid.length ? selectedBuild.avoid.map((stat) => statShortLabels[stat]).join(" · ") : "없음"}</p>
               </div>
               <p className="build-note">{selectedBuild.note}</p>
+              <RecommendationSources sources={selectedBuild.sources} />
             </div>
 
             <div className="drawer-caution">

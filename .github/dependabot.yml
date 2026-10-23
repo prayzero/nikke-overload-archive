@@ -29,6 +29,7 @@ updates:
           - react
           - react-dom
           - react-server-dom-webpack
+          - "@types/react*"
           - vinext
           - vite
           - "@vitejs/*"
@@ -37,11 +38,34 @@ updates:
           - wrangler
       production-dependencies:
         dependency-type: production
+        # Keep framework updates in one PR even when dependency types differ.
+        exclude-patterns:
+          - react
+          - react-dom
+          - react-server-dom-webpack
+          - "@types/react*"
+          - vinext
+          - vite
+          - "@vitejs/*"
+          - "@cloudflare/vite-plugin"
+          - "@cloudflare/workers-types"
+          - wrangler
         update-types:
           - minor
           - patch
       development-dependencies:
         dependency-type: development
+        exclude-patterns:
+          - react
+          - react-dom
+          - react-server-dom-webpack
+          - "@types/react*"
+          - vinext
+          - vite
+          - "@vitejs/*"
+          - "@cloudflare/vite-plugin"
+          - "@cloudflare/workers-types"
+          - wrangler
         update-types:
           - minor
           - patch

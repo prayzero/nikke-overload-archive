@@ -10,6 +10,16 @@ const reviewedNames = new Set([
   "Drake: Great Villain", "Queen (Makoto Niijima)", "Yukiko Amagi", "Rapunzel: Pure Grace",
   "Privaty", "Centi", "Quiry", "Tia", "Scarlet: Black Shadow", "Bready",
 ]);
+const reviewSources = {
+  "Guilty: Mighty Bunny": [{ label: "Nikke.gg 출시 후 분석 (2026-10-02)", url: "https://nikke.gg/guilty-mighty-bunny-analysis-should-you-pull/" }],
+  "Sin: Swift Bunny": [{ label: "Nikke.gg 출시 후 분석 (2026-10-02)", url: "https://nikke.gg/sin-swift-bunny-analysis-should-you-pull/" }],
+  "Belorta: Pumpkin Witch": [{ label: "Nikke.gg 출시 후 분석 (2026-10-16)", url: "https://nikke.gg/belorta-pumpkin-witch-analysis-should-you-pull/" }],
+  "Diesel: Winter Sweets": [{ label: "Nikke.gg 개별 빌드 분석", url: "https://nikke.gg/diesel-winter-sweets-analysis-should-you-pull/" }],
+  "Mihara: Bonding Chain": [{ label: "Nikke.gg 개별 빌드 가이드", url: "https://nikke.gg/mihara-bonding-chain-best-builds-teams-and-how-to-play/" }],
+  Label: [{ label: "Nikke.gg 방어·큐브 분석", url: "https://nikke.gg/label-analysis-should-you-pull/" }],
+  Mint: [{ label: "Nikke.gg 버프 유지·큐브 분석", url: "https://nikke.gg/mint-analysis-should-you-pull/" }],
+  "Maxwell: Ordinary Mechanic": [{ label: "Nikke.gg 역할별 큐브 분석", url: "https://nikke.gg/maxwell-ordinary-mechanic-analysis-should-you-pull/" }],
+};
 const validCubeIds = new Set([
   "assault", "onslaught", "resilience", "bastion", "adjutant", "wingman",
   "quantum", "vigor", "endurance", "healing", "tempering", "assist",
@@ -58,6 +68,14 @@ const defaultRecommendations = {
 };
 
 const overrides = {
+  "Guilty: Mighty Bunny": make("resilience", [], "재장전 공백을 줄여 풀 차지 사격과 스킬 회전을 유지합니다. 방어력 무시 지원 팀에서는 이미 충분한 대미지 버프를 더하는 전문 큐브보다 재장전 보조를 우선합니다.", "보스", "guide"),
+  "Sin: Swift Bunny": make("resilience", ["destruction"], "풀 차지 사격을 이어 가는 재장전 큐브가 기본입니다. 오래 유지되는 파츠를 계속 공격할 수 있는 보스에서는 디스트로이를 비교합니다.", "보스/PvE", "guide"),
+  "Belorta: Pumpkin Witch": make("resilience", ["quantum"], "재장전 보조를 기본으로 사용하되, 시전자 공격력 기반 지원을 위해 큐브의 기본 능력치와 보유 레벨을 우선 비교합니다. 풀 차지 버프의 시간 조건이 엄격하지 않아 특정 큐브가 필수는 아닙니다. 퀀텀은 버스트 수급이 필요할 때 비교합니다.", "보스 지원", "guide"),
+  "Diesel: Winter Sweets": make("resilience", [], "재장전 뒤 풀 차지까지의 공백을 줄여 3초 지속 대미지 버프를 유지합니다. 자동 운용은 재장전 속도 효과 2단계 이상을 기준으로 하고, 장탄·재장전 팀 보조로 유지력을 더 높입니다.", "보스", "guide"),
+  "Mihara: Bonding Chain": make("bastion", ["resilience"], "풀버스트 사격과 지속 대미지 가속을 이어 가도록 탄환 환급을 사용합니다. 재장전 속도 버프를 모은 팀에서는 렐릭 베어를 비교합니다.", "보스", "guide"),
+  Label: make("tempering", ["vigor"], "보호막을 우회하는 공격에 대비해 본체의 받는 대미지 감소를 우선합니다. 비거는 최대 HP에 비례하는 보호막을 강화합니다. 전격 상대 PvP 공격 등 생존 역할에 맞춘 추천입니다.", "PvP/생존", "guide"),
+  Mint: make("resilience", [], "풀 차지로 갱신하는 3초 버프가 재장전 중 끊기지 않도록 렐릭 베어를 사용합니다. 기본 재장전 2초와 차지 1초의 공백을 줄이는 것이 핵심입니다.", "보스 지원", "guide"),
+  "Maxwell: Ordinary Mechanic": make("vigor", ["piercing", "destruction", "resilience"], "주력 버스트 II 지원은 HP를 공격력 지원으로 바꾸는 비거를 비교합니다. 개인 관통 버스트 화력은 피어싱·파츠 보스는 디스트로이, 버스트를 쓰지 않는 보조 역할은 렐릭 베어로 사격과 버스트 수급을 유지합니다.", "보스/지원", "guide"),
   "Anis: Sparkling Summer": make("resilience", ["destruction", "assault"], "마지막 탄환 기믹을 빠르게 돌려야 하므로 재장전 속도가 핵심입니다. 탄환 환급과 장탄 증가 큐브는 사용하지 않습니다.", "보스", "guide"),
   Dorothy: make("resilience", ["divide", "destruction"], "마지막 탄환 스킬 회전을 위해 렐릭 베어를 사용합니다. 분배 대미지나 파츠 보스에서는 전문 큐브를 상황별로 비교합니다.", "보스", "guide"),
   Exia: make("resilience", ["adjutant", "onslaught"], "마지막 탄환 발동을 앞당기는 재장전 속도가 가장 안정적입니다. 장탄 증가와 탄환 환급은 피합니다."),
@@ -160,17 +178,24 @@ const rosterNames = new Set(roster.map(({ name }) => name));
 for (const name of Object.keys(overrides)) {
   if (!rosterNames.has(name)) throw new Error(`${name}: cube override does not match the roster.`);
 }
+for (const name of Object.keys(reviewSources)) {
+  if (!overrides[name]) throw new Error(`${name}: reviewed cube sources require a named recommendation.`);
+}
 
 const recommendations = roster.map((nikke) => {
-  const recommendation = overrides[nikke.name] ?? defaultRecommendations[nikke.weapon];
+  const override = overrides[nikke.name];
+  const recommendation = override ?? defaultRecommendations[nikke.weapon];
   if (!recommendation) throw new Error(`${nikke.name}: no cube rule for ${nikke.weapon}.`);
+  const sources = reviewSources[nikke.name];
   const alternatives = [...new Set(recommendation.alternatives)]
     .filter((cubeId) => cubeId !== recommendation.primary);
   return {
     name: nikke.name,
     ...recommendation,
     alternatives,
-    verifiedAt: reviewedNames.has(nikke.name) ? "2026-09-16" : recommendation.verifiedAt,
+    note: override ? recommendation.note : `개별 스킬 검증 전 무기 기반 범용안입니다. ${recommendation.note}`,
+    ...(sources ? { sources } : {}),
+    verifiedAt: sources ? "2026-10-23" : reviewedNames.has(nikke.name) ? "2026-09-16" : recommendation.verifiedAt,
   };
 });
 
