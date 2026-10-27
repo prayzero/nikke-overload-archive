@@ -30,6 +30,6 @@ for (const target of ["node", "edge"]) {
 for (const [file, code] of outputs) {
   const destination = new URL(`dist/${file}.js`, root);
   await mkdir(new URL(".", destination), { recursive: true });
-  await writeFile(destination, `// Re-emitted from @vercel/og 1.0.3 published source map; original MIT license applies.\n${code}`);
+  await writeFile(destination, `// Re-emitted from @vercel/og 1.0.3 published source map; original MPL-2.0 license and retained third-party notices apply.\n${code}`);
 }
 console.log("OG compatibility: unbundled node/edge entries use patched external dependencies");
