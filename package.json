@@ -6,14 +6,18 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "prebuild": "npm run overload:build && npm run cube:build",
+    "prebuild": "npm run deps:prepare && npm run overload:build && npm run cube:build",
+    "predev": "npm run deps:prepare",
+    "deps:prepare": "node scripts/prepare-og.mjs",
     "dev": "node scripts/run-vinext.mjs dev",
     "build": "node scripts/run-vinext.mjs build",
     "postbuild": "node scripts/harden-static-html.mjs",
     "start": "node scripts/run-vinext.mjs start",
     "test": "npm run build && npm run test:static",
-    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs tests/glob-compat.test.mjs",
+    "pretest:static": "npm run deps:prepare",
+    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs tests/glob-compat.test.mjs tests/arena-planner.test.mjs",
     "typecheck": "tsc --noEmit",
+    "test:browser": "node --test tests/arena-browser.test.mjs",
     "qa": "npm run build && npm run typecheck && npm run lint && npm run test:static",
     "security:audit": "npm audit --include=dev --audit-level=low",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
@@ -43,6 +47,7 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "fast-glob": "file:vendor/fast-glob-compat",
     "globals": "16.4.0",
+    "playwright-core": "1.64.1",
     "react-server-dom-webpack": "19.3.1",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",
@@ -57,6 +62,16 @@
     },
     "vite-plugin-dynamic-import": {
       "fast-glob": "$fast-glob"
+    },
+    "miniflare": {
+      "undici": "7.30.1"
+    },
+    "@vercel/og": {
+      ".": "1.0.3",
+      "satori": {
+        ".": "0.33.5",
+        "fflate": "0.7.5"
+      }
     }
   },
   "type": "module"

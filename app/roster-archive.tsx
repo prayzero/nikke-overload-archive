@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import ArenaPlanner from "./arena-planner";
 import { getCubeDetails, type CubeId, type CubeRecommendation } from "./cube-catalog";
 import { createGearLayout } from "./gear-layout.mjs";
 import cubesJson from "./cubes.json";
@@ -424,6 +425,7 @@ export default function RosterArchive() {
             </p>
             <div className="hero-actions">
               <a className="primary-action" href="#roster">전체 니케 보기 <span aria-hidden="true">↓</span></a>
+              <a className="arena-hero-link" href="#arena">보유 기반 아레나 덱 <span aria-hidden="true">↗</span></a>
               <span className="auto-save"><i aria-hidden="true" /> 브라우저 자동 저장</span>
             </div>
           </div>
@@ -467,6 +469,18 @@ export default function RosterArchive() {
             </div>
           </div>
         </section>
+
+        <ArenaPlanner
+          roster={roster}
+          ownedIds={ownedIds}
+          hydrated={hydrated}
+          onViewNikke={(id, opener) => {
+            const nikke = roster.find((entry) => entry.id === id);
+            if (!nikke) return;
+            dialogOpenerRef.current = opener;
+            setSelected(nikke);
+          }}
+        />
 
         <section className="roster-section" id="roster" aria-labelledby="roster-title">
           <div className="section-heading">
