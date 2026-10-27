@@ -1,0 +1,1016 @@
+{
+  "checkedAt": "2026-10-27",
+  "sources": [
+    {
+      "id": "ngg-rookie",
+      "title": "nikke.gg 아레나 기본 편성 (기존 공개 조합)",
+      "url": "https://nikke.gg/arena-team-compositions/"
+    },
+    {
+      "id": "ngg-sp",
+      "title": "nikke.gg 스페셜 아레나 편성 (2023-11-29 작성본)",
+      "url": "https://nikke.gg/special-arena-team-compositions/"
+    },
+    {
+      "id": "ngg-trina",
+      "title": "nikke.gg 트리나 PvP 편성 공략",
+      "url": "https://nikke.gg/trina-pvp-focus-review-analysis-guide-and-best-teams/"
+    },
+    {
+      "id": "ngg-maiden",
+      "title": "nikke.gg 메이든: 아이스 로즈 PvP 편성 공략",
+      "url": "https://nikke.gg/maiden-ice-rose-pvp-focus-review-analysis-guide-and-best-teams/"
+    },
+    {
+      "id": "ngg-grave",
+      "title": "nikke.gg 그레이브 PvP 편성 공략",
+      "url": "https://nikke.gg/grave-pvp-focus-review-analysis-guide-and-best-teams/"
+    },
+    {
+      "id": "ngg-sbs",
+      "title": "nikke.gg 홍련: 흑영 PvP 편성 공략",
+      "url": "https://nikke.gg/characterguides/scarlet-black-shadow/"
+    },
+    {
+      "id": "ngg-rei",
+      "title": "nikke.gg 아야나미 레이(가칭) PvP 편성 공략",
+      "url": "https://nikke.gg/rei-ayanami-tentative-name-pvp-focus-review-analysis-guide-and-best-teams/"
+    },
+    {
+      "id": "ngg-cinderella",
+      "title": "nikke.gg 신데렐라 PvP 편성 공략",
+      "url": "https://nikke.gg/pvp-review-cinderella/"
+    },
+    {
+      "id": "p-scarlet",
+      "title": "Prydwen 홍련: 반격·자칼·트리나 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/scarlet"
+    },
+    {
+      "id": "p-noah",
+      "title": "Prydwen 노아: 도발과 전체 무적",
+      "url": "https://www.prydwen.gg/nikke/characters/noah"
+    },
+    {
+      "id": "p-biscuit",
+      "title": "Prydwen 비스킷: 방어형 보호 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/biscuit"
+    },
+    {
+      "id": "p-blanc",
+      "title": "Prydwen 블랑: 불굴 대상과 지속시간",
+      "url": "https://www.prydwen.gg/nikke/characters/blanc"
+    },
+    {
+      "id": "p-trina",
+      "title": "Prydwen 트리나: 전격 AR 지원 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/trina"
+    },
+    {
+      "id": "p-maiden",
+      "title": "Prydwen 메이든: 아이스 로즈: PvP 역할",
+      "url": "https://www.prydwen.gg/nikke/characters/maiden-ice-rose"
+    },
+    {
+      "id": "p-emilia",
+      "title": "Prydwen 에밀리아: 지연 광역 공격과 투자 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/emilia"
+    },
+    {
+      "id": "p-laplace-t",
+      "title": "Prydwen 라플라스 애장품: 충전 공격과 버스트 수급",
+      "url": "https://www.prydwen.gg/nikke/characters/laplace-treasure"
+    },
+    {
+      "id": "p-helm-t",
+      "title": "Prydwen 헬름 애장품: 회복·버스트 수급·주력 공격",
+      "url": "https://www.prydwen.gg/nikke/characters/helm-treasure"
+    },
+    {
+      "id": "p-grave",
+      "title": "Prydwen 그레이브: 공격 대미지 지원",
+      "url": "https://www.prydwen.gg/nikke/characters/grave"
+    },
+    {
+      "id": "p-sbs",
+      "title": "Prydwen 홍련: 흑영: 분배 대미지·앨리스 시너지",
+      "url": "https://www.prydwen.gg/nikke/characters/scarlet-black-shadow"
+    },
+    {
+      "id": "p-laplace-hero",
+      "title": "Prydwen 라플라스: 얼티메이트 히어로 PvP 팀 479·480·487·488",
+      "url": "https://www.prydwen.gg/nikke/characters/laplace-ultimate-hero"
+    },
+    {
+      "id": "p-centi-t",
+      "title": "Prydwen 센티 애장품: 초기 보호 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/centi-treasure"
+    },
+    {
+      "id": "p-anis-star",
+      "title": "Prydwen 아니스: 스타: 단독 B1 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/anis-star"
+    },
+    {
+      "id": "p-siren",
+      "title": "Prydwen 리틀 머메이드(Siren): 버스트 방해",
+      "url": "https://www.prydwen.gg/nikke/characters/siren"
+    },
+    {
+      "id": "p-miranda-t",
+      "title": "Prydwen 미란다 애장품: 첫 공격 치명타 조건",
+      "url": "https://www.prydwen.gg/nikke/characters/miranda-treasure"
+    }
+  ],
+  "presets": [
+    {
+      "id": "scarlet-anne-rush",
+      "title": "홍련·앤 선제 광역",
+      "style": "선제 광역",
+      "priority": 87,
+      "evidence": "guide",
+      "members": [
+        "Scarlet",
+        "Anne: Miracle Fairy",
+        "Anis",
+        "Centi",
+        "Jackal"
+      ],
+      "burst": [
+        "Jackal",
+        "Anne: Miracle Fairy",
+        "Scarlet"
+      ],
+      "notes": [
+        "자칼의 피해 분담과 로켓 수급으로 홍련의 광역 공격을 준비합니다.",
+        "홍련이 자칼의 공격력 상위 2명 연결 대상에 포함되는지 확인해 주세요."
+      ],
+      "weakness": "노아가 먼저 무적을 켜거나 라푼젤이 살아남아 부활시키는 상대에게 약합니다.",
+      "sourceIds": [
+        "ngg-rookie",
+        "p-scarlet"
+      ]
+    },
+    {
+      "id": "scarlet-blanc-biscuit",
+      "title": "홍련·블랑 보호",
+      "style": "불굴 보호",
+      "priority": 83,
+      "evidence": "guide",
+      "members": [
+        "Blanc",
+        "Scarlet",
+        "Biscuit",
+        "Centi",
+        "Jackal"
+      ],
+      "burst": [
+        "Jackal",
+        "Blanc",
+        "Scarlet"
+      ],
+      "notes": [
+        "비스킷이 방어형을 보호하고 블랑이 주력 딜러의 생존을 돕습니다.",
+        "불굴은 블랑 자신을 제외한 최저 체력 대상에게 적용되므로 홍련에게 가는지 확인해 주세요."
+      ],
+      "weakness": "더 빠른 광역 공격이나 불굴 대상이 어긋나는 편성에 취약합니다.",
+      "sourceIds": [
+        "ngg-rookie",
+        "p-blanc",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "alice-noah-noise",
+      "title": "앨리스·노아 단일 압박",
+      "style": "단일 집중",
+      "priority": 65,
+      "evidence": "guide",
+      "members": [
+        "Noah",
+        "Noise",
+        "Alice",
+        "Biscuit",
+        "Jackal"
+      ],
+      "burst": [
+        "Noise",
+        "Noah",
+        "Alice"
+      ],
+      "notes": [
+        "노이즈의 회복과 노아·비스킷의 보호로 앨리스의 공격 시간을 확보합니다."
+      ],
+      "weakness": "상대 방어형 도발·비스킷 조합에 공격이 묶일 수 있습니다.",
+      "sourceIds": [
+        "ngg-rookie",
+        "p-noah",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "sanis-noah-anis",
+      "title": "수니스·노아 기본형",
+      "style": "보호 후 지속 공격",
+      "priority": 88,
+      "evidence": "guide",
+      "members": [
+        "Noah",
+        "Rapunzel",
+        "Anis: Sparkling Summer",
+        "Biscuit",
+        "Anis"
+      ],
+      "burst": [
+        "Rapunzel",
+        "Noah",
+        "Anis: Sparkling Summer"
+      ],
+      "notes": [
+        "노아가 광역 공격을 막고, 비스킷이 노아를 보호하며 수니스가 공격합니다.",
+        "라푼젤의 생존과 수니스의 마지막 탄환 운용을 확인해 주세요."
+      ],
+      "weakness": "노아 무적 전의 광역 공격과 홍련 반격에 취약합니다.",
+      "sourceIds": [
+        "ngg-sp",
+        "p-noah",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "power-makima-shotgun",
+      "title": "파워·마키마 잔여 자원 편성",
+      "style": "단일 저격",
+      "priority": 35,
+      "evidence": "guide",
+      "members": [
+        "Makima",
+        "Pepper",
+        "Power",
+        "Drake",
+        "Noir"
+      ],
+      "burst": [
+        "Pepper",
+        "Makima",
+        "Power"
+      ],
+      "notes": [
+        "파워와 페퍼의 단일 공격을 묶은 기존 공개 대체 편성입니다."
+      ],
+      "weakness": "광역 공격, 부활, 상대 홍련·자칼을 만나면 효율이 크게 떨어집니다.",
+      "sourceIds": [
+        "ngg-sp"
+      ]
+    },
+    {
+      "id": "sanis-noah-jackal",
+      "title": "수니스·노아·자칼 보호",
+      "style": "보호 후 지속 공격",
+      "priority": 81,
+      "evidence": "guide",
+      "members": [
+        "Noah",
+        "Rapunzel",
+        "Anis: Sparkling Summer",
+        "Biscuit",
+        "Jackal"
+      ],
+      "burst": [
+        "Rapunzel",
+        "Noah",
+        "Anis: Sparkling Summer"
+      ],
+      "notes": [
+        "자칼까지 투입해 피해를 분산하는 수니스 편성입니다.",
+        "자칼을 이 덱에 쓰면 홍련·자칼 편성은 함께 사용할 수 없습니다."
+      ],
+      "weakness": "여러 핵심 지원가를 점유하며 홍련 반격과 버프 해제에 주의해야 합니다.",
+      "sourceIds": [
+        "ngg-sp",
+        "p-noah",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "scarlet-trina-rosanna",
+      "title": "홍련·트리나·로산나",
+      "style": "광역·버프 해제",
+      "priority": 92,
+      "evidence": "guide",
+      "members": [
+        "Scarlet",
+        "Trina",
+        "Anis",
+        "Rosanna",
+        "Jackal"
+      ],
+      "burst": [
+        "Rosanna",
+        "Trina",
+        "Scarlet"
+      ],
+      "notes": [
+        "트리나의 전격 AR 지원을 홍련에게 적용하는 공개 편성입니다.",
+        "첫 B1은 로산나입니다. 자칼 연결 대상에 홍련이 포함되는지도 확인해 주세요."
+      ],
+      "weakness": "홍련의 초기 생존과 상대 무적 발동 시점에 따라 결과가 달라집니다.",
+      "sourceIds": [
+        "ngg-trina",
+        "p-trina",
+        "p-scarlet"
+      ]
+    },
+    {
+      "id": "sanis-noah-trina",
+      "title": "수니스·노아·트리나",
+      "style": "보호 후 지속 공격",
+      "priority": 86,
+      "evidence": "guide",
+      "members": [
+        "Noah",
+        "Rapunzel",
+        "Biscuit",
+        "Anis: Sparkling Summer",
+        "Trina"
+      ],
+      "burst": [
+        "Rapunzel",
+        "Noah",
+        "Anis: Sparkling Summer"
+      ],
+      "notes": [
+        "공략이 명시한 라푼젤 지원형입니다. 트리나는 수급·회복 역할입니다.",
+        "트리나의 전격 AR 전용 강화는 샷건인 수니스에게 적용되지 않습니다."
+      ],
+      "weakness": "반격에 수니스가 먼저 쓰러지거나 노아 보호보다 광역 공격이 빠르면 무너집니다.",
+      "sourceIds": [
+        "ngg-trina",
+        "p-trina",
+        "p-noah"
+      ]
+    },
+    {
+      "id": "helm-nero-stall",
+      "title": "애장품 헬름·네로 유지력",
+      "style": "회복·단일 압박",
+      "priority": 70,
+      "evidence": "guide",
+      "members": [
+        "Nero",
+        "Moran",
+        "Helm",
+        "Rapunzel",
+        "Trina"
+      ],
+      "burst": [
+        "Moran",
+        "Nero",
+        "Helm"
+      ],
+      "requiresFavorite": [
+        "Helm"
+      ],
+      "notes": [
+        "헬름의 회복과 네로의 생존 효과로 공격 시간을 확보합니다.",
+        "헬름 애장품 최종 단계 기준입니다. 첫 B2는 트리나가 아닌 네로입니다."
+      ],
+      "weakness": "강한 광역 공격에는 전열 유지가 어렵고, 헬름은 전격 공격에 취약합니다.",
+      "sourceIds": [
+        "ngg-trina",
+        "p-helm-t",
+        "p-trina"
+      ]
+    },
+    {
+      "id": "maiden-blanc-laplace",
+      "title": "겨울 메이든·블랑 압박",
+      "style": "단일 집중",
+      "priority": 60,
+      "evidence": "guide",
+      "members": [
+        "Maiden: Ice Rose",
+        "Blanc",
+        "Centi",
+        "Laplace",
+        "Rumani"
+      ],
+      "burst": [
+        "Rumani",
+        "Blanc",
+        "Maiden: Ice Rose"
+      ],
+      "requiresFavorite": [
+        "Laplace"
+      ],
+      "notes": [
+        "메이든의 단일 공격을 블랑이 보호하고 애장품 라플라스가 수급을 돕습니다.",
+        "라플라스 애장품 최종 단계 기준입니다."
+      ],
+      "weakness": "도발 방어형과 비스킷의 무적에 주력 공격이 막힐 수 있습니다.",
+      "sourceIds": [
+        "ngg-maiden",
+        "p-maiden",
+        "p-laplace-t"
+      ]
+    },
+    {
+      "id": "maiden-biscuit-laplace",
+      "title": "겨울 메이든 전열 압박",
+      "style": "방어형 딜러 보호",
+      "priority": 61,
+      "evidence": "guide",
+      "members": [
+        "Maiden: Ice Rose",
+        "Biscuit",
+        "Laplace",
+        "Emilia",
+        "Noise"
+      ],
+      "burst": [
+        "Noise",
+        "Biscuit",
+        "Maiden: Ice Rose"
+      ],
+      "requiresFavorite": [
+        "Laplace"
+      ],
+      "notes": [
+        "비스킷이 방어형 메이든을 보호하며 로켓 공격으로 전열을 압박합니다.",
+        "라플라스 애장품 최종 단계 기준이며 에밀리아는 첫 B3를 사용하지 않습니다."
+      ],
+      "weakness": "단일 공격을 흡수하는 도발·무적과 강한 광역 공격에 주의해 주세요.",
+      "sourceIds": [
+        "ngg-maiden",
+        "p-maiden",
+        "p-laplace-t"
+      ]
+    },
+    {
+      "id": "sanis-noah-maiden",
+      "title": "수니스·겨울 메이든",
+      "style": "양쪽 전열 압박",
+      "priority": 89,
+      "evidence": "guide",
+      "members": [
+        "Noah",
+        "Rapunzel",
+        "Biscuit",
+        "Anis: Sparkling Summer",
+        "Maiden: Ice Rose"
+      ],
+      "burst": [
+        "Rapunzel",
+        "Noah",
+        "Anis: Sparkling Summer"
+      ],
+      "notes": [
+        "메이든을 수니스 오른쪽에 두어 첫 B3를 수니스가 사용합니다.",
+        "메이든은 버스트 수급과 일반 공격을 담당합니다."
+      ],
+      "weakness": "수니스가 홍련 반격에 노출되거나 핵심 지원가가 먼저 쓰러지면 약해집니다.",
+      "sourceIds": [
+        "ngg-maiden",
+        "p-maiden",
+        "p-noah"
+      ]
+    },
+    {
+      "id": "emilia-blanc-laplace",
+      "title": "에밀리아·블랑 지연 광역",
+      "style": "지연 광역",
+      "priority": 77,
+      "evidence": "guide",
+      "members": [
+        "Blanc",
+        "Emilia",
+        "Rapunzel",
+        "Maiden: Ice Rose",
+        "Laplace"
+      ],
+      "burst": [
+        "Rapunzel",
+        "Blanc",
+        "Emilia"
+      ],
+      "requiresFavorite": [
+        "Laplace"
+      ],
+      "notes": [
+        "에밀리아의 긴 충전이 끝날 때까지 생존을 확보하는 공개 편성입니다.",
+        "에밀리아 버스트 7레벨 이상, 라플라스 애장품 최종 단계 기준입니다. 불굴 대상도 확인해 주세요."
+      ],
+      "weakness": "충전 중 피격·기절, 홍련 반격 및 상대의 늦은 노아 무적에 취약합니다.",
+      "sourceIds": [
+        "ngg-maiden",
+        "p-emilia",
+        "p-laplace-t",
+        "p-blanc"
+      ]
+    },
+    {
+      "id": "scarlet-grave-rumani",
+      "title": "홍련·그레이브 광역",
+      "style": "선제 광역",
+      "priority": 73,
+      "evidence": "guide",
+      "members": [
+        "Scarlet",
+        "Grave",
+        "Centi",
+        "Rumani",
+        "Jackal"
+      ],
+      "burst": [
+        "Rumani",
+        "Grave",
+        "Scarlet"
+      ],
+      "notes": [
+        "그레이브의 공격 대미지 강화와 로켓 수급을 함께 쓰는 공개 편성입니다.",
+        "첫 B1은 루마니입니다. 공략의 빠른 버스트는 큐브 투자 조건이 있으므로 속도를 보장하지 않습니다."
+      ],
+      "weakness": "초기 보호가 부족하면 홍련이 버스트 전에 쓰러질 수 있습니다.",
+      "sourceIds": [
+        "ngg-grave",
+        "p-grave",
+        "p-scarlet"
+      ]
+    },
+    {
+      "id": "maid-grave-shotgun",
+      "title": "메이드 프리바티·샷건",
+      "style": "잔여 자원 광역",
+      "priority": 40,
+      "evidence": "guide",
+      "members": [
+        "Privaty: Unkind Maid",
+        "Grave",
+        "Soda: Twinkling Bunny",
+        "Noir",
+        "Pepper"
+      ],
+      "burst": [
+        "Pepper",
+        "Grave",
+        "Privaty: Unkind Maid"
+      ],
+      "notes": [
+        "핵심 자칼·비스킷 편성과 겹치지 않게 사용할 수 있는 공개 대체 편성입니다.",
+        "첫 B3는 메이드 프리바티이며 소다·누아르는 보조 공격을 맡습니다."
+      ],
+      "weakness": "샷건의 많은 타격이 상대 홍련 반격과 자칼 수급을 돕습니다.",
+      "sourceIds": [
+        "ngg-grave"
+      ]
+    },
+    {
+      "id": "alice-moran-grave",
+      "title": "앨리스·목단 보호",
+      "style": "단일 집중",
+      "priority": 56,
+      "evidence": "guide",
+      "members": [
+        "Moran",
+        "Grave",
+        "Alice",
+        "Biscuit",
+        "Rumani"
+      ],
+      "burst": [
+        "Moran",
+        "Grave",
+        "Alice"
+      ],
+      "notes": [
+        "목단과 비스킷으로 앨리스의 공격 시간을 확보합니다.",
+        "목단 기본형도 대상인 공개 조합이며 첫 B1은 목단입니다."
+      ],
+      "weakness": "상대 노아·비스킷의 도발 무적 및 선제 광역에 약합니다.",
+      "sourceIds": [
+        "ngg-grave",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "sbs-noah-alice",
+      "title": "흑련·노아·앨리스",
+      "style": "분배 대미지",
+      "priority": 72,
+      "evidence": "guide",
+      "members": [
+        "Noah",
+        "Scarlet: Black Shadow",
+        "Alice",
+        "Biscuit",
+        "Jackal"
+      ],
+      "burst": [
+        "Jackal",
+        "Noah",
+        "Scarlet: Black Shadow"
+      ],
+      "notes": [
+        "노아·비스킷으로 시간을 확보하고 흑련이 분배 대미지를 누적합니다.",
+        "앨리스는 첫 B3를 양보하며 흑련의 충전 공격을 돕습니다."
+      ],
+      "weakness": "무적 중인 상대가 분배 대미지를 받아내거나 초기 광역이 먼저 들어오면 불리합니다.",
+      "sourceIds": [
+        "ngg-sbs",
+        "p-sbs",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "sbs-blanc-alice",
+      "title": "흑련·블랑 불굴",
+      "style": "불굴·분배 대미지",
+      "priority": 70,
+      "evidence": "guide",
+      "members": [
+        "Scarlet: Black Shadow",
+        "Blanc",
+        "Centi",
+        "Alice",
+        "Jackal"
+      ],
+      "burst": [
+        "Jackal",
+        "Blanc",
+        "Scarlet: Black Shadow"
+      ],
+      "notes": [
+        "흑련에게 블랑 불굴이 적용되도록 생존 수치를 조정하는 공개 편성입니다.",
+        "자칼 연결 대상과 블랑 사용 시점의 최저 체력 대상을 확인해 주세요."
+      ],
+      "weakness": "불굴이 앨리스 등 다른 니케에게 적용되거나 상대 무적이 이어지면 약합니다.",
+      "sourceIds": [
+        "ngg-sbs",
+        "p-sbs",
+        "p-blanc"
+      ]
+    },
+    {
+      "id": "sbs-noise-noah",
+      "title": "흑련·노이즈 유지력",
+      "style": "회복·분배 대미지",
+      "priority": 62,
+      "evidence": "guide",
+      "members": [
+        "Noise",
+        "Noah",
+        "Scarlet: Black Shadow",
+        "Rapunzel",
+        "Jackal"
+      ],
+      "burst": [
+        "Noise",
+        "Noah",
+        "Scarlet: Black Shadow"
+      ],
+      "notes": [
+        "회복·무적을 집중해 흑련의 지속 공격을 보호하는 공개 편성입니다.",
+        "핵심 지원가를 많이 점유하므로 다른 두 덱의 완성 여부를 확인해 주세요."
+      ],
+      "weakness": "생존 자원을 집중해도 피해량 부족이나 무적 종료 후 집중 공격으로 패배할 수 있습니다.",
+      "sourceIds": [
+        "ngg-sbs",
+        "p-sbs",
+        "p-noah"
+      ]
+    },
+    {
+      "id": "rei-blanc-biscuit",
+      "title": "레이(가칭)·블랑 보호",
+      "style": "광역·불굴",
+      "priority": 63,
+      "evidence": "guide",
+      "members": [
+        "Blanc",
+        "Rei Ayanami (Tentative Name)",
+        "Biscuit",
+        "Centi",
+        "Jackal"
+      ],
+      "burst": [
+        "Jackal",
+        "Blanc",
+        "Rei Ayanami (Tentative Name)"
+      ],
+      "notes": [
+        "블랑·비스킷이 레이의 광역 공격까지 생존을 돕는 공개 편성입니다.",
+        "기본 아야나미 레이가 아닌 '아야나미 레이(가칭)'이 필요합니다."
+      ],
+      "weakness": "상대 노아의 무적과 홍련 반격에 취약하며 불굴 대상 확인이 필요합니다.",
+      "sourceIds": [
+        "ngg-rei",
+        "p-blanc",
+        "p-biscuit"
+      ]
+    },
+    {
+      "id": "rei-anne-shotgun",
+      "title": "레이(가칭)·앤 광역",
+      "style": "잔여 자원 광역",
+      "priority": 42,
+      "evidence": "guide",
+      "members": [
+        "Rei Ayanami (Tentative Name)",
+        "Anne: Miracle Fairy",
+        "Soda: Twinkling Bunny",
+        "Noir",
+        "Pepper"
+      ],
+      "burst": [
+        "Pepper",
+        "Anne: Miracle Fairy",
+        "Rei Ayanami (Tentative Name)"
+      ],
+      "notes": [
+        "앤의 공격력 강화로 레이의 광역 공격을 지원하는 공개 대체 편성입니다.",
+        "기본 아야나미 레이가 아닌 '아야나미 레이(가칭)'이 필요합니다."
+      ],
+      "weakness": "초기 생존과 버스트 수급이 상대에 따라 달라지며 홍련·자칼에 취약합니다.",
+      "sourceIds": [
+        "ngg-rei"
+      ]
+    },
+    {
+      "id": "cinderella-blanc-battery",
+      "title": "신데렐라·로켓 수급",
+      "style": "분산 광역",
+      "priority": 68,
+      "evidence": "guide",
+      "members": [
+        "Blanc",
+        "Centi",
+        "Jackal",
+        "Rumani",
+        "Cinderella"
+      ],
+      "burst": [
+        "Jackal",
+        "Blanc",
+        "Cinderella"
+      ],
+      "notes": [
+        "로켓 수급과 블랑 보호를 묶은 공개 신데렐라 편성입니다.",
+        "공략의 속도는 큐브 투자 조건이 있으므로 동일한 버스트 시점을 보장하지 않습니다."
+      ],
+      "weakness": "공격이 순차적으로 들어가 노아의 무적이나 블랑 불굴이 개입할 수 있습니다.",
+      "sourceIds": [
+        "ngg-cinderella",
+        "p-blanc"
+      ]
+    },
+    {
+      "id": "cinderella-blanc-rapunzel",
+      "title": "신데렐라·블랑·라푼젤",
+      "style": "회복·분산 광역",
+      "priority": 60,
+      "evidence": "guide",
+      "members": [
+        "Blanc",
+        "Cinderella",
+        "Rapunzel",
+        "Centi",
+        "Noir"
+      ],
+      "burst": [
+        "Rapunzel",
+        "Blanc",
+        "Cinderella"
+      ],
+      "notes": [
+        "자칼을 다른 덱에 남기고 블랑·라푼젤로 신데렐라를 보호하는 공개 대체 편성입니다."
+      ],
+      "weakness": "상대 노아의 무적과 불굴에 피해가 끊기며, 빠른 공격에 지원가가 먼저 쓰러질 수 있습니다.",
+      "sourceIds": [
+        "ngg-cinderella",
+        "p-blanc"
+      ]
+    },
+    {
+      "id": "cinderella-noise-blanc",
+      "title": "신데렐라·노이즈·블랑",
+      "style": "체력·불굴 보호",
+      "priority": 59,
+      "evidence": "guide",
+      "members": [
+        "Noise",
+        "Cinderella",
+        "Blanc",
+        "Noir",
+        "Centi"
+      ],
+      "burst": [
+        "Noise",
+        "Blanc",
+        "Cinderella"
+      ],
+      "notes": [
+        "노이즈의 체력 지원과 블랑의 불굴을 함께 쓰는 공개 대체 편성입니다.",
+        "최저 체력 대상이 신데렐라인지 확인해 주세요."
+      ],
+      "weakness": "도발 후 전열이 무너지거나 상대 무적이 순차 공격을 차단하면 불리합니다.",
+      "sourceIds": [
+        "ngg-cinderella",
+        "p-blanc"
+      ]
+    },
+    {
+      "id": "hero-blanc-jackal",
+      "title": "얼티메이트 라플라스·블랑",
+      "style": "공격용 광역",
+      "priority": 96,
+      "members": [
+        "Jackal",
+        "Laplace: Ultimate Hero",
+        "Blanc",
+        "Centi",
+        "Helm"
+      ],
+      "burst": [
+        "Jackal",
+        "Blanc",
+        "Laplace: Ultimate Hero"
+      ],
+      "requiresFavorite": [
+        "Centi",
+        "Helm"
+      ],
+      "notes": [
+        "Prydwen 팀 479입니다. 센티·헬름 애장품으로 초기 생존과 수급을 지원합니다.",
+        "블랑 불굴 대상과 상대 비스킷 발동 여부를 확인해 주세요."
+      ],
+      "weakness": "선제 공격·베스티: 택티컬 업그레이드 및 맞춰 쓰는 무적에 취약합니다.",
+      "sourceIds": [
+        "p-laplace-hero",
+        "p-centi-t",
+        "p-helm-t",
+        "p-blanc"
+      ],
+      "evidence": "guide"
+    },
+    {
+      "id": "hero-noah-anis-star",
+      "title": "얼티메이트 라플라스·스타 아니스",
+      "style": "무적 후 광역",
+      "priority": 95,
+      "members": [
+        "Noah",
+        "Biscuit",
+        "Laplace: Ultimate Hero",
+        "Helm",
+        "Anis: Star"
+      ],
+      "burst": [
+        "Anis: Star",
+        "Noah",
+        "Laplace: Ultimate Hero"
+      ],
+      "requiresFavorite": [
+        "Helm"
+      ],
+      "notes": [
+        "Prydwen 팀 480입니다. 노아·비스킷으로 라플라스의 광역 공격까지 보호합니다.",
+        "아니스: 스타가 단독 B1이므로 재진입하지 않습니다. 헬름 애장품 최종 단계 기준입니다."
+      ],
+      "weakness": "초기 화력에 보호가 무너지거나 상대 무적과 공격 시점이 겹치면 불리합니다.",
+      "sourceIds": [
+        "p-laplace-hero",
+        "p-anis-star",
+        "p-helm-t",
+        "p-biscuit"
+      ],
+      "evidence": "guide"
+    },
+    {
+      "id": "hero-noah-soda",
+      "title": "얼티메이트 라플라스·소다",
+      "style": "방어용 방해",
+      "priority": 85,
+      "members": [
+        "Noah",
+        "Soda",
+        "Laplace: Ultimate Hero",
+        "Centi",
+        "Snow White: Heavy Arms"
+      ],
+      "burst": [
+        "Soda",
+        "Noah",
+        "Laplace: Ultimate Hero"
+      ],
+      "requiresFavorite": [
+        "Centi"
+      ],
+      "notes": [
+        "Prydwen 팀 487입니다. 노아의 보호와 소다의 기절로 상대 대응을 방해합니다.",
+        "센티 애장품 최종 단계 기준이며, 소다의 기절 대상은 보장되지 않습니다."
+      ],
+      "weakness": "상대가 기절을 피하거나 라플라스의 공격을 무적으로 막으면 약해집니다.",
+      "sourceIds": [
+        "p-laplace-hero",
+        "p-centi-t",
+        "p-noah"
+      ],
+      "evidence": "guide"
+    },
+    {
+      "id": "hero-siren-trina",
+      "title": "얼티메이트 라플라스·리틀 머메이드",
+      "style": "공격용 버스트 방해",
+      "priority": 94,
+      "members": [
+        "Trina",
+        "Little Mermaid",
+        "Laplace: Ultimate Hero",
+        "Helm",
+        "Centi"
+      ],
+      "burst": [
+        "Little Mermaid",
+        "Trina",
+        "Laplace: Ultimate Hero"
+      ],
+      "requiresFavorite": [
+        "Helm",
+        "Centi"
+      ],
+      "notes": [
+        "Prydwen 팀 488입니다. 리틀 머메이드의 기절로 상대 버스트 연결을 방해합니다.",
+        "센티·헬름 애장품 최종 단계 기준입니다. 기절 성공은 상대 배치·속도에 달려 있습니다."
+      ],
+      "weakness": "기절보다 빠른 공격이나 초기 보호 종료 후의 공격에 주의해 주세요.",
+      "sourceIds": [
+        "p-laplace-hero",
+        "p-siren",
+        "p-centi-t",
+        "p-helm-t"
+      ],
+      "evidence": "guide"
+    },
+    {
+      "id": "sanis-noah-emilia",
+      "title": "수니스·노아·에밀리아",
+      "style": "보호 후 지속 공격",
+      "priority": 91,
+      "members": [
+        "Noah",
+        "Biscuit",
+        "Anis: Sparkling Summer",
+        "Emilia",
+        "Rumani"
+      ],
+      "burst": [
+        "Rumani",
+        "Noah",
+        "Anis: Sparkling Summer"
+      ],
+      "notes": [
+        "Prydwen 팀 149입니다. 에밀리아를 수니스 오른쪽에 두어 수급·보조 공격에 사용합니다.",
+        "에밀리아의 충전속도 투자에 따라 버스트 시점이 달라집니다."
+      ],
+      "weakness": "홍련 반격과 무적 이전의 집중 공격에 취약하며 부활 수단이 없습니다.",
+      "sourceIds": [
+        "p-emilia",
+        "p-noah",
+        "p-biscuit"
+      ],
+      "evidence": "guide"
+    },
+    {
+      "id": "emilia-miranda-noah",
+      "title": "에밀리아·애장품 미란다",
+      "style": "치명타 지연 광역",
+      "priority": 84,
+      "members": [
+        "Noah",
+        "Emilia",
+        "Miranda",
+        "Centi",
+        "Jackal"
+      ],
+      "burst": [
+        "Miranda",
+        "Noah",
+        "Emilia"
+      ],
+      "requiresFavorite": [
+        "Miranda"
+      ],
+      "notes": [
+        "Prydwen 팀 150입니다. 미란다의 첫 공격 치명타 강화를 에밀리아의 지연 광역에 연결합니다.",
+        "미란다 애장품 최종 단계·스킬2 10레벨, 에밀리아 버스트 7레벨 이상을 권합니다. 미란다 제외 최고 공격력은 에밀리아로 맞추고 치명타 피해 투자도 확인해 주세요."
+      ],
+      "weakness": "충전 중 사망·기절, 홍련 반격과 상대가 늦게 켜는 무적에 취약합니다.",
+      "sourceIds": [
+        "p-emilia",
+        "p-miranda-t",
+        "p-noah"
+      ],
+      "evidence": "guide"
+    }
+  ]
+}

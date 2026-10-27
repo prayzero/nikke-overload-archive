@@ -26,3 +26,22 @@ test("the lockfile root matches the dependency declarations", () => {
     assert.deepEqual(lock.packages[""][kind], manifest[kind], `${kind} must match package-lock.json`);
   }
 });
+
+test("the patched SVG stack remains compatible with the OG image renderer", async () => {
+  const [{ createElement }, { ImageResponse }] = await Promise.all([import("react"), import("@vercel/og")]);
+  const response = new ImageResponse(createElement("div", { style: {
+    display: "flex", width: "100%", height: "100%", backgroundColor: "#151a20", color: "#ffffff",
+  } }, "Arena"), { width: 320, height: 160 });
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  assert.deepEqual([...bytes.slice(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+  assert.equal(new DataView(bytes.buffer).getUint32(16), 320);
+  assert.equal(new DataView(bytes.buffer).getUint32(20), 160);
+});
+
+test("OG entries load patched dependencies instead of embedding stale bundles", async () => {
+  for (const target of ["node", "edge"]) {
+    const source = await readFile(new URL(`node_modules/@vercel/og/dist/index.${target}.js`, root), "utf8");
+    assert.match(source, /from ['"]satori(?:\/standalone)?['"]/);
+    assert.doesNotMatch(source, /fflate@0\.7\.3|require_hb/);
+  }
+});

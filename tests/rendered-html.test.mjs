@@ -19,6 +19,9 @@ test("exports the complete static archive", async () => {
   assert.match(html, /아이기스/);
   assert.match(html, /드레이크 : 그레이트 빌런/);
   assert.match(html, /추천 오버로드와 큐브/);
+  assert.match(html, /id="arena"/);
+  assert.match(html, /보유 기반 아레나 덱/);
+  assert.match(html, /스페셜 아레나/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
 });
 

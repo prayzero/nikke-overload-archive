@@ -38,3 +38,6 @@ jobs:
 
       - name: Run quality gates
         run: npm run qa
+
+      - name: Verify owned arena flows in headless Chrome
+        run: npm run test:browser
