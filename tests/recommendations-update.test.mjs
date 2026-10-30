@@ -19,7 +19,7 @@ test("released September and October units have sourced individual recommendatio
     assert.ok(roster.some((entry) => entry.name === name));
     for (const records of [overloads, cubes]) {
       const record = byName(records, name);
-      assert.equal(record.verifiedAt, "2026-10-23");
+      assert.equal(record.verifiedAt, name === "Belorta: Pumpkin Witch" ? "2026-10-23" : "2026-10-30");
       assert.ok(record.sources?.length, `${name}: individual source required`);
       assert.doesNotMatch(record.note, /개별 스킬 검증 전/);
     }
@@ -30,16 +30,41 @@ test("bunny builds distinguish fixed burst charge time from ordinary full-charge
   const guilty = byName(overloads, "Guilty: Mighty Bunny");
   const sin = byName(overloads, "Sin: Swift Bunny");
   for (const record of [guilty, sin]) {
-    assert.ok(record.primary.some(({ stat }) => stat === "chargeSpeed"));
-    assert.ok(record.primary.some(({ stat, count }) => stat === "maxAmmo" && count === 2));
+    assert.ok(!record.primary.some(({ stat }) => stat === "chargeSpeed"));
+    assert.ok(record.primary.some(({ stat, count }) => stat === "maxAmmo" && count === 1));
     assert.match(record.note, /1~2줄/);
     assert.match(record.note, /고정/);
-    assert.equal(record.primary.length, 4);
-    assert.equal(record.primary.reduce((sum, { count }) => sum + count, 0), 12,
-      "include ammunition in the complete twelve-line example");
+    assert.equal(record.primary.length, 3);
+    assert.equal(record.primary.reduce((sum, { count }) => sum + count, 0), 9,
+      "do not invent fixed targets for optional filler lines");
   }
-  assert.ok(guilty.avoid.includes("chargeDamage"));
+  assert.ok(!guilty.avoid.includes("chargeDamage"));
+  assert.ok(guilty.alternatives.includes("chargeDamage"));
+  assert.ok(guilty.alternatives.includes("chargeSpeed"));
   assert.ok(sin.alternatives.includes("chargeDamage"));
+  for (const name of [guilty.name, sin.name]) {
+    const cube = byName(cubes, name);
+    assert.equal(cube.primary, "crush");
+    assert.match(cube.note, /Engage/);
+    assert.match(cube.note, /Stance/);
+  }
+});
+
+test("anniversary guidance distinguishes an early proposal from unavailable investment advice", () => {
+  const marian = byName(overloads, "Marian: Queen");
+  assert.match(marian.mode, /초기 분석/);
+  assert.match(marian.note, /Tier 11/);
+  assert.equal(marian.primary.reduce((sum, { count }) => sum + count, 0), 9);
+  assert.deepEqual(marian.alternatives, ["critRate"]);
+  assert.equal(byName(cubes, marian.name).primary, "bastion");
+  assert.deepEqual(byName(cubes, marian.name).pvp, []);
+  for (const records of [overloads, cubes]) {
+    const rapunzel = byName(records, "Rapunzel: Sanctuary");
+    assert.equal(rapunzel.reviewStatus, "unavailable");
+    assert.deepEqual(rapunzel.primary, records === overloads ? [] : null);
+    assert.deepEqual(rapunzel.alternatives, []);
+    assert.equal(rapunzel.verifiedAt, "2026-10-30");
+  }
 });
 
 test("mechanic-specific advice replaces misleading weapon defaults", () => {

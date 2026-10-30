@@ -18,6 +18,8 @@ test("exports the complete static archive", async () => {
   assert.match(html, /아마기 유키코/);
   assert.match(html, /아이기스/);
   assert.match(html, /드레이크 : 그레이트 빌런/);
+  assert.match(html, /마리안 : 퀸/);
+  assert.match(html, /라푼젤 : 생츄어리/);
   assert.match(html, /추천 오버로드와 큐브/);
   assert.match(html, /id="arena"/);
   assert.match(html, /보유 기반 아레나 덱/);
@@ -53,6 +55,7 @@ test("includes hardened metadata and Pages assets", async () => {
   assert.ok(html.indexOf(cspMeta[0]) < html.indexOf("<script"));
   assert.match(cspMeta[1], /script-src 'self' 'sha256-/);
   assert.match(cspMeta[1], /img-src[^;]+https:\/\/nikke-db-legacy\.pages\.dev/);
+  assert.match(cspMeta[1], /img-src[^;]+https:\/\/sg-tools-cdn\.blablalink\.com/);
   assert.doesNotMatch(cspMeta[1], /unsafe-inline/);
   assert.match(html, /name="referrer" content="no-referrer"/i);
   assert.ok(canonical);
@@ -81,7 +84,7 @@ test("includes hardened metadata and Pages assets", async () => {
   ]);
 });
 
-test("maps full-body artwork for every playable Nikke", async () => {
+test("maps verified artwork or a portrait fallback for every playable Nikke", async () => {
   const roster = JSON.parse(await readFile(new URL("app/roster.json", root), "utf8"));
 
   assert.ok(roster.length >= 200);
@@ -90,7 +93,7 @@ test("maps full-body artwork for every playable Nikke", async () => {
   assert.equal(roster.filter((nikke) => nikke.artwork).length, roster.length);
   assert.ok(
     roster.every((nikke) =>
-      nikke.artwork.startsWith("https://static.wikia.nocookie.net/"),
+      ["static.wikia.nocookie.net", "sg-tools-cdn.blablalink.com"].includes(new URL(nikke.artwork).hostname),
     ),
   );
   assert.ok(roster.every(({ image }) => /^https:\/\//.test(image)));
