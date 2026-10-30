@@ -25,7 +25,7 @@ const reviewSources = {
 const validCubeIds = new Set([
   "assault", "onslaught", "resilience", "bastion", "adjutant", "wingman",
   "quantum", "vigor", "endurance", "healing", "tempering", "assist",
-  "destruction", "piercing", "crush", "cover", "divide",
+  "destruction", "piercing", "crush", "cover", "divide", "bezel",
 ]);
 
 const make = (

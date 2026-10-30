@@ -83,7 +83,11 @@ test("released anniversary characters can be found, saved, and opened with their
     await drawer.waitFor();
     assert.match(await drawer.innerText(), /2026-10-30/);
     if (name === "Rapunzel: Sanctuary") {
-      assert.match(await drawer.innerText(), /판단 보류/);
+      assert.match(await drawer.innerText(), /조건별 검토/);
+      assert.match(await drawer.innerText(), /추천 옵션 · 줄 수 미지정/);
+      assert.match(await drawer.innerText(), /차지 속도 · 우월 코드 · 장탄 수 · 차지 대미지/);
+      assert.match(await drawer.innerText(), /출시 초기 참고안/);
+      assert.deepEqual(await drawer.locator('.cube-option__name strong').allTextContents(), ["렐릭 베어 큐브", "렐릭 부스트 큐브", "렐릭 비거 큐브"]);
       assert.doesNotMatch(await drawer.innerText(), /재설정 비추천/);
       assert.equal(await drawer.locator('.gear-matrix article').count(), 0);
     } else {
@@ -96,6 +100,22 @@ test("released anniversary characters can be found, saved, and opened with their
     await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill(nikke.nameKo);
     await page.getByRole("button", { name: `${nikke.nameKo} 보유 해제`, exact: true }).waitFor();
   }
+});
+
+test("new cube information is reachable and readable on desktop and narrow mobile", async (t) => {
+  const page = await session(t);
+  await page.getByRole("link", { name: "새 큐브 정보" }).click();
+  const section = page.getByRole("region", { name: "새 큐브 · Bezel 큐브" });
+  assert.match(await section.innerText(), /로스트 섹터 30/);
+  assert.match(await section.innerText(), /현재 HP를 회복하는 효과는 아닙니다/);
+  assert.equal(await section.locator('.cube-update-levels article').count(), 3);
+  assert.deepEqual(await section.locator('.cube-update-levels strong').allTextContents(), ["+4.01%", "+6.01%", "+8.02%"]);
+  assert.equal(await section.locator('a[target="_blank"][rel="noreferrer"]').count(), 2);
+  await section.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/bezel-desktop.png", import.meta.url)) });
+  await page.setViewportSize({ width: 320, height: 900 });
+  await section.scrollIntoViewIfNeeded();
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+  await section.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/bezel-mobile.png", import.meta.url)) });
 });
 
 test("production UI renders three disjoint owned teams and persists ownership edits", async (t) => {

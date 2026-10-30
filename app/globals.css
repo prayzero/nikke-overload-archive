@@ -1446,6 +1446,70 @@ a {
   word-break: keep-all;
 }
 
+.cube-update-section {
+  border-top: 1px solid var(--line);
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 64px clamp(16px, 4vw, 64px);
+}
+
+.cube-update-heading {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.cube-update-heading h2 {
+  font-size: clamp(26px, 3.2vw, 44px);
+  letter-spacing: -0.05em;
+  margin: 12px 0 0;
+}
+
+.cube-update-heading > span,
+.cube-update-note,
+.cube-update-acquisition {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.cube-update-effect {
+  color: var(--lime);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 24px 0;
+}
+
+.cube-update-levels {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 720px;
+}
+
+.cube-update-levels article {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+  padding: clamp(10px, 2vw, 24px);
+}
+
+.cube-update-levels span,
+.cube-update-levels small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.cube-update-levels strong {
+  color: var(--lime);
+  font-family: var(--font-mono);
+  font-size: clamp(20px, 3vw, 32px);
+}
+
 .site-shell > footer {
   align-items: center;
   background: #080a0d;

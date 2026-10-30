@@ -1,3 +1,5 @@
+import cubeUpdate from "./cube-update.json";
+
 export const cubeIds = [
   "assault",
   "onslaught",
@@ -16,6 +18,7 @@ export const cubeIds = [
   "crush",
   "cover",
   "divide",
+  "bezel",
 ] as const;
 
 export type CubeId = (typeof cubeIds)[number];
@@ -58,6 +61,7 @@ export const cubeCatalog: Record<CubeId, CubeDetails> = {
   crush: { name: "렐릭 크러쉬 큐브", shortName: "Rupture", effect: "방어력 무시 대미지" },
   cover: { name: "렐릭 커버 큐브", shortName: "Stealth", effect: "엄폐물 최대 HP" },
   divide: { name: "렐릭 디바이드 큐브", shortName: "Diffusion", effect: "분배 대미지" },
+  bezel: { name: cubeUpdate.name, shortName: cubeUpdate.shortName, effect: cubeUpdate.effect },
 };
 
 export function getCubeDetails(id: CubeId): CubeDetails {

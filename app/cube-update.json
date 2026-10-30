@@ -1,0 +1,24 @@
+{
+  "id": "bezel",
+  "name": "Bezel 큐브",
+  "shortName": "Bezel",
+  "effect": "풀 버스트 진입 시 최대 HP 증가 · 최대 3중첩",
+  "checkedAt": "2026-10-30",
+  "acquisition": "로스트 섹터 30",
+  "maxStacks": 3,
+  "restoresHp": false,
+  "levels": [
+    { "level": 1, "maxHpPercentPerStack": 4.01 },
+    { "level": 3, "maxHpPercentPerStack": 6.01 },
+    { "level": 7, "maxHpPercentPerStack": 8.02 }
+  ],
+  "notes": [
+    "풀 버스트에 진입할 때 착용자 자신의 최대 HP가 증가합니다. 현재 HP를 회복하는 효과는 아닙니다.",
+    "수치는 1중첩당 효과입니다. 확인한 자료에 없는 지속 시간이나 중첩 합산 방식은 단정하지 않습니다.",
+    "한국어 정식 표기를 확인하지 못해 영문 이름을 사용합니다. 라푼젤의 개별 추천 공략에는 아직 없어 기본 후보에 포함하지 않았습니다."
+  ],
+  "sources": [
+    { "label": "GameWith 신규 큐브·획득처", "url": "https://gamewith.jp/nikke/article/show/373305" },
+    { "label": "NIKKE Wiki 효과·레벨별 수치 (수정본 72626)", "url": "https://nikke-goddess-of-victory-international.fandom.com/wiki/Lost_Sector/Harmony_Cubes?oldid=72626" }
+  ]
+}
