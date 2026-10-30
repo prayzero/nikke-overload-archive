@@ -5,7 +5,7 @@ import { buildArenaPlan, type ArenaCandidate, type ArenaCatalog, type ArenaNikke
 import arenaJson from "./arena-presets.json";
 import "./arena-planner.css";
 
-const catalog: ArenaCatalog = arenaJson;
+const catalog = arenaJson as ArenaCatalog;
 const STORAGE_KEY = "nikke-overload-archive:arena:v1";
 const PAGE_SIZE = 3;
 const sourceById = new Map(catalog.sources.map((source) => [source.id, source]));
@@ -156,7 +156,7 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
     return () => window.cancelAnimationFrame(frame);
   }, [roster]);
 
-  const plan = useMemo(() => buildArenaPlan({ roster, ownedIds, favoriteIds, presets: catalog.presets }), [roster, ownedIds, favoriteIds]);
+  const plan = useMemo(() => buildArenaPlan({ roster, ownedIds, favoriteIds, presets: catalog.presets, pendingReviews: catalog.pendingReviews }), [roster, ownedIds, favoriteIds]);
   const eligibleFavorites = useMemo(() => roster.filter((nikke) => ownedIds.has(nikke.id) && favoriteNames.has(nikke.name)), [roster, ownedIds]);
   const ready = hydrated && favoriteHydrated;
   const copyText = useMemo(() => {
@@ -225,6 +225,38 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
         </div>
       ) : (
         <>
+          {plan.pendingOwned.length > 0 && (
+            <section className="arena-review" aria-labelledby="arena-review-title">
+              <h3 id="arena-review-title">보유 니케의 편성 검토</h3>
+              <p className="arena-review__intro">아래 니케는 보유 목록에 정상 반영돼 있습니다. 아레나용 5인 조합이 확인되지 않아 추천팀 수에는 포함하지 않습니다.</p>
+              <div className="arena-review__grid">
+                {plan.pendingOwned.map((review) => (
+                  <article className="arena-review__card" key={review.nikke.id} aria-labelledby={`arena-review-${review.nikke.id}`}>
+                    <div className="arena-review__heading">
+                      <h4 id={`arena-review-${review.nikke.id}`}>{review.nikke.nameKo}</h4>
+                      <span>편성 검증 대기</span>
+                    </div>
+                    <p className="arena-review__role">B{review.nikke.burst} · {review.nikke.weapon}</p>
+                    <p className="arena-review__reason">{review.reason}</p>
+                    <details>
+                      <summary>스킬 조건과 확인 자료</summary>
+                      <ul>{review.notes.map((note) => <li key={note}>{note}</li>)}</ul>
+                      <div className="arena-review__sources">
+                        {review.sourceIds.map((id) => {
+                          const source = sourceById.get(id);
+                          return source ? <a key={id} href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a> : null;
+                        })}
+                      </div>
+                    </details>
+                    <div className="arena-review__footer">
+                      <time dateTime={review.checkedAt}>자료 확인 {review.checkedAt.replaceAll("-", ".")}</time>
+                      <button type="button" onClick={(event) => onViewNikke(review.nikke.id, event.currentTarget)} aria-label={`${review.nikke.nameKo} 검토 카드에서 장비 정보 보기`}>장비 정보 보기 ↗</button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
           {eligibleFavorites.length > 0 && (
             <div className="arena-favorites">
               <fieldset>

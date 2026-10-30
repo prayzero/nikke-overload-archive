@@ -68,6 +68,44 @@ test("empty ownership prompts registration without invented teams", async (t) =>
   const page = await session(t);
   assert.equal(await page.locator(".arena-teams .arena-team").count(), 0);
   assert.match(await page.locator("#arena").innerText(), /먼저 보유 니케를 등록/);
+  assert.equal(await page.locator(".arena-review").count(), 0);
+});
+
+test("owned anniversary units show sourced pending reviews, update on removal and preserve detail focus", async (t) => {
+  const owned = roster.filter(({ name }) => ["Marian: Queen", "Rapunzel: Sanctuary"].includes(name)).map(({ id }) => id);
+  const page = await session(t, { owned });
+  const panel = page.getByRole("region", { name: "보유 니케의 편성 검토" });
+  await panel.waitFor();
+  assert.equal(await panel.locator(".arena-review__card").count(), 2);
+  assert.equal(await page.locator(".arena-teams .arena-team").count(), 0);
+  assert.match(await page.locator(".arena-readiness").innerText(), /보유 2명 · 조건 충족 0조합/);
+  for (const review of catalog.pendingReviews) {
+    const nikke = roster.find(({ name }) => name === review.name);
+    const card = panel.getByRole("article", { name: nikke.nameKo, exact: true });
+    await card.getByText("스킬 조건과 확인 자료", { exact: true }).click();
+    assert.match(await card.innerText(), /편성 검증 대기/);
+    assert.match(await card.innerText(), /2026\.10\.30/);
+    for (const note of review.notes) assert.ok((await card.innerText()).includes(note));
+    assert.equal(await card.locator('a[target="_blank"][rel="noreferrer"]').count(), review.sourceIds.length);
+  }
+  const opener = panel.getByRole("button", { name: "라푼젤 : 생츄어리 검토 카드에서 장비 정보 보기" });
+  await opener.click();
+  await page.getByRole("dialog", { name: "라푼젤 : 생츄어리", exact: true }).waitFor();
+  await page.keyboard.press("Escape");
+  await page.getByRole("dialog").waitFor({ state: "detached" });
+  assert.ok(await opener.evaluate((element) => element === document.activeElement));
+  await panel.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/anniversary-review-desktop.png", import.meta.url)) });
+  await page.setViewportSize({ width: 320, height: 1000 });
+  await panel.scrollIntoViewIfNeeded();
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+  await panel.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/anniversary-review-mobile.png", import.meta.url)) });
+  await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill("Marian: Queen");
+  await page.getByRole("button", { name: "마리안 : 퀸 보유 해제", exact: true }).click();
+  await panel.getByRole("article", { name: "마리안 : 퀸", exact: true }).waitFor({ state: "detached" });
+  assert.equal(await panel.locator(".arena-review__card").count(), 1);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await panel.getByRole("article", { name: "라푼젤 : 생츄어리", exact: true }).waitFor();
+  assert.equal(await panel.locator(".arena-review__card").count(), 1);
 });
 
 test("released anniversary characters can be found, saved, and opened with their sourced builds", async (t) => {
@@ -164,11 +202,14 @@ test("malformed or blocked favorite storage keeps the roster usable", async (t) 
 });
 
 test("denied clipboard offers complete text and character details retain focus", async (t) => {
-  const page = await session(t, { owned: fixtureIds, clipboardFails: true });
+  const pendingIds = roster.filter(({ name }) => catalog.pendingReviews.some((review) => review.name === name)).map(({ id }) => id);
+  const page = await session(t, { owned: [...fixtureIds, ...pendingIds], clipboardFails: true });
+  assert.equal(await page.locator(".arena-review__card").count(), 2);
   await page.getByRole("button", { name: /추천 3팀 복사/ }).click();
   const text = await page.getByRole("textbox", { name: "직접 복사할 추천 편성" }).inputValue();
   assert.equal((text.match(/\/ P5 /g) ?? []).length, 3);
   assert.equal((text.match(/첫 버스트:/g) ?? []).length, 3);
+  assert.doesNotMatch(text, /마리안 : 퀸|라푼젤 : 생츄어리/);
   const opener = page.locator(".arena-teams .arena-member__button").first();
   await opener.click();
   await page.getByRole("dialog").waitFor();

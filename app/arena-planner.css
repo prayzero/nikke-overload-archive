@@ -27,6 +27,24 @@
 .arena-briefing strong { color: var(--cyan); flex-shrink: 0; font-family: var(--font-mono); }
 
 .arena-favorites { background: var(--ink-soft); border: 1px solid var(--line); border-top: 2px solid var(--cyan); margin-bottom: 24px; padding: 22px; }
+.arena-review { border: 1px solid var(--line); border-top: 2px solid var(--amber); margin-bottom: 24px; padding: 22px; }
+.arena-review h3 { font-size: 17px; margin: 0; }
+.arena-review__intro { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 10px 0 18px; }
+.arena-review__grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.arena-review__card { background: var(--ink-soft); border: 1px solid var(--line); min-width: 0; padding: 18px; }
+.arena-review__heading { align-items: start; display: flex; flex-wrap: wrap; gap: 8px 14px; justify-content: space-between; }
+.arena-review h4 { font-size: 16px; margin: 0; }
+.arena-review__heading > span { color: var(--amber); font-size: 11px; }
+.arena-review__role { color: var(--cyan); font-family: var(--font-mono); font-size: 11px; margin: 10px 0; }
+.arena-review__reason, .arena-review details { color: var(--muted); font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.arena-review summary { color: var(--text); cursor: pointer; padding: 10px 0; }
+.arena-review ul { margin: 4px 0 14px; padding-left: 18px; }
+.arena-review li + li { margin-top: 8px; }
+.arena-review__sources { display: flex; flex-direction: column; gap: 6px; }
+.arena-review__sources a { color: var(--cyan); font-size: 11px; text-decoration: underline; text-underline-offset: 3px; }
+.arena-review__footer { align-items: center; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; margin-top: 14px; padding-top: 8px; }
+.arena-review__footer time { color: var(--muted); font-size: 10px; }
+.arena-review__footer button { background: transparent; color: var(--cyan); cursor: pointer; font-size: 11px; min-height: 44px; padding: 0; }
 .arena-favorites fieldset { border: 0; margin: 0; min-width: 0; padding: 0; }
 .arena-favorites legend { font-size: 15px; font-weight: 800; padding: 0; }
 .arena-favorites fieldset > p { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 10px 0 16px; }
@@ -152,6 +170,8 @@
   .arena-open-slot { flex-direction: row; gap: 20px; min-height: 110px; padding: 22px; text-align: left; }
   .arena-open-slot > span { flex-shrink: 0; font-size: 32px; }
   .arena-favorites { padding: 18px; }
+  .arena-review { padding: 14px; }
+  .arena-review__card { padding: 14px; }
   .arena-candidates summary { font-size: 13px; padding: 16px; }
   .arena-candidates__content { padding: 14px 10px; }
   .arena-candidates__description { padding: 0 5px; }

@@ -27,21 +27,32 @@ export type ArenaCandidate = Omit<ArenaPreset, "members"> & {
   conflicts: string[];
   available: boolean;
 };
+export type ArenaPendingReview = {
+  name: string;
+  status: "pending-team";
+  checkedAt: string;
+  reason: string;
+  notes: string[];
+  sourceIds: string[];
+};
 export type ArenaCatalog = {
   checkedAt: string;
   sources: { id: string; title: string; url: string }[];
   presets: ArenaPreset[];
+  pendingReviews?: ArenaPendingReview[];
 };
 export function buildArenaPlan(input: {
   roster: ArenaNikke[];
   ownedIds: Iterable<string>;
   favoriteIds?: Iterable<string>;
   presets: ArenaPreset[];
+  pendingReviews?: ArenaPendingReview[];
 }): {
   teams: ArenaCandidate[];
   alternatives: ArenaCandidate[];
   nearMatches: ArenaCandidate[];
   ownedCount: number;
   availableCount: number;
+  pendingOwned: Array<ArenaPendingReview & { nikke: ArenaNikke }>;
 };
 export function validateArenaCatalog(catalog: ArenaCatalog, roster: ArenaNikke[]): true;
