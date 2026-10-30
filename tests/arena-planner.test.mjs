@@ -108,12 +108,64 @@ test("validates provenance, ownership references, and favorite conditions", () =
   ]) assert.throws(() => validateArenaCatalog(bad, roster));
 });
 
+test("pending character reviews follow exact owned IDs without fabricating a team", () => {
+  const pendingReviews = [{ name: roster[24].name, status: "pending-team", checkedAt: "2026-10-30", reason: "No reviewed PvP formation", notes: ["Skill conditions only"], sourceIds: ["guide"] }];
+  const input = { roster, ownedIds: new Set([ids[24], "retired-id"]), presets: teams, pendingReviews };
+  const before = structuredClone(input);
+  const result = buildArenaPlan(input);
+  assert.equal(result.teams.length, 0);
+  assert.equal(result.availableCount, 0);
+  assert.equal(result.ownedCount, 1);
+  assert.deepEqual(result.pendingOwned, [{ ...pendingReviews[0], nikke: roster[24] }]);
+  assert.deepEqual(input, before);
+  assert.deepEqual(buildArenaPlan({ ...input, ownedIds: [] }).pendingOwned, []);
+  const baseline = plan(ids);
+  const withReview = buildArenaPlan({ ...input, ownedIds: ids });
+  for (const key of ["teams", "alternatives", "nearMatches", "availableCount"]) assert.deepEqual(withReview[key], baseline[key]);
+});
+
+test("pending reviews reject missing evidence, ambiguous status and contradictory presets", () => {
+  const review = { name: roster[24].name, status: "pending-team", checkedAt: "2026-10-30", reason: "No PvP team", notes: ["Early guide"], sourceIds: ["guide"] };
+  const catalog = { checkedAt: "2026-10-27", sources: [{ id: "guide", title: "Guide", url: "https://example.com/guide" }], presets: teams, pendingReviews: [review] };
+  assert.equal(validateArenaCatalog(catalog, roster), true);
+  for (const patch of [
+    { name: "Unknown" }, { status: "reviewed" }, { checkedAt: "2026-02-30" },
+    { checkedAt: "not-a-date" }, { reason: " " }, { notes: [] }, { notes: [42] },
+    { sourceIds: [] }, { sourceIds: ["unknown"] }, { sourceIds: ["guide", "guide"] },
+  ]) assert.throws(() => validateArenaCatalog({ ...catalog, pendingReviews: [{ ...review, ...patch }] }, roster));
+  assert.throws(() => validateArenaCatalog({ ...catalog, pendingReviews: [review, review] }, roster));
+  assert.throws(() => validateArenaCatalog({ ...catalog, sources: [{ ...catalog.sources[0], url: "https://user@example.com/guide" }] }, roster));
+  const unreviewed = preset("unreviewed", [0, 1, 2, 3, 24]);
+  assert.throws(() => validateArenaCatalog({ ...catalog, presets: [unreviewed] }, roster), /Unverified arena character/);
+  assert.throws(() => buildArenaPlan({ roster, ownedIds: ids, presets: [unreviewed], pendingReviews: [review] }), /Unverified arena character/);
+});
+
+test("anniversary arena reviews keep both units distinct from old Rapunzel and PvE suggestions", async () => {
+  const [catalog, realRoster] = await Promise.all(["arena-presets.json", "roster.json"].map(async (file) =>
+    JSON.parse(await readFile(new URL(`../app/${file}`, import.meta.url), "utf8"))));
+  const reviewedNames = ["Marian: Queen", "Rapunzel: Sanctuary"];
+  assert.deepEqual(catalog.pendingReviews.map(({ name }) => name), reviewedNames);
+  assert.ok(catalog.pendingReviews.every(({ checkedAt, status }) => checkedAt === "2026-10-30" && status === "pending-team"));
+  assert.equal(catalog.checkedAt, "2026-10-27", "do not refresh unreviewed team dates");
+  assert.equal(catalog.presets.length, 30);
+  assert.ok(catalog.presets.every(({ members }) => members.every((name) => !reviewedNames.includes(name))));
+  const review = catalog.pendingReviews.find(({ name }) => name === "Rapunzel: Sanctuary");
+  assert.match(review.notes.join(" "), /3명 이상/);
+  assert.match(review.notes.join(" "), /40초 증가/);
+  const getPlan = (ownedNames) => buildArenaPlan({ roster: realRoster, ownedIds: realRoster.filter(({ name }) => ownedNames.includes(name)).map(({ id }) => id), ...catalog });
+  for (const name of ["Rapunzel", "Rapunzel: Pure Grace"]) assert.equal(getPlan([name]).pendingOwned.length, 0);
+  const newUnitsOnly = getPlan(reviewedNames);
+  assert.equal(newUnitsOnly.teams.length, 0);
+  assert.equal(newUnitsOnly.availableCount, 0);
+  assert.deepEqual(newUnitsOnly.pendingOwned.map(({ nikke }) => [nikke.name, nikke.burst]), [["Marian: Queen", "3"], ["Rapunzel: Sanctuary", "2"]]);
+});
+
 test("shipped arena catalog references real roster members, sources, and three compatible teams", async () => {
   const [catalog, realRoster] = await Promise.all(["arena-presets.json", "roster.json"].map(async (file) =>
     JSON.parse(await readFile(new URL(`../app/${file}`, import.meta.url), "utf8"))));
   assert.equal(validateArenaCatalog(catalog, realRoster), true);
   const allOwned = realRoster.map(({ id }) => id);
-  const result = buildArenaPlan({ roster: realRoster, ownedIds: allOwned, favoriteIds: allOwned, presets: catalog.presets });
+  const result = buildArenaPlan({ roster: realRoster, ownedIds: allOwned, favoriteIds: allOwned, presets: catalog.presets, pendingReviews: catalog.pendingReviews });
   assert.equal(result.teams.length, 3);
   assert.equal(new Set(result.teams.flatMap(({ members }) => members.map(({ id }) => id))).size, 15);
   for (const candidate of [...result.teams, ...result.alternatives]) {

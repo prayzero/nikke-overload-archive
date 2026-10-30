@@ -1,6 +1,56 @@
 {
   "checkedAt": "2026-10-27",
+  "pendingReviews": [
+    {
+      "name": "Marian: Queen",
+      "status": "pending-team",
+      "checkedAt": "2026-10-30",
+      "reason": "확인한 최신 자료에서 아레나용 5인 편성과 P1~P5 배치를 확보하지 못했습니다.",
+      "notes": [
+        "B3·MG 딜러로 전체 공격 버스트를 보유합니다. nikke.gg 초기 분석은 PvP 시험 대기 상태이며, Prydwen의 팀 가이드도 아직 비어 있습니다.",
+        "공개된 작열 MG·보스용 조합을 아레나 덱으로 전용하지 않았습니다. 버스트 수급·보호 조합과 상대 조건이 확인될 때까지 자동 추천에 포함하지 않습니다."
+      ],
+      "sourceIds": ["p-marian-queen-review", "ngg-marian-queen-early", "gw-marian-queen-review"]
+    },
+    {
+      "name": "Rapunzel: Sanctuary",
+      "status": "pending-team",
+      "checkedAt": "2026-10-30",
+      "reason": "회복·부활 조건은 확인했지만 아레나용 5인 편성과 자리 순서는 검증하지 못했습니다.",
+      "notes": [
+        "생츄어리는 B2·RL 지원형으로, 기존 B1 라푼젤의 자리를 그대로 대체하지 않습니다. 부활은 자신의 버스트 발동 시 전투 불능 아군이 3명 이상일 때 전투당 1회 적용되며, 전원 생존 첫 버스트에서는 발동하지 않습니다.",
+        "부활 사용 후 자신의 버스트 재사용 대기시간이 40초 증가합니다. 공개된 추가 B2 동반 조합은 PvE용이며, 자동 아레나의 생존·버스트 순서까지 검증한 조합으로 볼 수 없습니다.",
+        "풀 차지 유지가 필요한 보호막을 자동 전투에서 항상 유지한다고 가정하지 않습니다. Prydwen의 개별 팀 가이드도 아직 비어 있어 자동 추천은 대기합니다."
+      ],
+      "sourceIds": ["p-sanctuary-review", "gw-sanctuary-review"]
+    }
+  ],
   "sources": [
+    {
+      "id": "p-marian-queen-review",
+      "title": "Prydwen 마리안 : 퀸 스킬·팀 공개 상태",
+      "url": "https://www.prydwen.gg/nikke/characters/marian-queen"
+    },
+    {
+      "id": "ngg-marian-queen-early",
+      "title": "nikke.gg 마리안 초기 분석 · PvP 시험 대기",
+      "url": "https://nikke.gg/marian-queen-early-analysis/"
+    },
+    {
+      "id": "gw-marian-queen-review",
+      "title": "GameWith 마리안 개별 공략 · 공개 편성 용도 확인",
+      "url": "https://gamewith.jp/nikke/article/show/584272"
+    },
+    {
+      "id": "p-sanctuary-review",
+      "title": "Prydwen 생츄어리 스킬·팀 공개 상태",
+      "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary"
+    },
+    {
+      "id": "gw-sanctuary-review",
+      "title": "GameWith 생츄어리 개별 공략 · 부활·추가 B2 조건",
+      "url": "https://gamewith.jp/nikke/article/show/584270"
+    },
     {
       "id": "ngg-rookie",
       "title": "nikke.gg 아레나 기본 편성 (기존 공개 조합)",
