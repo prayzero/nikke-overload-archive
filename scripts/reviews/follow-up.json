@@ -113,25 +113,29 @@
   {
     "name": "Rapunzel: Sanctuary",
     "checkedAt": "2026-10-30",
-    "sources": [{ "label": "Prydwen 스킬 자료 · 투자 가이드 미공개", "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary" }],
+    "sources": [
+      { "label": "GameWith 개별 옵션·큐브 참고안 (출시 초기)", "url": "https://gamewith.jp/nikke/article/show/584270" },
+      { "label": "NikkeHub 개별 큐브 추천 (버퍼 조합·풀투자 가정)", "url": "https://nikkehub.com/nikkes/rapunzel-sanctuary" },
+      { "label": "Prydwen 스킬 자료 · 투자 가이드 미공개", "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary" }
+    ],
     "overload": {
       "primary": [],
-      "alternatives": [],
+      "alternatives": ["chargeSpeed", "element", "maxAmmo", "chargeDamage"],
       "avoid": [],
       "priority": "skip",
-      "mode": "추천 자료 확인 중",
-      "note": "개별 OL 투자 표가 아직 공개되지 않아 목표 옵션과 줄 수를 지정하지 않습니다. 이는 재설정이 불필요하다고 검증된 판정이 아니라 추천 근거가 부족한 상태입니다. 스킬에 차지 속도 증가·감소 면역이 명시되어 있으므로 일반 로켓 런처의 차지 속도 세팅을 그대로 적용하지 않습니다.",
-      "confidence": "mechanic",
-      "reviewStatus": "unavailable"
+      "mode": "PvE (출시 초기 참고안)",
+      "note": "GameWith의 개별 표에서 차지 속도·우월 코드·최대 장탄 수·차지 대미지를 후보로 확인했습니다. 표는 줄 수와 확정 효율 순위를 제공하지 않아 목표 개수를 지정하지 않습니다. 차지 속도 증가·감소 면역은 풀 차지 상태일 때에 한정되므로 전투 내내 차지 속도가 무효라는 뜻이 아닙니다. 출시 초기 자료이며 Prydwen 투자 표는 아직 미공개입니다. 팀과 공격 주기에 맞춰 옵션을 비교해 주세요.",
+      "confidence": "guide",
+      "reviewStatus": "no-target"
     },
     "cube": {
-      "primary": null,
-      "alternatives": [],
+      "primary": "resilience",
+      "alternatives": ["adjutant", "vigor"],
       "pvp": [],
-      "mode": "추천 자료 확인 중",
-      "note": "개별 큐브 투자 가이드가 아직 공개되지 않아 주력·대체·PvP 큐브를 지정하지 않습니다. 회복과 아군 지원 스킬이 확인되었더라도 그것만으로 특정 큐브가 최적이라고 판단하지 않습니다.",
-      "confidence": "mechanic",
-      "reviewStatus": "unavailable"
+      "mode": "PvE (출시 초기 참고안)",
+      "note": "NikkeHub의 공용 버퍼 조합·풀투자 가정은 렐릭 베어를 제안해 기본 후보로 표시합니다. GameWith는 풀 차지 공격과 회복 빈도를 위한 렐릭 부스트를 우선 소개하고, 회복량을 위한 최대 HP의 비거와 재장전의 베어도 제안합니다. 출처별 우선 후보가 다르므로 큐브 레벨·팀·회복 필요량에 맞춰 비교해야 하며 확정 최적 순위가 아닙니다. 출시 초기 참고안으로 PvP 큐브와 신규 Bezel의 적합성은 아직 지정하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
     }
   }
 ]

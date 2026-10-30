@@ -21,7 +21,7 @@ export function validateReviews(records, rosterNames) {
     for (const source of record.sources) {
       const url = new URL(source.url);
       if (url.protocol !== "https:" || url.username || url.password
-        || !["www.prydwen.gg", "nikke.gg"].includes(url.hostname)
+        || !["www.prydwen.gg", "nikke.gg", "gamewith.jp", "nikkehub.com"].includes(url.hostname)
         || !source.label?.trim() || urls.has(source.url)) {
         throw new Error(`${record.name}: invalid or duplicate review source.`);
       }

@@ -148,7 +148,7 @@ test("provides one validated cube recommendation for every playable Nikke", asyn
   const validCubeIds = new Set([
     "assault", "onslaught", "resilience", "bastion", "adjutant", "wingman",
     "quantum", "vigor", "endurance", "healing", "tempering", "assist",
-    "destruction", "piercing", "crush", "cover", "divide",
+    "destruction", "piercing", "crush", "cover", "divide", "bezel",
   ]);
   const validConfidence = new Set(["guide", "mechanic"]);
 
@@ -172,6 +172,31 @@ test("provides one validated cube recommendation for every playable Nikke", asyn
       && typeof note === "string" && note.trim().length > 0));
   assert.ok(recommendations.every(({ confidence }) => validConfidence.has(confidence)));
   assert.ok(recommendations.every(({ verifiedAt }) => /^\d{4}-\d{2}-\d{2}$/.test(verifiedAt)));
+});
+
+test("publishes sourced Bezel thresholds without implying healing or an unverified Korean name", async () => {
+  const cube = JSON.parse(await readFile(new URL("app/cube-update.json", root), "utf8"));
+  assert.equal(cube.id, "bezel");
+  assert.equal(cube.name, "Bezel 큐브");
+  assert.equal(cube.maxStacks, 3);
+  assert.equal(cube.restoresHp, false);
+  assert.deepEqual(cube.levels, [
+    { level: 1, maxHpPercentPerStack: 4.01 },
+    { level: 3, maxHpPercentPerStack: 6.01 },
+    { level: 7, maxHpPercentPerStack: 8.02 },
+  ]);
+  assert.equal(cube.acquisition, "로스트 섹터 30");
+  assert.ok(cube.sources.some(({ url }) => new URL(url).searchParams.get("oldid") === "72626"));
+  const html = (await readFile(new URL("index.html", output), "utf8")).replace(/<!--[\s\S]*?-->/g, "");
+  assert.match(html, /id="cube-update"/);
+  for (const text of [cube.name, cube.acquisition, ...cube.notes, ...cube.levels.map(({ maxHpPercentPerStack }) => `+${maxHpPercentPerStack}%`)]) assert.ok(html.includes(text), text);
+  for (const { url, label } of cube.sources) {
+    const parsed = new URL(url);
+    assert.equal(parsed.protocol, "https:");
+    assert.equal(parsed.username + parsed.password, "");
+    assert.ok(label.trim());
+    assert.ok(html.includes(url));
+  }
 });
 
 test("renders accessible cube guidance in the character detail drawer", async () => {

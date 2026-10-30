@@ -5,6 +5,7 @@ import ArenaPlanner from "./arena-planner";
 import { getCubeDetails, type CubeId, type CubeRecommendation } from "./cube-catalog";
 import { createGearLayout } from "./gear-layout.mjs";
 import cubesJson from "./cubes.json";
+import cubeUpdate from "./cube-update.json";
 import overloadJson from "./overloads.json";
 import rosterJson from "./roster.json";
 
@@ -131,6 +132,7 @@ const priorityLabels: Record<BuildPriority, string> = {
 };
 
 function buildPriorityLabel(build: OverloadBuild) {
+  if (build.reviewStatus === "no-target" && build.alternatives.length) return "조건별 검토";
   return build.reviewStatus === "unavailable" ? "판단 보류" : priorityLabels[build.priority];
 }
 
@@ -141,8 +143,9 @@ const confidenceLabels: Record<BuildConfidence, string> = {
   "recent-kit": "최신 키트 기반",
 };
 
-function reviewLabel(record: { confidence: BuildConfidence; reviewStatus?: string }) {
+function reviewLabel(record: { confidence: BuildConfidence; reviewStatus?: string; alternatives?: string[] }) {
   if (record.reviewStatus === "unavailable") return "개별 추천 근거 부족";
+  if (record.reviewStatus === "no-target" && record.alternatives?.length) return "목표 줄 수 미지정";
   if (record.reviewStatus === "no-target") return "목표 옵션 미지정";
   return confidenceLabels[record.confidence];
 }
@@ -430,6 +433,7 @@ export default function RosterArchive() {
             <div className="hero-actions">
               <a className="primary-action" href="#roster">전체 니케 보기 <span aria-hidden="true">↓</span></a>
               <a className="arena-hero-link" href="#arena">보유 기반 아레나 덱 <span aria-hidden="true">↗</span></a>
+              <a className="arena-hero-link" href="#cube-update">새 큐브 정보 <span aria-hidden="true">↓</span></a>
               <span className="auto-save"><i aria-hidden="true" /> 브라우저 자동 저장</span>
             </div>
           </div>
@@ -626,6 +630,28 @@ export default function RosterArchive() {
             <article><span>03</span><h3>투자 우선도 표시</h3><p>META부터 재설정 비추천까지 구분해 커스텀 모듈을 어디에 먼저 쓸지 보여줍니다.</p></article>
           </div>
         </section>
+        <section id="cube-update" className="cube-update-section" aria-labelledby="cube-update-title">
+          <div className="cube-update-heading">
+            <div>
+              <p className="eyebrow"><span>03</span> HARMONY CUBE UPDATE</p>
+              <h2 id="cube-update-title">새 큐브 · {cubeUpdate.name}</h2>
+            </div>
+            <span>자료 확인 {cubeUpdate.checkedAt}</span>
+          </div>
+          <p className="cube-update-effect">{cubeUpdate.effect}</p>
+          <div className="cube-update-levels" aria-label="Bezel 큐브 1중첩당 최대 HP 증가">
+            {cubeUpdate.levels.map(({ level, maxHpPercentPerStack }) => (
+              <article key={level}>
+                <span>Lv. {level}부터</span>
+                <strong>+{maxHpPercentPerStack}%</strong>
+                <small>최대 HP · 1중첩당</small>
+              </article>
+            ))}
+          </div>
+          <p className="cube-update-acquisition">획득처: {cubeUpdate.acquisition} · 최대 {cubeUpdate.maxStacks}중첩</p>
+          {cubeUpdate.notes.map((note) => <p className="cube-update-note" key={note}>{note}</p>)}
+          <RecommendationSources sources={cubeUpdate.sources} />
+        </section>
       </main>
 
       <footer>
@@ -724,7 +750,7 @@ export default function RosterArchive() {
             )}
 
             <div className="loadout-heading">
-              <div><p>RECOMMENDED OVERLOAD</p><h3>{selectedBuild.primary.length ? "4부위 목표 배치 예시" : "오버로드 목표 미지정"}</h3></div>
+              <div><p>RECOMMENDED OVERLOAD</p><h3>{selectedBuild.primary.length ? "4부위 목표 배치 예시" : selectedBuild.alternatives.length ? "추천 옵션 · 줄 수 미지정" : "오버로드 목표 미지정"}</h3></div>
               {selectedBuild.primary.length > 0 && <span>4 × 3</span>}
             </div>
 
@@ -750,7 +776,7 @@ export default function RosterArchive() {
                   </ol>
                 </article>
               ))}
-            </div> : <p className="recommendation-empty">부위별 목표를 확정하지 않아 배치를 표시하지 않습니다. 아래 공략의 투자 조건과 선택지를 먼저 확인해 주세요.</p>}
+            </div> : <p className="recommendation-empty">{selectedBuild.alternatives.length ? "추천 옵션은 있으나 목표 줄 수가 지정되지 않아 부위별 배치를 표시하지 않습니다. " : "부위별 목표를 확정하지 않아 배치를 표시하지 않습니다. "}아래 공략의 투자 조건과 선택지를 먼저 확인해 주세요.</p>}
 
             <div className="build-summary">
               <div className="build-meta">
@@ -765,7 +791,7 @@ export default function RosterArchive() {
                 ))}
               </div>
               <div className="option-groups">
-                <p><b>대체/유효</b>{selectedBuild.alternatives.length ? selectedBuild.alternatives.map((stat) => statShortLabels[stat]).join(" · ") : "별도 지정 없음"}</p>
+                <p><b>{!selectedBuild.primary.length && selectedBuild.alternatives.length ? "검토할 옵션" : "대체/유효"}</b>{selectedBuild.alternatives.length ? selectedBuild.alternatives.map((stat) => statShortLabels[stat]).join(" · ") : "별도 지정 없음"}</p>
                 <p className={selectedBuild.avoid.length ? "is-avoid" : ""}><b>회피</b>{selectedBuild.avoid.length ? selectedBuild.avoid.map((stat) => statShortLabels[stat]).join(" · ") : "별도 지정 없음"}</p>
               </div>
               <p className="build-note">{selectedBuild.note}</p>

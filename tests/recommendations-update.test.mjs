@@ -50,7 +50,7 @@ test("bunny builds distinguish fixed burst charge time from ordinary full-charge
   }
 });
 
-test("anniversary guidance distinguishes an early proposal from unavailable investment advice", () => {
+test("anniversary guidance preserves early assumptions without inventing Sanctuary line counts", () => {
   const marian = byName(overloads, "Marian: Queen");
   assert.match(marian.mode, /초기 분석/);
   assert.match(marian.note, /Tier 11/);
@@ -60,11 +60,22 @@ test("anniversary guidance distinguishes an early proposal from unavailable inve
   assert.deepEqual(byName(cubes, marian.name).pvp, []);
   for (const records of [overloads, cubes]) {
     const rapunzel = byName(records, "Rapunzel: Sanctuary");
-    assert.equal(rapunzel.reviewStatus, "unavailable");
-    assert.deepEqual(rapunzel.primary, records === overloads ? [] : null);
-    assert.deepEqual(rapunzel.alternatives, []);
+    assert.match(rapunzel.mode, /출시 초기/);
+    assert.equal(rapunzel.confidence, "guide");
     assert.equal(rapunzel.verifiedAt, "2026-10-30");
   }
+  const build = byName(overloads, "Rapunzel: Sanctuary");
+  assert.equal(build.reviewStatus, "no-target");
+  assert.deepEqual(build.primary, []);
+  assert.deepEqual(build.alternatives, ["chargeSpeed", "element", "maxAmmo", "chargeDamage"]);
+  assert.match(build.note, /풀 차지 상태일 때에 한정/);
+  assert.match(build.note, /줄 수와 확정 효율 순위를 제공하지 않아/);
+  const cube = byName(cubes, build.name);
+  assert.equal(cube.reviewStatus, "reviewed");
+  assert.equal(cube.primary, "resilience");
+  assert.deepEqual(cube.alternatives, ["adjutant", "vigor"]);
+  assert.deepEqual(cube.pvp, []);
+  assert.match(cube.note, /출처별 우선 후보가 다르므로/);
 });
 
 test("mechanic-specific advice replaces misleading weapon defaults", () => {
@@ -141,9 +152,13 @@ test("invalid evidence and contradictory review statuses fail before generation"
   };
   const names = new Set(["Example"]);
   assert.equal(validateReviews([base], names).size, 1);
+  for (const host of ["gamewith.jp", "nikkehub.com"]) {
+    assert.equal(validateReviews([{ ...base, sources: [{ label: "Guide", url: `https://${host}/guide` }] }], names).size, 1);
+  }
   for (const records of [
     [base, base], [{ ...base, name: "Missing" }], [{ ...base, checkedAt: "2026-02-30" }],
     [{ ...base, sources: [] }], [{ ...base, sources: [{ label: "Bad", url: "javascript:alert(1)" }] }],
+    ...["https://unverified.test/guide", "https://gamewith.jp.unverified.test/guide", "http://nikkehub.com/guide", "https://user@gamewith.jp/guide"].map((url) => [{ ...base, sources: [{ label: "Bad", url }] }]),
     [{ ...base, overload: { ...base.overload, reviewStatus: "reviewed" } }],
     [{ ...base, cube: { primary: "vigor", alternatives: [], mode: "PvE", note: "Missing advice", reviewStatus: "unavailable" } }],
   ]) assert.throws(() => validateReviews(records, names));
@@ -160,7 +175,7 @@ test("recommendation sources use labelled secure links without duplicates", () =
       assert.equal(parsed.protocol, "https:");
       assert.equal(parsed.username, "");
       assert.equal(parsed.password, "");
-      assert.ok(["nikke.gg", "www.prydwen.gg"].includes(parsed.hostname));
+      assert.ok(["nikke.gg", "www.prydwen.gg", "gamewith.jp", "nikkehub.com"].includes(parsed.hostname));
     }
   }
 });
