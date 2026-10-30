@@ -70,6 +70,34 @@ test("empty ownership prompts registration without invented teams", async (t) =>
   assert.match(await page.locator("#arena").innerText(), /먼저 보유 니케를 등록/);
 });
 
+test("released anniversary characters can be found, saved, and opened with their sourced builds", async (t) => {
+  const page = await session(t);
+  for (const name of ["Marian: Queen", "Rapunzel: Sanctuary"]) {
+    const nikke = roster.find((entry) => entry.name === name);
+    assert.ok(nikke, `${name} is released and present`);
+    await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill(name);
+    await page.getByRole("button", { name: `${nikke.nameKo} 보유 등록`, exact: true }).click();
+    await page.getByRole("button", { name: `${nikke.nameKo} 보유 해제`, exact: true }).waitFor();
+    await page.getByRole("button", { name: new RegExp(`${nikke.nameKo}.*오버로드와 추천 큐브 세팅 보기`) }).click();
+    const drawer = page.getByRole("dialog", { name: nikke.nameKo, exact: true });
+    await drawer.waitFor();
+    assert.match(await drawer.innerText(), /2026-10-30/);
+    if (name === "Rapunzel: Sanctuary") {
+      assert.match(await drawer.innerText(), /판단 보류/);
+      assert.doesNotMatch(await drawer.innerText(), /재설정 비추천/);
+      assert.equal(await drawer.locator('.gear-matrix article').count(), 0);
+    } else {
+      assert.equal(await drawer.locator('.gear-matrix article').count(), 4);
+      assert.match(await drawer.innerText(), /출시 전 초기 분석/);
+    }
+    assert.ok(await drawer.locator('.recommendation-sources a').count() > 0);
+    await page.getByRole("button", { name: "상세 닫기", exact: true }).click();
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill(nikke.nameKo);
+    await page.getByRole("button", { name: `${nikke.nameKo} 보유 해제`, exact: true }).waitFor();
+  }
+});
+
 test("production UI renders three disjoint owned teams and persists ownership edits", async (t) => {
   const page = await session(t, { owned: fixtureIds });
   const teams = page.locator(".arena-teams .arena-team");

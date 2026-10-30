@@ -130,6 +130,10 @@ const priorityLabels: Record<BuildPriority, string> = {
   skip: "재설정 비추천",
 };
 
+function buildPriorityLabel(build: OverloadBuild) {
+  return build.reviewStatus === "unavailable" ? "판단 보류" : priorityLabels[build.priority];
+}
+
 const confidenceLabels: Record<BuildConfidence, string> = {
   guide: "개별 가이드 검토",
   mechanic: "기믹 규칙 기반",
@@ -218,7 +222,7 @@ function NikkeArtwork({
           <img
             className="nikke-artwork__image"
             src={source}
-            alt={`${nikke.nameKo} 캐릭터 전신 일러스트`}
+            alt={`${nikke.nameKo} 캐릭터 이미지`}
             loading={variant === "card" ? "lazy" : "eager"}
             decoding="async"
             referrerPolicy="no-referrer"
@@ -570,7 +574,7 @@ export default function RosterArchive() {
                       <span className="card-index" aria-hidden="true">{String(index + 1).padStart(3, "0")}</span>
                       <NikkeArtwork nikke={nikke} owned={isOwned} variant="card" />
                       <span className="owned-badge"><b aria-hidden="true">✓</b>{isOwned ? "보유 중" : "미보유"}</span>
-                      <span className={`ol-rank ol-rank--${build.priority}`}>OL {priorityLabels[build.priority]}</span>
+                      <span className={`ol-rank ol-rank--${build.priority}`}>OL {buildPriorityLabel(build)}</span>
                       <span className="scan-line" aria-hidden="true" />
                     </button>
                     <div className="card-body">
@@ -750,7 +754,7 @@ export default function RosterArchive() {
 
             <div className="build-summary">
               <div className="build-meta">
-                <span className={`build-priority build-priority--${selectedBuild.priority}`}>{priorityLabels[selectedBuild.priority]}</span>
+                <span className={`build-priority build-priority--${selectedBuild.priority}`}>{buildPriorityLabel(selectedBuild)}</span>
                 <span>{selectedBuild.mode}</span>
                 <span>{reviewLabel(selectedBuild)}</span>
               </div>

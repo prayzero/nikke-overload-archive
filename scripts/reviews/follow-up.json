@@ -22,5 +22,116 @@
       "confidence": "guide",
       "reviewStatus": "reviewed"
     }
+  },
+  {
+    "name": "Guilty: Mighty Bunny",
+    "checkedAt": "2026-10-30",
+    "sources": [{ "label": "Prydwen 개별 투자·모드별 큐브 가이드", "url": "https://www.prydwen.gg/nikke/characters/guilty-mighty-bunny" }],
+    "overload": {
+      "primary": [
+        { "stat": "element", "count": 4, "grade": "ideal" },
+        { "stat": "attack", "count": 4, "grade": "ideal" },
+        { "stat": "maxAmmo", "count": 1, "grade": "ideal" }
+      ],
+      "alternatives": ["chargeSpeed", "critRate", "critDamage", "chargeDamage"],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "현재 개별 투자 표는 우월·공격력 각 4줄과 장탄 1~2줄을 제시하며, 표시는 장탄 하한 1줄입니다. 차지 속도·치명타 계열은 남은 줄의 선택지이며 차지 속도 2줄을 고정 목표로 요구하지 않습니다. 버스트의 고정 차지 시간과 일반 차지 공격을 구분합니다. 차지 대미지도 낮은 우선순위의 선택지이므로 일괄 금지하지 않습니다. PvP 차지 속도는 팀 전체의 충전 임계 조건에 맞춰 판단합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "crush",
+      "alternatives": ["resilience", "bastion", "destruction"],
+      "pvp": ["tempering", "vigor", "adjutant", "bastion", "resilience"],
+      "mode": "PvE (Engage 모드)",
+      "note": "방어력 무시 공격을 쓰는 Engage 모드에서 충분히 육성한 크러쉬를 우선 비교합니다. Stance 모드에는 같은 조건을 적용하지 않으며, 크러쉬 레벨이 크게 낮으면 렐릭 베어를 사용합니다. 장탄 OL이 많으면 택티컬 베어, 파츠를 오래 공격하는 보스는 디스트로이를 비교합니다. PvP 후보는 생존·불굴 대상 조정·팀 차지 속도 조건에 따라 별도로 고릅니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Sin: Swift Bunny",
+    "checkedAt": "2026-10-30",
+    "sources": [{ "label": "Prydwen 개별 PvE·PvP 투자 및 큐브 가이드", "url": "https://www.prydwen.gg/nikke/characters/sin-swift-bunny" }],
+    "overload": {
+      "primary": [
+        { "stat": "element", "count": 4, "grade": "ideal" },
+        { "stat": "attack", "count": 4, "grade": "ideal" },
+        { "stat": "maxAmmo", "count": 1, "grade": "ideal" }
+      ],
+      "alternatives": ["critRate", "critDamage", "chargeDamage"],
+      "avoid": [],
+      "priority": "medium",
+      "mode": "PvE",
+      "note": "PvE 표시는 우월·공격력 각 4줄과 장탄 1~2줄의 하한입니다. 남은 2~3줄은 치명타 확률·치명타 대미지·차지 대미지 중에서 비교하며 한 종류로 고정하지 않습니다. 스위프트 캐럿의 고정 차지 시간 때문에 차지 속도는 일반 공격에만 영향을 주어 기본 목표로 요구하지 않습니다. PvP는 치명타 확률 4줄을 우선하는 별도 운용이며, 공격력·우월·차지 속도는 팀 조건에 따라 선택하므로 PvE 목표와 합산하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "crush",
+      "alternatives": ["resilience", "bastion", "destruction"],
+      "pvp": ["tempering", "vigor", "adjutant", "bastion", "resilience"],
+      "mode": "PvE (Engage 모드)",
+      "note": "Engage 모드의 방어력 무시 공격에는 육성된 크러쉬가 우선 후보입니다. Stance 모드에는 이 조건을 적용하지 않습니다. 크러쉬 레벨이 크게 낮으면 렐릭 베어, 장탄 OL이 많으면 택티컬 베어, 파츠 공격 비중이 높은 보스라면 디스트로이를 비교합니다. PvP에서는 생존용 템퍼링·비거와 팀 차지 속도 임계를 위한 부스트 등을 별도로 선택합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Marian: Queen",
+    "checkedAt": "2026-10-30",
+    "sources": [
+      { "label": "nikke.gg 출시 전 초기 분석 (2026-10-28)", "url": "https://nikke.gg/marian-queen-early-analysis/" },
+      { "label": "Prydwen 스킬 자료 · 투자 가이드 미공개", "url": "https://www.prydwen.gg/nikke/characters/marian-queen" }
+    ],
+    "overload": {
+      "primary": [
+        { "stat": "element", "count": 4, "grade": "ideal" },
+        { "stat": "attack", "count": 4, "grade": "ideal" },
+        { "stat": "maxAmmo", "count": 1, "grade": "essential" }
+      ],
+      "alternatives": ["critRate"],
+      "avoid": [],
+      "priority": "high",
+      "mode": "PvE (출시 전 초기 분석)",
+      "note": "10월 28일 초기 분석의 제안으로, 출시 후 확정된 최적 세팅이 아닙니다. 우월·공격력 각 4줄과 장탄 1줄을 제시하며, 장탄은 옵션 수치 단계 Tier 11 이상이라는 조건이 있어 줄 수만 맞춰서는 충분하지 않습니다. 치명타 확률은 남은 줄의 선택지로만 제시되어 수량을 정하지 않았습니다. Prydwen 투자 표는 아직 미공개이며 PvP 분석도 대기 상태입니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "bastion",
+      "alternatives": [],
+      "pvp": [],
+      "mode": "PvE (출시 전 초기 분석)",
+      "note": "10월 28일 초기 분석은 탄환 충전용 택티컬 베어를 제안합니다. 장탄 OL 조건을 함께 확인해야 하며, 큐브 레벨별 최적값이나 무한 사격을 보장하는 결과는 제공하지 않습니다. 출시 후 확정 공략 및 PvP 추천이 아니므로 추가 검증 전 투자 판단의 참고안으로만 사용합니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Rapunzel: Sanctuary",
+    "checkedAt": "2026-10-30",
+    "sources": [{ "label": "Prydwen 스킬 자료 · 투자 가이드 미공개", "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary" }],
+    "overload": {
+      "primary": [],
+      "alternatives": [],
+      "avoid": [],
+      "priority": "skip",
+      "mode": "추천 자료 확인 중",
+      "note": "개별 OL 투자 표가 아직 공개되지 않아 목표 옵션과 줄 수를 지정하지 않습니다. 이는 재설정이 불필요하다고 검증된 판정이 아니라 추천 근거가 부족한 상태입니다. 스킬에 차지 속도 증가·감소 면역이 명시되어 있으므로 일반 로켓 런처의 차지 속도 세팅을 그대로 적용하지 않습니다.",
+      "confidence": "mechanic",
+      "reviewStatus": "unavailable"
+    },
+    "cube": {
+      "primary": null,
+      "alternatives": [],
+      "pvp": [],
+      "mode": "추천 자료 확인 중",
+      "note": "개별 큐브 투자 가이드가 아직 공개되지 않아 주력·대체·PvP 큐브를 지정하지 않습니다. 회복과 아군 지원 스킬이 확인되었더라도 그것만으로 특정 큐브가 최적이라고 판단하지 않습니다.",
+      "confidence": "mechanic",
+      "reviewStatus": "unavailable"
+    }
   }
 ]
