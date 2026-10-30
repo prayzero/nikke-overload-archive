@@ -10,6 +10,7 @@ import { chromium } from "playwright-core";
 const output = new URL("../dist/client/", import.meta.url);
 const roster = JSON.parse(await readFile(new URL("../app/roster.json", import.meta.url), "utf8"));
 const catalog = JSON.parse(await readFile(new URL("../app/arena-presets.json", import.meta.url), "utf8"));
+const calculationModel = JSON.parse(await readFile(new URL("../app/arena-model.json", import.meta.url), "utf8"));
 const html = await readFile(new URL("index.html", output), "utf8");
 const site = new URL(html.match(/rel="canonical" href="([^"]+)"/)?.[1] ?? "https://archive.test/");
 const ownedKey = "nikke-overload-archive:roster:v1";
@@ -236,4 +237,167 @@ test("mobile layout preserves five slots without horizontal overflow", async (t)
     .filter((image) => { const rect = image.getBoundingClientRect(); return rect.top < innerHeight && rect.bottom > 0; })
     .every((image) => image.complete), undefined, { timeout: 10000 }).catch(() => {});
   await page.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/mobile.png", import.meta.url)) });
+});
+
+test("calculator is opt-in, keyboard accessible, and produces disjoint teams with an explicit score basis", async (t) => {
+  const page = await session(t, { owned: roster.map(({ id }) => id) });
+  const guideMode = page.getByRole("radio", { name: "공략 조합", exact: true });
+  assert.ok(await guideMode.isChecked());
+  assert.equal(await page.locator(".arena-calculator").count(), 0);
+  assert.equal(await page.locator(".arena-review__card").count(), 2);
+  await guideMode.focus();
+  await page.keyboard.press("ArrowRight");
+  await page.locator(".arena-calculator").waitFor();
+  assert.ok(await page.getByRole("radio", { name: "자체 계산", exact: true }).isChecked());
+  assert.equal(await page.locator(".arena-review__card").count(), 0);
+  assert.equal(await page.locator(".arena-teams").count(), 0);
+  const teams = page.locator(".arena-calculator__teams .arena-calculated-team");
+  assert.equal(await teams.count(), 3);
+  const allNames = await teams.locator(".arena-member__name").allTextContents();
+  assert.equal(allNames.length, 15);
+  assert.equal(new Set(allNames).size, 15);
+  assert.ok(allNames.every((name) => roster.some(({ nameKo }) => nameKo === name)));
+  assert.match(await page.locator(".arena-calculator__notice").innerText(), /실전에서 검증하지 않은 조합/);
+  assert.match(await page.locator(".arena-calculator__notice").innerText(), /승률이나 버스트까지 걸리는 초가 아닙니다/);
+  for (let index = 0; index < 3; index++) {
+    const team = teams.nth(index);
+    assert.match(await team.locator(".arena-calculated-team__badge").innerText(), /실전 미검증/);
+    assert.equal(await team.locator(".arena-lineup > li").count(), 5);
+    const members = await team.locator(".arena-member__name").allTextContents();
+    const expectedBurst = ["1", "2", "3"].map((stage) => members.find((name) => roster.some((nikke) => nikke.nameKo === name && nikke.burst === stage)));
+    const renderedBurst = await team.locator(".arena-burst li > span:last-child").allTextContents();
+    assert.deepEqual(renderedBurst, expectedBurst, "Displayed burst follows the displayed P1 to P5 order");
+  }
+  await page.getByText("계산 방식과 한계", { exact: true }).click();
+  assert.match(await page.locator(".arena-calculator__method").innerText(), /근사 탐색/);
+  assert.match(await page.locator(".arena-calculator__formula").innerText(), /3 : 4 : 3/);
+  await teams.first().getByText("점수 근거와 니케별 기여", { exact: true }).click();
+  assert.equal(await teams.first().locator(".arena-contributions > li").count(), 5);
+  assert.match(await teams.first().locator(".arena-team__sources").innerText(), /이 5인 조합의 검증 출처는 아닙니다/);
+  await page.getByRole("radio", { name: "버스트 수급 우선", exact: true }).check();
+  assert.match(await page.locator(".arena-calculator__summary").innerText(), /버스트 수급 우선/);
+  assert.match(await page.locator(".arena-calculator__formula").innerText(), /5 : 3 : 2/);
+  await page.getByRole("radio", { name: "생존 우선", exact: true }).check();
+  assert.match(await page.locator(".arena-calculator__formula").innerText(), /2 : 3 : 5/);
+  await page.getByRole("radio", { name: "루키 1팀", exact: true }).check();
+  assert.equal(await teams.count(), 1);
+  assert.match(await page.locator(".arena-calculator__summary").innerText(), /1\s*\/ 1팀/);
+  const opener = teams.first().locator(".arena-member__button").first();
+  await opener.click();
+  await page.getByRole("dialog").waitFor();
+  await page.keyboard.press("Escape");
+  await page.getByRole("dialog").waitFor({ state: "detached" });
+  assert.ok(await opener.evaluate((element) => element === document.activeElement));
+  await guideMode.check();
+  assert.equal(await page.locator(".arena-calculator").count(), 0);
+  assert.equal(await page.locator(".arena-review__card").count(), 2);
+  assert.equal(await page.locator(".arena-teams .arena-team").count(), 3);
+});
+
+test("calculator exposes basic profiles and exclusions, and shares favorite settings with guide mode", async (t) => {
+  const favoriteProfile = calculationModel.profiles.find(({ name, favorite }) => name === "Centi" && favorite);
+  assert.ok(favoriteProfile, "Centi has a distinct favorite item contribution");
+  const favoriteNikke = roster.find(({ name }) => name === favoriteProfile.name);
+  const blockedEntry = calculationModel.excluded[0];
+  assert.ok(blockedEntry, "A conditional burst unit is explicitly excluded by the model");
+  const blockedNikke = roster.find(({ name }) => name === blockedEntry.name);
+  const basicNikke = roster.find(({ name, burst }) => ["1", "2", "3"].includes(burst)
+    && !calculationModel.profiles.some((profile) => profile.name === name)
+    && !calculationModel.excluded.some((entry) => entry.name === name));
+  assert.ok(basicNikke, "A unit without an individual profile remains visible as a basic calculation");
+  const anchors = roster.filter(({ name }) => ["Jackal", "Scarlet", "Rapunzel: Sanctuary"].includes(name));
+  const owned = [...new Set([...anchors.map(({ id }) => id), favoriteNikke.id, blockedNikke.id, basicNikke.id])];
+  assert.equal(owned.length, 6, "Exactly five eligible units and one excluded unit");
+  const page = await session(t, { owned, clipboardFails: true });
+  await page.getByRole("radio", { name: "자체 계산", exact: true }).check();
+  assert.equal(await page.locator(".arena-calculated-team").count(), 1);
+  const eligibility = page.locator(".arena-calculator__eligibility");
+  await eligibility.locator("summary").click();
+  assert.ok((await eligibility.innerText()).includes(basicNikke.nameKo));
+  assert.ok((await eligibility.innerText()).includes(blockedEntry.reason));
+  assert.match(await page.locator(".arena-calculated-team__unknown").innerText(), new RegExp(basicNikke.nameKo));
+  assert.equal(await page.locator(".arena-calculated-team__favorite").count(), 0);
+  await page.getByRole("checkbox", { name: favoriteNikke.nameKo, exact: true }).check();
+  await page.getByText("편성 조건과 약점", { exact: true }).click();
+  assert.ok((await page.locator(".arena-calculated-team__favorite").innerText()).includes(favoriteNikke.nameKo));
+  await page.getByText("점수 근거와 니케별 기여", { exact: true }).click();
+  const contribution = page.locator(".arena-contributions > li").filter({ has: page.getByText(favoriteNikke.nameKo, { exact: true }) });
+  assert.match(await contribution.innerText(), /애장품 반영/);
+  await page.getByRole("button", { name: /계산 1팀 복사/ }).click();
+  const copy = await page.getByRole("textbox", { name: "직접 복사할 자체 계산 편성", exact: true }).inputValue();
+  assert.ok(copy.includes(`애장품 최종 단계: ${favoriteNikke.nameKo}`));
+  assert.ok(copy.includes(`무기·직군 기본값 적용: ${basicNikke.nameKo}`));
+  await page.getByRole("radio", { name: "공략 조합", exact: true }).check();
+  assert.ok(await page.getByRole("checkbox", { name: favoriteNikke.nameKo, exact: true }).isChecked());
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.getByRole("radio", { name: "공략 조합", exact: true }).waitFor();
+  assert.ok(await page.getByRole("radio", { name: "공략 조합", exact: true }).isChecked());
+  await page.locator(".arena-readiness small").filter({ hasText: "보유" }).waitFor();
+  assert.ok(await page.getByRole("checkbox", { name: favoriteNikke.nameKo, exact: true }).isChecked());
+});
+
+test("calculated copy stays separate from guide copy and keeps the unverified warning", async (t) => {
+  const page = await session(t, { owned: fixtureIds, clipboardFails: true });
+  await page.getByRole("radio", { name: "자체 계산", exact: true }).check();
+  await page.getByRole("radio", { name: "루키 1팀", exact: true }).check();
+  await page.getByRole("button", { name: /계산 1팀 복사/ }).click();
+  const fallback = page.getByRole("textbox", { name: "직접 복사할 자체 계산 편성", exact: true });
+  const text = await fallback.inputValue();
+  assert.match(text, /루키 아레나 · 자체 계산 1\/1팀/);
+  assert.match(text, /실전 미검증 조합/);
+  assert.match(text, /승률·버스트 시간이 아닙니다/);
+  assert.equal((text.match(/\/ P5 /g) ?? []).length, 1);
+  assert.equal((text.match(/예상 첫 버스트:/g) ?? []).length, 1);
+  await page.getByRole("radio", { name: "버스트 수급 우선", exact: true }).check();
+  assert.equal(await fallback.count(), 0, "Changing calculation settings removes stale copy feedback");
+  await page.getByRole("button", { name: /계산 1팀 복사/ }).click();
+  assert.match(await fallback.inputValue(), /버스트 수급 우선/);
+  await page.getByRole("radio", { name: "공략 조합", exact: true }).check();
+  assert.equal(await fallback.count(), 0);
+  await page.getByRole("button", { name: /추천 3팀 복사/ }).click();
+  const guideText = await page.getByRole("textbox", { name: "직접 복사할 추천 편성", exact: true }).inputValue();
+  assert.match(guideText, /공략 확인/);
+  assert.doesNotMatch(guideText, /자체 계산|자체 상대 점수/);
+});
+
+test("calculator never fills missing ownership and remains usable at 320 pixels", async (t) => {
+  const owned = roster.filter(({ name }) => ["Jackal", "Centi", "Scarlet", "Rapunzel: Sanctuary"].includes(name)).map(({ id }) => id);
+  assert.equal(owned.length, 4);
+  const page = await session(t, { owned, viewport: { width: 320, height: 1000 } });
+  await page.getByRole("radio", { name: "자체 계산", exact: true }).check();
+  assert.equal(await page.locator(".arena-calculated-team").count(), 0);
+  assert.match(await page.locator(".arena-calculator").innerText(), /계산 조건을 만족하는 5인 팀을 찾지 못했습니다/);
+  assert.ok(await page.getByRole("button", { name: /계산 0팀 복사/ }).isDisabled());
+  assert.equal(await page.locator(".arena-review").count(), 0);
+  await page.getByRole("radio", { name: "루키 1팀", exact: true }).check();
+  assert.match(await page.locator(".arena-calculator__summary").innerText(), /0\s*\/ 1팀/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+  await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill("2B");
+  await page.getByRole("button", { name: "2B 보유 등록", exact: true }).click();
+  await page.locator(".arena-calculated-team").waitFor();
+  assert.equal(await page.locator(".arena-calculated-team .arena-member").count(), 5);
+  assert.ok((await page.locator(".arena-calculated-team .arena-member__name").allTextContents()).includes("2B"));
+  await page.getByRole("button", { name: "2B 보유 해제", exact: true }).click();
+  await page.locator(".arena-calculated-team").waitFor({ state: "detached" });
+  assert.ok(await page.getByRole("button", { name: /계산 0팀 복사/ }).isDisabled());
+});
+
+test("calculated mobile cards preserve five slots and disclose their score before copying", async (t) => {
+  const page = await session(t, { owned: fixtureIds, viewport: { width: 375, height: 900 } });
+  await page.getByRole("radio", { name: "자체 계산", exact: true }).check();
+  assert.equal(await page.locator(".arena-calculated-team").count(), 3);
+  for (const width of [375, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    const layout = await page.locator(".arena-calculator").evaluate((section) => ({
+      overflow: document.documentElement.scrollWidth > innerWidth,
+      lineups: [...section.querySelectorAll(".arena-lineup")].map((lineup) => ({ count: lineup.children.length, columns: getComputedStyle(lineup).gridTemplateColumns.split(" ").length })),
+    }));
+    assert.equal(layout.overflow, false, `No calculated layout overflow at ${width}px`);
+    assert.ok(layout.lineups.every(({ count, columns }) => count === 5 && columns === 5));
+  }
+  const team = page.locator(".arena-calculated-team").first();
+  await team.getByText("점수 근거와 니케별 기여", { exact: true }).click();
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+  await team.scrollIntoViewIfNeeded();
+  await team.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/calculated-mobile.png", import.meta.url)) });
 });

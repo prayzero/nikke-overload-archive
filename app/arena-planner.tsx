@@ -2,14 +2,21 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { buildArenaPlan, type ArenaCandidate, type ArenaCatalog, type ArenaNikke } from "./arena-engine.mjs";
+import type { ArenaCalculationModel } from "./arena-calculator.mjs";
+import ArenaCalculator from "./arena-calculator-panel";
 import arenaJson from "./arena-presets.json";
+import modelJson from "./arena-model.json";
 import "./arena-planner.css";
 
 const catalog = arenaJson as ArenaCatalog;
+const calculationModel = modelJson as ArenaCalculationModel;
 const STORAGE_KEY = "nikke-overload-archive:arena:v1";
 const PAGE_SIZE = 3;
 const sourceById = new Map(catalog.sources.map((source) => [source.id, source]));
-const favoriteNames = new Set(catalog.presets.flatMap((preset) => preset.requiresFavorite ?? []));
+const favoriteNames = new Set([
+  ...catalog.presets.flatMap((preset) => preset.requiresFavorite ?? []),
+  ...calculationModel.profiles.filter((profile) => profile.requiresFavorite || profile.favorite).map((profile) => profile.name),
+]);
 
 type ArenaPlannerProps = {
   roster: ArenaNikke[];
@@ -131,6 +138,7 @@ function CandidateGroup({ title, description, candidates, scope, onViewNikke }: 
 }
 
 export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }: ArenaPlannerProps) {
+  const [mode, setMode] = useState<"guide" | "calculated">("guide");
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [favoriteHydrated, setFavoriteHydrated] = useState(false);
   const [storageMessage, setStorageMessage] = useState("");
@@ -202,19 +210,32 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
     <section className="arena-planner" id="arena" aria-labelledby="arena-title">
       <div className="arena-planner__heading">
         <div>
-          <p className="eyebrow"><span>SP ARENA</span> / TEAM PLANNER</p>
-          <h2 id="arena-title">내 니케로 짜는<br />스페셜 아레나</h2>
-          <p className="arena-planner__intro">보유 목록과 공략을 대조해, 니케가 겹치지 않는 최대 3팀을 찾습니다.</p>
+          <p className="eyebrow"><span>{mode === "guide" ? "SP ARENA" : "ARENA LAB"}</span> / TEAM PLANNER</p>
+          <h2 id="arena-title">내 니케로 짜는<br />{mode === "guide" ? "스페셜 아레나" : "아레나 자체 계산"}</h2>
+          <p className="arena-planner__intro">{mode === "guide" ? "보유 목록과 공략을 대조해, 니케가 겹치지 않는 최대 3팀을 찾습니다." : "같은 보유 목록으로 루키 1팀 또는 스페셜 아레나 3팀을 계산합니다. 공략에서 확인한 편성과 구분해 확인해 주세요."}</p>
         </div>
         <div className="arena-readiness" role="status" aria-live="polite">
-          <span>중복 없는 추천팀</span><p><strong>{ready ? String(plan.teams.length).padStart(2, "0") : "—"}</strong><span> / 03</span></p>
-          <small>{ready ? "보유 " + plan.ownedCount + "명 · 조건 충족 " + plan.availableCount + "조합" : "이 기기의 보유 목록을 불러오는 중"}</small>
+          <span>{mode === "guide" ? "중복 없는 추천팀" : "자체 계산 모드"}</span><p><strong>{mode === "guide" ? ready ? String(plan.teams.length).padStart(2, "0") : "—" : "β"}</strong>{mode === "guide" && <span> / 03</span>}</p>
+          <small>{ready ? "보유 " + plan.ownedCount + "명 · " + (mode === "guide" ? "조건 충족 " + plan.availableCount + "조합" : "실전 검증 전") : "이 기기의 보유 목록을 불러오는 중"}</small>
         </div>
       </div>
       <div className="arena-briefing">
         <p><strong>P1 → P5</strong><span>게임의 편성 화면 순서입니다. 니케를 누르면 OL·큐브 세팅을 확인할 수 있습니다.</span></p>
         <p>상대 편성과 육성 상태를 입력하지 않은 추천입니다. 공격·방어 배치는 상대에 맞춰 조정해 주세요.</p>
       </div>
+      <fieldset className="arena-mode">
+        <legend>추천 방식</legend>
+        <div className="arena-mode__options">
+          <label className={mode === "guide" ? "arena-mode__option arena-mode__option--selected" : "arena-mode__option"}>
+            <input type="radio" name="arena-mode" value="guide" aria-label="공략 조합" checked={mode === "guide"} onChange={() => setMode("guide")} />
+            <span><strong>공략 조합</strong><small>공개 공략의 5인 편성</small></span>
+          </label>
+          <label className={mode === "calculated" ? "arena-mode__option arena-mode__option--selected" : "arena-mode__option"}>
+            <input type="radio" name="arena-mode" value="calculated" aria-label="자체 계산" checked={mode === "calculated"} onChange={() => setMode("calculated")} />
+            <span><strong>자체 계산 <b>실험</b></strong><small>보유 니케로 새 조합 탐색</small></span>
+          </label>
+        </div>
+      </fieldset>
       {!ready ? (
         <div className="arena-empty" role="status"><span className="arena-empty__code" aria-hidden="true">SYNC</span><h3>보유 정보와 애장품 설정을 불러오고 있습니다.</h3></div>
       ) : plan.ownedCount === 0 ? (
@@ -225,7 +246,7 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
         </div>
       ) : (
         <>
-          {plan.pendingOwned.length > 0 && (
+          {mode === "guide" && plan.pendingOwned.length > 0 && (
             <section className="arena-review" aria-labelledby="arena-review-title">
               <h3 id="arena-review-title">보유 니케의 편성 검토</h3>
               <p className="arena-review__intro">아래 니케는 보유 목록에 정상 반영돼 있습니다. 아레나용 5인 조합이 확인되지 않아 추천팀 수에는 포함하지 않습니다.</p>
@@ -261,7 +282,7 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
             <div className="arena-favorites">
               <fieldset>
                 <legend>애장품 최종 단계 완료</legend>
-                <p id="arena-favorite-help">완료한 니케만 체크해 주세요. 일부 공략의 최소 단계보다 보수적으로 적용한 조건이며, 체크하면 애장품 전제 조합에 포함됩니다.</p>
+                <p id="arena-favorite-help">완료한 니케만 체크해 주세요. 일부 공략의 최소 단계보다 보수적으로 적용한 조건입니다. 두 모드가 같은 설정을 사용하며, 자체 계산에서는 해당 애장품 효과나 편성 조건에 반영됩니다.</p>
                 <div className="arena-favorites__options">
                   {eligibleFavorites.map((nikke) => (
                     <label key={nikke.id} className={"arena-favorite" + (favoriteIds.has(nikke.id) ? " arena-favorite--checked" : "")}>
@@ -275,6 +296,7 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
             </div>
           )}
           {storageMessage && <p className="arena-storage-message" role="status">{storageMessage}</p>}
+          {mode === "calculated" ? <ArenaCalculator roster={roster} ownedIds={ownedIds} favoriteIds={favoriteIds} model={calculationModel} onViewNikke={onViewNikke} /> : <>
           {plan.teams.length > 0 ? (
             <div className="arena-teams" aria-label="중복 없이 함께 편성할 추천팀">
               {plan.teams.map((team, index) => <CandidateCard key={team.id} team={team} label={"추천 " + String(index + 1).padStart(2, "0") + "팀"} scope="selected" onViewNikke={onViewNikke} />)}
@@ -297,9 +319,10 @@ export default function ArenaPlanner({ roster, ownedIds, hydrated, onViewNikke }
           </div>
           <p className="arena-copy-status" role="status" aria-live="polite">{currentCopyResult ? currentCopyResult.success ? "추천 " + plan.teams.length + "팀을 복사했습니다." : "자동 복사를 사용할 수 없습니다. 아래 텍스트를 선택해 직접 복사해 주세요." : ""}</p>
           {currentCopyResult && !currentCopyResult.success && <textarea className="arena-copy-fallback" aria-label="직접 복사할 추천 편성" readOnly rows={9} value={copyText} onFocus={(event) => event.currentTarget.select()} />}
+          </>}
         </>
       )}
-      <footer className="arena-planner__footer"><span>공략에서 확인한 조합 안에서 추천합니다.</span><time dateTime={catalog.checkedAt}>확인일 {catalog.checkedAt.replaceAll("-", ".")}</time></footer>
+      {mode === "guide" && <footer className="arena-planner__footer"><span>공략에서 확인한 조합 안에서 추천합니다.</span><time dateTime={catalog.checkedAt}>확인일 {catalog.checkedAt.replaceAll("-", ".")}</time></footer>}
     </section>
   );
 }
