@@ -1,0 +1,1176 @@
+{
+  "checkedAt": "2026-10-30",
+  "modelKind": "relative-heuristic-v1",
+  "description": "스킬·공개 공략을 참고해 편집한 0~5 상대 가중치입니다. 공식 성능 수치, 승률, 실제 버스트 도달 시간, 전투 시뮬레이션 결과가 아닙니다. 전원 생존 상태에서 첫 자동 버스트와 그 직후의 역할을 비교하며, 육성·전투력·상대 편성·정확한 표적과 후속 회전은 계산하지 않습니다. 공략 프리셋과 별개로 보유 니케에서 탐색하는 실험적 후보입니다.",
+  "sources": [
+    {
+      "id": "pvp-burst",
+      "title": "Prydwen 아레나 버스트 수급 원리",
+      "url": "https://www.prydwen.gg/nikke/guides/pvp-burst"
+    },
+    {
+      "id": "pvp-mechanics",
+      "title": "Prydwen 아레나 자동 전투 원리",
+      "url": "https://www.prydwen.gg/nikke/guides/pvp-mechanics"
+    },
+    {
+      "id": "alice",
+      "title": "Prydwen Alice 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/alice"
+    },
+    {
+      "id": "anis",
+      "title": "Prydwen Anis 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/anis"
+    },
+    {
+      "id": "sparkling-summer-anis",
+      "title": "Prydwen Anis: Sparkling Summer 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/sparkling-summer-anis"
+    },
+    {
+      "id": "anis-star",
+      "title": "Prydwen Anis: Star 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/anis-star"
+    },
+    {
+      "id": "miracle-fairy-anne",
+      "title": "Prydwen Anne: Miracle Fairy 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/miracle-fairy-anne"
+    },
+    {
+      "id": "biscuit",
+      "title": "Prydwen Biscuit 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/biscuit"
+    },
+    {
+      "id": "blanc",
+      "title": "Prydwen Blanc 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/blanc"
+    },
+    {
+      "id": "centi",
+      "title": "Prydwen Centi 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/centi"
+    },
+    {
+      "id": "cinderella",
+      "title": "Prydwen Cinderella 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/cinderella"
+    },
+    {
+      "id": "drake",
+      "title": "Prydwen Drake 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/drake"
+    },
+    {
+      "id": "emilia",
+      "title": "Prydwen Emilia 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/emilia"
+    },
+    {
+      "id": "grave",
+      "title": "Prydwen Grave 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/grave"
+    },
+    {
+      "id": "helm",
+      "title": "Prydwen Helm 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/helm"
+    },
+    {
+      "id": "jackal",
+      "title": "Prydwen Jackal 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/jackal"
+    },
+    {
+      "id": "laplace",
+      "title": "Prydwen Laplace 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/laplace"
+    },
+    {
+      "id": "laplace-ultimate-hero",
+      "title": "Prydwen Laplace: Ultimate Hero 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/laplace-ultimate-hero"
+    },
+    {
+      "id": "siren",
+      "title": "Prydwen Little Mermaid 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/siren"
+    },
+    {
+      "id": "maiden-ice-rose",
+      "title": "Prydwen Maiden: Ice Rose 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/maiden-ice-rose"
+    },
+    {
+      "id": "makima",
+      "title": "Prydwen Makima 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/makima"
+    },
+    {
+      "id": "marian-queen",
+      "title": "Prydwen Marian: Queen 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/marian-queen"
+    },
+    {
+      "id": "miranda",
+      "title": "Prydwen Miranda 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/miranda"
+    },
+    {
+      "id": "moran",
+      "title": "Prydwen Moran 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/moran"
+    },
+    {
+      "id": "nero",
+      "title": "Prydwen Nero 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/nero"
+    },
+    {
+      "id": "noah",
+      "title": "Prydwen Noah 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/noah"
+    },
+    {
+      "id": "noir",
+      "title": "Prydwen Noir 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/noir"
+    },
+    {
+      "id": "noise",
+      "title": "Prydwen Noise 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/noise"
+    },
+    {
+      "id": "pepper",
+      "title": "Prydwen Pepper 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/pepper"
+    },
+    {
+      "id": "power",
+      "title": "Prydwen Power 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/power"
+    },
+    {
+      "id": "privaty-unkind-maid",
+      "title": "Prydwen Privaty: Unkind Maid 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/privaty-unkind-maid"
+    },
+    {
+      "id": "rapunzel",
+      "title": "Prydwen Rapunzel 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/rapunzel"
+    },
+    {
+      "id": "rapunzel-sanctuary",
+      "title": "Prydwen Rapunzel: Sanctuary 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary"
+    },
+    {
+      "id": "rei-ayanami-tentative-name",
+      "title": "Prydwen Rei Ayanami (Tentative Name) 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/rei-ayanami-tentative-name"
+    },
+    {
+      "id": "rosanna",
+      "title": "Prydwen Rosanna 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/rosanna"
+    },
+    {
+      "id": "rumani",
+      "title": "Prydwen Rumani 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/rumani"
+    },
+    {
+      "id": "scarlet",
+      "title": "Prydwen Scarlet 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/scarlet"
+    },
+    {
+      "id": "scarlet-black-shadow",
+      "title": "Prydwen Scarlet: Black Shadow 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/scarlet-black-shadow"
+    },
+    {
+      "id": "snow-white-heavy-arms",
+      "title": "Prydwen Snow White: Heavy Arms 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/snow-white-heavy-arms"
+    },
+    {
+      "id": "soda",
+      "title": "Prydwen Soda 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/soda"
+    },
+    {
+      "id": "soda-twinkling-bunny",
+      "title": "Prydwen Soda: Twinkling Bunny 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/soda-twinkling-bunny"
+    },
+    {
+      "id": "trina",
+      "title": "Prydwen Trina 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/trina"
+    },
+    {
+      "id": "centi-treasure",
+      "title": "Prydwen centi 애장품 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/centi-treasure"
+    },
+    {
+      "id": "helm-treasure",
+      "title": "Prydwen helm 애장품 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/helm-treasure"
+    },
+    {
+      "id": "laplace-treasure",
+      "title": "Prydwen laplace 애장품 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/laplace-treasure"
+    },
+    {
+      "id": "miranda-treasure",
+      "title": "Prydwen miranda 애장품 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/miranda-treasure"
+    },
+    {
+      "id": "moran-treasure",
+      "title": "Prydwen moran 애장품 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/moran-treasure"
+    },
+    {
+      "id": "rosanna-treasure",
+      "title": "Prydwen rosanna 애장품 스킬·공략",
+      "url": "https://www.prydwen.gg/nikke/characters/rosanna-treasure"
+    },
+    {
+      "id": "tia",
+      "title": "Prydwen tia 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/tia"
+    },
+    {
+      "id": "winter-shopper-rupee",
+      "title": "Prydwen winter-shopper-rupee 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/winter-shopper-rupee"
+    },
+    {
+      "id": "alice-wonderland-bunny",
+      "title": "Prydwen alice-wonderland-bunny 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/alice-wonderland-bunny"
+    },
+    {
+      "id": "avistar",
+      "title": "Prydwen avistar 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/avistar"
+    },
+    {
+      "id": "red-hood",
+      "title": "Prydwen red-hood 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/red-hood"
+    },
+    {
+      "id": "rapi-red-hood",
+      "title": "Prydwen rapi-red-hood 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/rapi-red-hood"
+    },
+    {
+      "id": "viper-treasure",
+      "title": "Prydwen viper-treasure 특수 버스트 스킬",
+      "url": "https://www.prydwen.gg/nikke/characters/viper-treasure"
+    }
+  ],
+  "rules": [
+    {
+      "id": "automatic-burst-order",
+      "note": "자동 버스트는 단계별로 왼쪽에 있는 사용 가능한 니케가 우선합니다. 기본 경로 B1→B2→B3가 실제로 이어지는 조합만 평가합니다.",
+      "sourceIds": [
+        "pvp-burst"
+      ]
+    },
+    {
+      "id": "active-burst-only",
+      "note": "비버스트 효과는 자신의 버스트 없이 작동하는 일반·조건부 스킬입니다. 자신의 버스트가 필요한 공격·회복·무적은 실제 첫 버스트 사용자에게만 가산합니다.",
+      "sourceIds": [
+        "noah",
+        "blanc",
+        "pvp-burst"
+      ]
+    },
+    {
+      "id": "relative-generation",
+      "note": "같은 무기라도 캐릭터·장전 방식·추가 타격의 수급이 다릅니다. 적·엄폐물·빗나감·피격·큐브·차지 투자를 재현하지 않으므로 수급 점수를 초나 RL 발수로 환산하지 않습니다.",
+      "sourceIds": [
+        "pvp-burst"
+      ]
+    },
+    {
+      "id": "conservative-fallback",
+      "note": "개별 프로필이 없는 일반 단계 니케는 무기별 낮은 기본 수급만 사용합니다. 무기 정보만으로 클립식 여부나 실제 공격 간격을 추정하지 않으며, 미검토 후보로 표시합니다.",
+      "sourceIds": [
+        "pvp-burst"
+      ]
+    },
+    {
+      "id": "first-engagement",
+      "note": "첫 교전을 비교합니다. 사망·최대 중첩·전투 종료 후 효과를 미리 보상하지 않고, 조건을 계산할 수 없는 효과는 보수적으로 낮추거나 0으로 둡니다. 부활 효율이나 두 번째 버스트 지속성은 평가하지 않습니다.",
+      "sourceIds": [
+        "rapunzel-sanctuary",
+        "rosanna",
+        "grave"
+      ]
+    },
+    {
+      "id": "conditional-protection",
+      "note": "비스킷의 방어형 보호는 자신을 제외한 방어형 아군이 있을 때만 반영합니다. 정확한 저체력 발동 시점과 보호 성공 여부는 계산하지 않습니다.",
+      "sourceIds": [
+        "biscuit"
+      ]
+    },
+    {
+      "id": "position-limits",
+      "note": "P1 배치는 생존 역할 점수에 따른 편성 편의입니다. 상대의 도발·무기·엄폐·자리별 표적 규칙을 시뮬레이션한 최적 배치가 아닙니다.",
+      "sourceIds": [
+        "pvp-mechanics",
+        "noah",
+        "noise"
+      ]
+    },
+    {
+      "id": "favorite-state",
+      "note": "애장품 추가 점수는 최종 단계 확인 시에만 적용합니다. 중간 단계와 미확인 니케는 기본 프로필을 사용하므로 실제 효과와 차이가 날 수 있습니다.",
+      "sourceIds": [
+        "centi-treasure",
+        "helm-treasure",
+        "viper-treasure"
+      ]
+    },
+    {
+      "id": "solo-b1-anis-star",
+      "note": "아니스: 스타는 다른 B1이 없는 경우만 지원합니다. 다른 B1이 있을 때의 재진입 상태를 일반 B1처럼 계산하지 않습니다.",
+      "sourceIds": [
+        "anis-star"
+      ]
+    },
+    {
+      "id": "new-unit-limits",
+      "note": "마리안: 퀸과 라푼젤: 생츄어리는 출시 초기 스킬에서 확인한 역할만 보수적으로 반영합니다. 생성 후보를 검증된 아레나 공략 편성이나 실전 우위로 해석하지 않습니다.",
+      "sourceIds": [
+        "marian-queen",
+        "rapunzel-sanctuary"
+      ]
+    }
+  ],
+  "weaponGeneration": {
+    "RL": 1,
+    "SG": 1,
+    "SR": 1,
+    "AR": 0,
+    "SMG": 0,
+    "MG": 0
+  },
+  "profiles": [
+    {
+      "name": "Alice",
+      "burstStage": 3,
+      "generation": 2,
+      "passiveOffense": 2,
+      "burstOffense": 4,
+      "passiveSurvival": 1,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "자신의 버스트에서 차지 속도·공격력을 높이는 지속 단일 딜러입니다. 비버스트 관통과 체력 조건 흡혈을 낮게 반영했습니다.",
+        "자동 전투에서는 수동 연사 성능을 가정하지 않습니다. 방어형 보호·불굴·도발에 막힐 수 있습니다."
+      ],
+      "sourceIds": [
+        "alice"
+      ]
+    },
+    {
+      "name": "Anis",
+      "burstStage": 2,
+      "generation": 5,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 1,
+      "burstRule": "standard",
+      "notes": [
+        "클립 RL의 높은 수급을 중심으로 평가했습니다. 느린 방어·공유 효과가 첫 버스트 전에 작동한다고 가정하지 않습니다.",
+        "SR의 전투력과 실제 육성 차이는 점수에 포함하지 않았습니다."
+      ],
+      "sourceIds": [
+        "anis"
+      ]
+    },
+    {
+      "name": "Anis: Sparkling Summer",
+      "burstStage": 3,
+      "generation": 2,
+      "passiveOffense": 3,
+      "burstOffense": 3,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "마지막 탄 추가 공격은 자신의 버스트 밖에서도 작동하며, 자신의 버스트는 장탄 감소로 발동을 돕습니다.",
+        "장탄 증가 동료·장비는 마지막 탄 주기를 늦춥니다. 강한 1발 운용에는 버스트 9레벨 등 실제 투자를 확인하셔야 합니다."
+      ],
+      "sourceIds": [
+        "sparkling-summer-anis"
+      ]
+    },
+    {
+      "name": "Anis: Star",
+      "burstStage": 1,
+      "generation": 4,
+      "passiveOffense": 2,
+      "burstOffense": 3,
+      "passiveSurvival": 0,
+      "burstSurvival": 1,
+      "tank": 2,
+      "burstRule": "sole-b1",
+      "notes": [
+        "다른 B1이 없는 조건만 지원합니다. 다른 B1과 함께할 때의 재진입·회복 상태는 이 모델에서 사용하지 않습니다.",
+        "시작 시 버스트 게이지 증가와 풀 차지 추가 공격을 수급·공격의 상대 평가에 반영했습니다. 아군 방어력 비교 조건의 폭발 강화는 가산하지 않았습니다."
+      ],
+      "sourceIds": [
+        "anis-star"
+      ]
+    },
+    {
+      "name": "Anne: Miracle Fairy",
+      "burstStage": 2,
+      "generation": 2,
+      "passiveOffense": 0,
+      "burstOffense": 0,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "버스트의 공격력 증가·회복·부활 대상은 공격형입니다. 해당 대상과 전투 불능 여부를 계산하지 않아 이 효과의 점수는 0으로 두었습니다.",
+        "지원형 흡혈·체력 조건 회복량 변경도 보장하지 않습니다. 공격형 딜러 보조라는 역할을 직접 확인해 사용하셔야 합니다."
+      ],
+      "sourceIds": [
+        "miracle-fairy-anne"
+      ]
+    },
+    {
+      "name": "Biscuit",
+      "burstStage": 2,
+      "generation": 2,
+      "passiveOffense": 0,
+      "burstOffense": 0,
+      "passiveSurvival": 4,
+      "burstSurvival": 1,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "체력이 낮아진 방어형의 무적·회복을 보호 역할로 반영합니다. 자신을 제외한 방어형 동료가 없으면 비버스트 보호 점수를 부여하지 않습니다.",
+        "자신의 버스트는 엄폐물 복구와 지원형 공격·흡혈 효과입니다. 버스트를 쓰지 않으면 이 효과를 가산하지 않습니다."
+      ],
+      "sourceIds": [
+        "biscuit"
+      ],
+      "survivalRequiresClass": "defender"
+    },
+    {
+      "name": "Blanc",
+      "burstStage": 2,
+      "generation": 0,
+      "passiveOffense": 0,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 5,
+      "tank": 2,
+      "burstRule": "standard",
+      "notes": [
+        "자신의 버스트로 아군 회복, 자신을 제외한 최저 체력 아군의 불굴, 적 받는 피해 증가를 제공합니다.",
+        "불굴이 의도한 딜러에게 갈지는 실제 체력 순서에 달렸습니다. 첫 버스트만 평가하므로 누아르 동반에 따른 후속 쿨타임 단축은 점수 밖입니다."
+      ],
+      "sourceIds": [
+        "blanc"
+      ]
+    },
+    {
+      "name": "Centi",
+      "burstStage": 2,
+      "generation": 5,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 1,
+      "burstSurvival": 0,
+      "tank": 1,
+      "burstRule": "standard",
+      "notes": [
+        "기본형은 높은 수급과 주기적 공용 보호막을 평가했습니다. 시작부터 보호막이 있다고 가정하지 않습니다.",
+        "최종 애장품은 시작 5초간 비축·회복과 버스트 회복을 추가합니다. 큰 한 방을 무조건 막는 무적으로 취급하지 않습니다."
+      ],
+      "sourceIds": [
+        "centi",
+        "centi-treasure"
+      ],
+      "favorite": {
+        "passiveSurvival": 4,
+        "burstSurvival": 3
+      }
+    },
+    {
+      "name": "Cinderella",
+      "burstStage": 3,
+      "generation": 2,
+      "passiveOffense": 2,
+      "burstOffense": 5,
+      "passiveSurvival": 2,
+      "burstSurvival": 0,
+      "tank": 2,
+      "burstRule": "standard",
+      "notes": [
+        "분신과 체력 기반 공격을 가진 방어형 B3입니다. 버스트의 연속 공격은 표적이 분산될 수 있습니다.",
+        "RL 표기만으로 클립 RL급 수급을 주지 않았습니다. 분신·도발·상대 무적과 실제 표적 분배는 시뮬레이션하지 않습니다."
+      ],
+      "sourceIds": [
+        "cinderella"
+      ]
+    },
+    {
+      "name": "Drake",
+      "burstStage": 3,
+      "generation": 4,
+      "passiveOffense": 2,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "클립 SG 수급, 타격 누적 추가 공격과 풀 버스트 아군 공격 보조를 반영한 기본형 평가입니다.",
+        "산탄은 상대 자칼의 수급도 도울 수 있습니다. 애장품의 별도 강화는 이번 프로필에 포함하지 않았습니다."
+      ],
+      "sourceIds": [
+        "drake"
+      ]
+    },
+    {
+      "name": "Emilia",
+      "burstStage": 3,
+      "generation": 4,
+      "passiveOffense": 2,
+      "burstOffense": 5,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지 추가 타격과 넓은 폭발이 있는 수급·공격 겸용 후보입니다. 버스트는 느리게 충전하는 큰 범위 공격입니다.",
+        "발사까지 보호가 필요하며, 차지·장탄·상대 무적에 따라 결과가 달라집니다. 정해진 초나 무적 돌파 성공을 보장하지 않습니다."
+      ],
+      "sourceIds": [
+        "emilia"
+      ]
+    },
+    {
+      "name": "Grave",
+      "burstStage": 2,
+      "generation": 0,
+      "passiveOffense": 1,
+      "burstOffense": 3,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "첫 버스트는 아군 공격 대미지·관통 피해를 강화하는 공격 보조로 평가합니다.",
+        "자가 회복과 수급 강화는 자신의 버스트 상태 종료 후 조건이므로 첫 수급·비버스트 생존에 가산하지 않았습니다. 장탄 증가가 마지막 탄 딜러와 충돌할 수 있습니다."
+      ],
+      "sourceIds": [
+        "grave"
+      ]
+    },
+    {
+      "name": "Helm",
+      "burstStage": 3,
+      "generation": 1,
+      "passiveOffense": 1,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 2,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "기본형은 버스트 단일 공격과 아군 흡혈, 풀 버스트 공격 보조를 구분했습니다.",
+        "최종 애장품은 풀 차지마다 게이지 증가·회복과 추가 타격이 생겨 수급·비버스트 역할이 크게 달라집니다."
+      ],
+      "sourceIds": [
+        "helm",
+        "helm-treasure"
+      ],
+      "favorite": {
+        "generation": 5,
+        "passiveOffense": 3,
+        "burstOffense": 4,
+        "passiveSurvival": 2
+      }
+    },
+    {
+      "name": "Jackal",
+      "burstStage": 1,
+      "generation": 5,
+      "passiveOffense": 0,
+      "burstOffense": 0,
+      "passiveSurvival": 3,
+      "burstSurvival": 1,
+      "tank": 2,
+      "burstRule": "standard",
+      "notes": [
+        "클립 RL 수급과 시작 시 높은 공격력 아군 둘에게 거는 피해 공유를 반영했습니다. 피격 누적에 따른 추가 수급량은 고정하지 않습니다.",
+        "버스트의 공격 강화는 ‘적 1기’ 대상 스킬 조건이 있어 일반 광역 딜러 공격 점수에 넣지 않았습니다. 링크 대상은 실제 공격력에 좌우됩니다."
+      ],
+      "sourceIds": [
+        "jackal"
+      ]
+    },
+    {
+      "name": "Laplace",
+      "burstStage": 3,
+      "generation": 2,
+      "passiveOffense": 1,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "기본형은 마지막 탄 추가 공격과 관통 버스트를 보수적으로 평가했습니다.",
+        "최종 애장품은 추가 타격이 풀 차지 조건으로 바뀌어 자동 수급과 공격이 개선됩니다. 누적 최대 상태와 보스 부위 효과는 가정하지 않습니다."
+      ],
+      "sourceIds": [
+        "laplace",
+        "laplace-treasure"
+      ],
+      "favorite": {
+        "generation": 4,
+        "passiveOffense": 2,
+        "burstOffense": 3
+      }
+    },
+    {
+      "name": "Laplace: Ultimate Hero",
+      "burstStage": 3,
+      "generation": 2,
+      "passiveOffense": 2,
+      "burstOffense": 5,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "체력 기반 공격력과 강한 전체 공격 버스트를 가진 공격형입니다. 첫 버스트 화력을 중심으로 평가합니다.",
+        "장시간 축적하는 오버 에너지의 최대 보너스는 첫 교전에 가산하지 않았습니다. 무기 전환 이후 수급을 정확히 예측하지 않습니다."
+      ],
+      "sourceIds": [
+        "laplace-ultimate-hero"
+      ]
+    },
+    {
+      "name": "Little Mermaid",
+      "burstStage": 1,
+      "generation": 0,
+      "passiveOffense": 2,
+      "burstOffense": 1,
+      "passiveSurvival": 1,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "일반 공격 누적 기절로 상대 버스트 진행을 방해할 가능성과 공격 보조를 낮게 반영했습니다.",
+        "아군의 총 탄 소모량 조건 게이지 충전은 조합·발사 속도가 필요하므로 첫 수급에 가산하지 않습니다. 기절의 정확한 대상·시점은 계산하지 않습니다."
+      ],
+      "sourceIds": [
+        "siren"
+      ]
+    },
+    {
+      "name": "Maiden: Ice Rose",
+      "burstStage": 3,
+      "generation": 3,
+      "passiveOffense": 2,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 1,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지 추가 공격으로 수급과 비버스트 공격을 보조합니다. MP를 소비하는 버스트는 단일 표적 공격입니다.",
+        "첫 버스트에서 장기전 최대 MP·최대 체력 중첩을 가정하지 않습니다. 전기 아군 전용 보조를 모든 팀에 일반화하지 않습니다."
+      ],
+      "sourceIds": [
+        "maiden-ice-rose"
+      ]
+    },
+    {
+      "name": "Makima",
+      "burstStage": 2,
+      "generation": 0,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 3,
+      "burstSurvival": 1,
+      "tank": 4,
+      "burstRule": "standard",
+      "notes": [
+        "치명상에서 발동하는 1회 불굴을 비버스트 생존으로, 자신의 버스트 흡혈을 별도 효과로 나눴습니다.",
+        "일반 공격 누적 도발이 즉시 발동한다고 가정하지 않습니다. SMG 수급은 낮으며 상대 자칼을 도울 수 있습니다."
+      ],
+      "sourceIds": [
+        "makima"
+      ]
+    },
+    {
+      "name": "Marian: Queen",
+      "burstStage": 3,
+      "generation": 0,
+      "passiveOffense": 2,
+      "burstOffense": 4,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "출시 초기 스킬 기반 평가입니다. 주기적 연속 공격과 자신의 전체 공격 버스트·자가 강화를 구분했으며 코어 관련 효과에는 점수를 주지 않았습니다.",
+        "MG의 초기 수급은 낮게 두었습니다. 공개 아레나 5인 공략·실전 성능 검증을 확보한 상태가 아니므로 생성 조합은 검증된 공략 덱을 의미하지 않습니다."
+      ],
+      "sourceIds": [
+        "marian-queen"
+      ]
+    },
+    {
+      "name": "Miranda",
+      "burstStage": 1,
+      "generation": 0,
+      "passiveOffense": 1,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "기본형은 풀 버스트 치명타 피해 보조와 자신을 제외한 최고 공격력 아군의 버스트 강화를 구분했습니다.",
+        "최종 애장품은 강화 대상이 둘로 늘고 최고 공격력 아군의 첫 1발 치명타 확률을 높입니다. 표적·투자·딜러 공격 형식에 따라 효율이 달라집니다."
+      ],
+      "sourceIds": [
+        "miranda",
+        "miranda-treasure"
+      ],
+      "favorite": {
+        "passiveOffense": 2,
+        "burstOffense": 3
+      }
+    },
+    {
+      "name": "Moran",
+      "burstStage": 1,
+      "generation": 0,
+      "passiveOffense": 1,
+      "burstOffense": 1,
+      "passiveSurvival": 3,
+      "burstSurvival": 4,
+      "tank": 5,
+      "burstRule": "standard",
+      "notes": [
+        "저체력 단계별 최대 체력 증가와 자기 방어, 버스트의 도발·흡혈·아군 받는 피해 감소를 분리했습니다.",
+        "최종 애장품의 아군 공격력 증가는 버스트 사용 시에만 반영합니다. 랩처 출현 조건의 쿨타임 효과는 PvP에서 가산하지 않습니다."
+      ],
+      "sourceIds": [
+        "moran",
+        "moran-treasure"
+      ],
+      "favorite": {
+        "burstOffense": 3
+      }
+    },
+    {
+      "name": "Nero",
+      "burstStage": 2,
+      "generation": 0,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 1,
+      "burstSurvival": 1,
+      "tank": 3,
+      "burstRule": "standard",
+      "notes": [
+        "시작 최대 체력 증가를 낮게 반영했습니다. 회복을 받아 쌓는 피해 감소는 회복 빈도를 계산하지 않아 최대 중첩 점수를 주지 않았습니다.",
+        "자신의 버스트는 단일 공격·도발 역할입니다. 조건부 반사·회복 강화가 항상 준비된 상태로 보지 않습니다."
+      ],
+      "sourceIds": [
+        "nero"
+      ]
+    },
+    {
+      "name": "Noah",
+      "burstStage": 2,
+      "generation": 3,
+      "passiveOffense": 0,
+      "burstOffense": 0,
+      "passiveSurvival": 1,
+      "burstSurvival": 5,
+      "tank": 4,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지 도발·공격력 감소와 자신의 버스트 전체 무적을 분리했습니다. 방어형으로 보호 동료와 조합할 수 있습니다.",
+        "무적은 짧고 버스트를 실제 사용해야 합니다. 상대 공격 타이밍이 맞지 않으면 높은 생존 점수와 별개로 패배할 수 있습니다."
+      ],
+      "sourceIds": [
+        "noah"
+      ]
+    },
+    {
+      "name": "Noir",
+      "burstStage": 3,
+      "generation": 4,
+      "passiveOffense": 2,
+      "burstOffense": 1,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "클립 SG 수급과 체력 조건 아군 공격력 보조를 반영했습니다. 자신의 전체 공격 버스트는 낮게 평가했습니다.",
+        "풀 버스트의 장탄 증가·탄 충전은 여름 아니스 같은 마지막 탄 딜러의 주기를 늦출 수 있습니다."
+      ],
+      "sourceIds": [
+        "noir"
+      ]
+    },
+    {
+      "name": "Noise",
+      "burstStage": 1,
+      "generation": 2,
+      "passiveOffense": 0,
+      "burstOffense": 0,
+      "passiveSurvival": 2,
+      "burstSurvival": 4,
+      "tank": 4,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지 도발·자기 최대 체력 증가와 피격 조건 피해 감소를 생존 역할로 반영했습니다.",
+        "자신의 버스트를 쓸 때만 아군 최대 체력 증가·지속 회복을 더합니다. 체력 갱신·재장전 타이밍을 정확히 시뮬레이션하지 않습니다."
+      ],
+      "sourceIds": [
+        "noise"
+      ]
+    },
+    {
+      "name": "Pepper",
+      "burstStage": 1,
+      "generation": 4,
+      "passiveOffense": 1,
+      "burstOffense": 2,
+      "passiveSurvival": 1,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "클립 SG 수급과 마지막 탄 단일 아군 회복을 반영했습니다. 버스트는 높은 공격력 적을 노리는 공격으로 평가합니다.",
+        "최대 중첩에서만 발생하는 버스트 전체 회복은 첫 버스트 전에 충족한다고 가정하지 않았습니다."
+      ],
+      "sourceIds": [
+        "pepper"
+      ]
+    },
+    {
+      "name": "Power",
+      "burstStage": 3,
+      "generation": 2,
+      "passiveOffense": 1,
+      "burstOffense": 3,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지 공격력 누적과 높은 공격력 적을 겨냥하는 버스트를 분리했습니다.",
+        "최대 중첩 추가 버스트 피해·다수 공격 후 폭발 범위 강화를 처음부터 가산하지 않았습니다."
+      ],
+      "sourceIds": [
+        "power"
+      ]
+    },
+    {
+      "name": "Privaty: Unkind Maid",
+      "burstStage": 3,
+      "generation": 1,
+      "passiveOffense": 1,
+      "burstOffense": 4,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "자신의 전체 공격 버스트를 중심으로 평가합니다. 탄알 적중 누적 추가 공격과 강화는 낮게 반영했습니다.",
+        "SG여도 클립 SG와 같은 수급을 갖지 않습니다. 버스트 전 공격력 강화가 부족하므로 실제 버퍼·투자에 따라 결과가 달라집니다."
+      ],
+      "sourceIds": [
+        "privaty-unkind-maid"
+      ]
+    },
+    {
+      "name": "Rapunzel",
+      "burstStage": 1,
+      "generation": 2,
+      "passiveOffense": 0,
+      "burstOffense": 0,
+      "passiveSurvival": 3,
+      "burstSurvival": 3,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지로 체력이 낮은 아군을 회복하는 비버스트 역할과 자신의 버스트 전체 회복을 구분했습니다.",
+        "전원 생존을 기본으로 하므로 부활 점수는 0입니다. 저체력 조건 기절과 후속 쿨타임은 점수 밖입니다."
+      ],
+      "sourceIds": [
+        "rapunzel"
+      ]
+    },
+    {
+      "name": "Rapunzel: Sanctuary",
+      "burstStage": 2,
+      "generation": 2,
+      "passiveOffense": 1,
+      "burstOffense": 1,
+      "passiveSurvival": 3,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "출시 초기 스킬 기반 평가입니다. 풀 차지 팀 회복을 비버스트 생존으로 반영하며, 자동으로 1초 이상 차지를 유지한다고 가정하지 않아 보호막 점수는 0입니다.",
+        "전원 생존 첫 버스트 기준이라 3명 이상 전투 불능 시 1회 부활도 0입니다. ‘격전 속으로’ 대상 전용 버프를 모든 아군에게 적용하지 않았습니다."
+      ],
+      "sourceIds": [
+        "rapunzel-sanctuary"
+      ]
+    },
+    {
+      "name": "Rei Ayanami (Tentative Name)",
+      "burstStage": 3,
+      "generation": 0,
+      "passiveOffense": 1,
+      "burstOffense": 4,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "자신의 버스트에 묶인 자가 강화·전체 공격을 평가했습니다. 비버스트 공격 보조는 낮게 두었습니다.",
+        "특정 에바 상태와 MG 연동 효과를 일반 팀에 가산하지 않습니다. AR 초기 수급을 보완할 동료가 필요합니다."
+      ],
+      "sourceIds": [
+        "rei-ayanami-tentative-name"
+      ]
+    },
+    {
+      "name": "Rosanna",
+      "burstStage": 1,
+      "generation": 0,
+      "passiveOffense": 1,
+      "burstOffense": 2,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "높은 공격력 적의 버프 해제와 공격형 적을 노리는 버스트가 있는 상대 의존 후보입니다.",
+        "아군 희생·적 처치가 없는 시작 조건이므로 사망 시 게이지 충전과 중첩 공격력은 가산하지 않습니다. 최종 애장품도 희생 없이 폭발적인 수급을 만들지 않습니다."
+      ],
+      "sourceIds": [
+        "rosanna",
+        "rosanna-treasure"
+      ],
+      "favorite": {
+        "burstOffense": 3
+      }
+    },
+    {
+      "name": "Rumani",
+      "burstStage": 1,
+      "generation": 5,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 1,
+      "burstSurvival": 1,
+      "tank": 2,
+      "burstRule": "standard",
+      "notes": [
+        "클립 RL의 높은 수급을 핵심으로 평가합니다. 풀 차지의 자기 체력 증가와 풀 버스트 도발은 낮게 반영했습니다.",
+        "최대 중첩 피해 감소·부위 피해 강화가 첫 교전에 모두 준비된 상태로 가정하지 않습니다."
+      ],
+      "sourceIds": [
+        "rumani"
+      ]
+    },
+    {
+      "name": "Scarlet",
+      "burstStage": 3,
+      "generation": 1,
+      "passiveOffense": 3,
+      "burstOffense": 5,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "일반 공격 중첩 강화·피격 반격과 자신의 전체 공격 버스트를 구분했습니다.",
+        "반격 수급은 상대의 공격과 확률에 달려 고정 수급으로 높게 잡지 않았습니다. 자신의 체력 소모 때문에 보호와 실제 투자 확인이 필요합니다."
+      ],
+      "sourceIds": [
+        "scarlet"
+      ]
+    },
+    {
+      "name": "Scarlet: Black Shadow",
+      "burstStage": 3,
+      "generation": 1,
+      "passiveOffense": 2,
+      "burstOffense": 4,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지 횟수에 따른 추가·분배 공격은 비버스트에도 있으며, 자신의 버스트는 필요 횟수를 줄이고 자가 공격을 강화합니다.",
+        "일반 RL과 폭발 반경·공격 간격이 달라 클립 RL 수급을 주지 않았습니다. 분배 피해는 상대 수·무적에 영향을 받습니다."
+      ],
+      "sourceIds": [
+        "scarlet-black-shadow"
+      ]
+    },
+    {
+      "name": "Snow White: Heavy Arms",
+      "burstStage": 3,
+      "generation": 5,
+      "passiveOffense": 3,
+      "burstOffense": 4,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "풀 차지의 전체·연속 공격을 비버스트 공격과 수급 역할로 평가했습니다. 자신의 버스트 강화는 별도로 반영합니다.",
+        "잠금 표적·분산 타격·상대 보호의 상호작용을 계산하지 않습니다. 고정 차지 시간 스킬을 일반 SR 차지 속도로 환산하지 않습니다."
+      ],
+      "sourceIds": [
+        "snow-white-heavy-arms"
+      ]
+    },
+    {
+      "name": "Soda",
+      "burstStage": 1,
+      "generation": 0,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 0,
+      "burstSurvival": 1,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "자신의 버스트가 무작위 적 둘에게 주는 짧은 기절을 공격·방해 보조로 낮게 평가했습니다.",
+        "유리한 기절 대상이 뽑힌다고 가정하지 않습니다. 주기 회복과 장기 중첩은 첫 버스트 전 보호로 가산하지 않습니다."
+      ],
+      "sourceIds": [
+        "soda"
+      ]
+    },
+    {
+      "name": "Soda: Twinkling Bunny",
+      "burstStage": 3,
+      "generation": 1,
+      "passiveOffense": 2,
+      "burstOffense": 3,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "시작 칩을 바탕으로 자신의 버스트 전체 공격·강화를 활용합니다. 풀 버스트 중 추가 공격은 비버스트 역할에도 일부 반영했습니다.",
+        "풀 버스트 연장으로 후속 회전과 보호 효과 종료 시점이 달라집니다. 이번 모델은 두 번째 회전을 계산하지 않습니다."
+      ],
+      "sourceIds": [
+        "soda-twinkling-bunny"
+      ]
+    },
+    {
+      "name": "Trina",
+      "burstStage": 2,
+      "generation": 5,
+      "passiveOffense": 0,
+      "burstOffense": 1,
+      "passiveSurvival": 1,
+      "burstSurvival": 1,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "클립 RL 수급과 저체력 아군의 풀 차지 회복을 반영했습니다. 자신의 버스트의 일반 아군 공격·체력 보조만 낮게 더합니다.",
+        "전기 AR 전용 시작 보호·개별 공격 강화는 조건 계산 없이 가산하지 않습니다. 랩처 수 조건의 큰 버스트 피해 증가는 PvP 점수에서 제외했습니다."
+      ],
+      "sourceIds": [
+        "trina"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "name": "Tia",
+      "reason": "B1 재진입으로 다른 B1과 순서 검증이 필요합니다. 현 모델의 단일 단계 자동 버스트 경로에서 제외합니다.",
+      "sourceIds": [
+        "tia"
+      ]
+    },
+    {
+      "name": "Rupee: Winter Shopper",
+      "reason": "B1 재진입을 사용하는 니케입니다. 재진입 뒤 추가 B1 경로를 모델링하지 않아 제외합니다.",
+      "sourceIds": [
+        "winter-shopper-rupee"
+      ]
+    },
+    {
+      "name": "Alice: Wonderland Bunny",
+      "reason": "B1 재진입과 별도 B1 동반이 필요합니다. 현 모델의 한 번씩 B1→B2→B3 경로에서 제외합니다.",
+      "sourceIds": [
+        "alice-wonderland-bunny"
+      ]
+    },
+    {
+      "name": "Avistar",
+      "reason": "B1 재진입과 특정 동료 상태에 의존합니다. 추가 버스트 경로를 모델링하지 않아 제외합니다.",
+      "sourceIds": [
+        "avistar"
+      ]
+    },
+    {
+      "name": "Red Hood",
+      "reason": "모든 버스트 단계에서 다른 스킬을 쓰는 올버스트 니케입니다. 복수 단계 선택과 첫 재사용 조건을 모델링하지 않아 제외합니다.",
+      "sourceIds": [
+        "red-hood"
+      ]
+    },
+    {
+      "name": "Rapi: Red Hood",
+      "reason": "다른 B1 동료 유무에 따라 B1/B3가 바뀝니다. 현재의 고정 단계 프로필에서 제외합니다.",
+      "sourceIds": [
+        "rapi-red-hood"
+      ]
+    },
+    {
+      "name": "Viper",
+      "reason": "최종 애장품에서 B2 재진입이 생깁니다. 기본형과 애장품 단계 차이를 안전하게 처리하지 못하므로 모두 제외합니다.",
+      "sourceIds": [
+        "viper-treasure"
+      ]
+    }
+  ]
+}

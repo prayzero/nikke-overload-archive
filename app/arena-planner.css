@@ -25,6 +25,17 @@
 .arena-briefing p + p { margin-top: 6px; }
 .arena-briefing p:first-child { display: flex; gap: 16px; }
 .arena-briefing strong { color: var(--cyan); flex-shrink: 0; font-family: var(--font-mono); }
+.arena-mode { border: 0; margin: 0 0 24px; min-width: 0; padding: 0; }
+.arena-mode legend { color: var(--muted); font-size: 11px; font-weight: 700; margin-bottom: 10px; padding: 0; }
+.arena-mode__options { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.arena-mode__option { align-items: center; background: var(--ink-soft); border: 1px solid var(--line-bright); cursor: pointer; display: flex; gap: 12px; min-width: 0; padding: 17px; }
+.arena-mode__option input { accent-color: var(--cyan); flex-shrink: 0; height: 17px; margin: 0; width: 17px; }
+.arena-mode__option--selected { background: rgba(85, 214, 255, .06); border-color: var(--cyan); }
+.arena-mode__option > span { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.arena-mode__option strong { align-items: center; display: flex; flex-wrap: wrap; font-size: 14px; gap: 7px; }
+.arena-mode__option b { color: var(--amber); font-size: 9px; font-weight: 700; }
+.arena-mode__option small { color: var(--muted); font-size: 11px; line-height: 1.5; word-break: keep-all; }
+.arena-mode__option:has(input:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 4px; }
 
 .arena-favorites { background: var(--ink-soft); border: 1px solid var(--line); border-top: 2px solid var(--cyan); margin-bottom: 24px; padding: 22px; }
 .arena-review { border: 1px solid var(--line); border-top: 2px solid var(--amber); margin-bottom: 24px; padding: 22px; }
@@ -190,4 +201,8 @@
   .arena-member__name { font-size: 11px; }
   .arena-member__state { font-size: 9px; }
   .arena-team__explanation, .arena-team__sources, .arena-burst, .arena-requirements { padding-left: 12px; padding-right: 12px; }
+  .arena-mode__options { gap: 7px; }
+  .arena-mode__option { align-items: start; gap: 7px; padding: 12px 9px; }
+  .arena-mode__option strong { font-size: 12px; }
+  .arena-mode__option small { font-size: 10px; }
 }

@@ -15,7 +15,7 @@
     "start": "node scripts/run-vinext.mjs start",
     "test": "npm run build && npm run test:static",
     "pretest:static": "npm run deps:prepare",
-    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs tests/glob-compat.test.mjs tests/arena-planner.test.mjs",
+    "test:static": "node --test tests/rendered-html.test.mjs tests/artwork-check.test.mjs tests/dependency-consistency.test.mjs tests/gear-layout.test.mjs tests/roster-update.test.mjs tests/recommendations-update.test.mjs tests/glob-compat.test.mjs tests/arena-planner.test.mjs tests/arena-calculator.test.mjs",
     "typecheck": "tsc --noEmit",
     "test:browser": "node --test tests/arena-browser.test.mjs",
     "qa": "npm run build && npm run typecheck && npm run lint && npm run test:static",

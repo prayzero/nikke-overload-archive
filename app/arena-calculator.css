@@ -1,0 +1,98 @@
+.arena-calculator { min-width: 0; }
+.arena-calculator__notice { background: linear-gradient(115deg, rgba(85, 214, 255, .08), transparent 80%); border: 1px solid var(--line-bright); border-left: 3px solid var(--cyan); padding: 24px; }
+.arena-calculator__tag { color: var(--cyan); font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; }
+.arena-calculator__notice h3 { font-size: 24px; letter-spacing: -.05em; margin: 10px 0; }
+.arena-calculator__notice p { color: var(--muted); font-size: 13px; line-height: 1.8; margin: 0; max-width: 860px; word-break: keep-all; }
+.arena-calculator__notice strong { color: var(--text); font-weight: 650; }
+.arena-calculator__settings { display: flex; flex-wrap: wrap; gap: 22px 38px; padding: 24px 0; }
+.arena-calculator__settings fieldset { border: 0; margin: 0; min-width: 0; padding: 0; }
+.arena-calculator__settings legend { color: var(--muted); font-size: 11px; font-weight: 750; margin-bottom: 10px; padding: 0; }
+.arena-calculator__choices { display: flex; flex-wrap: wrap; gap: 7px; }
+.arena-calculator__choice { align-items: center; background: var(--ink-soft); border: 1px solid var(--line-bright); cursor: pointer; display: flex; font-size: 12px; gap: 9px; min-height: 44px; padding: 10px 14px; }
+.arena-calculator__choice input { accent-color: var(--cyan); height: 15px; margin: 0; width: 15px; }
+.arena-calculator__choice--selected { background: rgba(85, 214, 255, .08); border-color: var(--cyan); color: var(--cyan); }
+.arena-calculator__choice:has(input:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 4px; }
+.arena-calculator__summary { align-items: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; gap: 24px; justify-content: space-between; padding: 18px 0; }
+.arena-calculator__summary > p { align-items: center; display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.arena-calculator__summary strong { color: var(--cyan); font-family: var(--font-mono); font-size: 37px; font-weight: 600; line-height: 1.2; }
+.arena-calculator__summary strong span { color: var(--text); font-family: var(--font-sans); font-size: 15px; font-weight: 600; }
+.arena-calculator__summary > p > span { color: var(--muted); font-size: 11px; }
+.arena-calculator__summary > div { color: var(--muted); font-size: 11px; line-height: 1.8; text-align: right; }
+.arena-calculator__summary > div p { margin: 0; }
+.arena-calculator__method, .arena-calculator__eligibility { border: 1px solid var(--line); margin: 18px 0 24px; }
+.arena-calculator__method summary, .arena-calculator__eligibility summary, .arena-calculated-team__reason summary { cursor: pointer; font-size: 12px; font-weight: 700; line-height: 1.7; min-height: 46px; padding: 14px 18px; }
+.arena-calculator__method > div, .arena-calculator__eligibility > div { border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.9; padding: 18px; overflow-wrap: anywhere; word-break: keep-all; }
+.arena-calculator__method p, .arena-calculator__eligibility p { margin: 0 0 12px; }
+.arena-calculator__method time { color: var(--cyan); font-family: var(--font-mono); font-size: 10px; }
+.arena-calculator__formula { background: var(--ink-soft); display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin: 16px 0; padding: 15px; }
+.arena-calculator__formula div { min-width: 0; }
+.arena-calculator__formula dt { font-size: 10px; }
+.arena-calculator__formula dd { color: var(--text); font-family: var(--font-mono); font-size: 12px; margin: 2px 0 0; }
+.arena-calculator__teams { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.arena-calculator__teams--single { grid-template-columns: minmax(0, 560px); }
+.arena-calculated-team { border-top: 2px solid var(--cyan); }
+.arena-calculated-team .arena-team__label { color: var(--cyan); }
+.arena-calculated-team__badge { border: 1px solid rgba(255, 190, 83, .35); color: var(--amber); flex-shrink: 0; font-size: 10px; padding: 4px 7px; }
+.arena-calculated-team__score { align-items: baseline; display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; padding: 0 18px 18px; }
+.arena-calculated-team__score > span { color: var(--muted); font-size: 11px; }
+.arena-calculated-team__score strong { color: var(--cyan); font-family: var(--font-mono); font-size: 28px; font-weight: 600; letter-spacing: -.04em; }
+.arena-calculated-team__score small { color: var(--muted); font-size: 11px; font-weight: 400; letter-spacing: 0; }
+.arena-calculated-team .arena-member__position { background: var(--cyan); }
+.arena-calculated-team__burst-help { color: var(--muted); font-size: 10px; line-height: 1.7; margin: 8px 0 0; word-break: keep-all; }
+.arena-calculated-team__breakdown { border-bottom: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; padding: 15px 17px; }
+.arena-calculated-team__breakdown div + div { border-left: 1px solid var(--line); padding-left: 14px; }
+.arena-calculated-team__breakdown dt { color: var(--muted); font-size: 10px; }
+.arena-calculated-team__breakdown dd { font-family: var(--font-mono); font-size: 19px; margin: 6px 0 0; }
+.arena-calculated-team__unknown { border-bottom: 1px solid var(--line); color: var(--amber); font-size: 11px; line-height: 1.8; margin: 0; overflow-wrap: anywhere; padding: 14px 17px; }
+.arena-calculated-team__unknown strong, .arena-calculated-team__unknown span { display: block; }
+.arena-calculated-team__unknown strong { font-size: 10px; margin-bottom: 4px; }
+.arena-calculated-team__unknown span { color: var(--muted); font-size: 10px; margin-top: 4px; }
+.arena-calculated-team__favorite { color: var(--cyan); font-size: 11px; margin: 13px 0 0; }
+.arena-calculated-team__reason { border-top: 1px solid var(--line); }
+.arena-calculated-team .arena-team__sources details { width: 100%; }
+.arena-calculated-team .arena-team__sources summary { color: var(--cyan); cursor: pointer; padding: 8px 0; }
+.arena-calculated-team__source-links { display: flex; flex-direction: column; gap: 6px; padding-top: 6px; }
+.arena-calculated-team__reason > div { border-top: 1px solid var(--line); padding: 15px 17px; }
+.arena-calculated-team__reason > div > p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 0 0 14px; }
+.arena-contributions { list-style: none; margin: 0; padding: 0; }
+.arena-contributions > li + li { border-top: 1px dashed var(--line-bright); margin-top: 16px; padding-top: 16px; }
+.arena-contributions > li > div { display: flex; flex-direction: column; gap: 4px; }
+.arena-contributions strong { font-size: 12px; line-height: 1.7; }
+.arena-contributions > li > div > span { color: var(--muted); font-size: 10px; }
+.arena-contributions dl { display: flex; flex-wrap: wrap; gap: 7px 15px; margin: 10px 0; }
+.arena-contributions dl > div { align-items: baseline; display: flex; gap: 6px; }
+.arena-contributions dt { color: var(--muted); font-size: 10px; }
+.arena-contributions dd { color: var(--cyan); font-family: var(--font-mono); font-size: 12px; margin: 0; }
+.arena-contributions p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 0; overflow-wrap: anywhere; word-break: keep-all; }
+.arena-calculator__eligibility { margin-top: 24px; }
+.arena-calculator__eligibility summary span { color: var(--muted); display: inline-block; font-size: 10px; font-weight: 400; margin-left: 12px; }
+.arena-calculator__eligibility h4 { color: var(--text); font-size: 13px; margin: 2px 0 8px; }
+.arena-calculator__eligibility h4:not(:first-child) { border-top: 1px dashed var(--line-bright); margin-top: 18px; padding-top: 18px; }
+.arena-calculator__excluded { list-style: none; margin: 0; padding: 0; }
+.arena-calculator__excluded li { align-items: baseline; display: grid; gap: 6px 16px; grid-template-columns: minmax(120px, 190px) 1fr; }
+.arena-calculator__excluded li + li { border-top: 1px solid var(--line); }
+.arena-calculator__excluded button { background: transparent; color: var(--cyan); cursor: pointer; font-size: 12px; line-height: 1.7; min-height: 44px; padding: 9px 0; text-align: left; word-break: keep-all; }
+.arena-calculator__excluded li > span { color: var(--muted); font-size: 11px; padding: 9px 0; }
+
+@media (max-width: 1150px) {
+  .arena-calculator__teams { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arena-calculator__teams--single { grid-template-columns: minmax(0, 560px); }
+}
+@media (max-width: 760px) {
+  .arena-calculator__notice { padding: 18px; }
+  .arena-calculator__notice h3 { font-size: 21px; }
+  .arena-calculator__notice p { font-size: 12px; }
+  .arena-calculator__settings { flex-direction: column; gap: 20px; }
+  .arena-calculator__summary { align-items: start; flex-direction: column; gap: 12px; }
+  .arena-calculator__summary > div { text-align: left; }
+  .arena-calculator__teams, .arena-calculator__teams--single { grid-template-columns: minmax(0, 1fr); }
+  .arena-calculator__method > div, .arena-calculator__eligibility > div { padding: 15px; }
+  .arena-calculator__eligibility summary span { display: block; margin: 5px 0 0; }
+  .arena-calculator__excluded li { grid-template-columns: minmax(0, 1fr); gap: 0; padding-bottom: 10px; }
+  .arena-calculator__excluded li > span { padding: 0; }
+}
+@media (max-width: 380px) {
+  .arena-calculator__choice { font-size: 11px; gap: 6px; padding: 10px 9px; }
+  .arena-calculator__choices { gap: 5px; }
+  .arena-calculated-team__score, .arena-calculated-team__breakdown, .arena-calculated-team__unknown, .arena-calculated-team__reason > div { padding-left: 12px; padding-right: 12px; }
+}
