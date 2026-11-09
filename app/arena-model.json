@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-30",
+  "checkedAt": "2026-11-09",
   "modelKind": "relative-heuristic-v1",
   "description": "스킬·공개 공략을 참고해 편집한 0~5 상대 가중치입니다. 공식 성능 수치, 승률, 실제 버스트 도달 시간, 전투 시뮬레이션 결과가 아닙니다. 전원 생존 상태에서 첫 자동 버스트와 그 직후의 역할을 비교하며, 육성·전투력·상대 편성·정확한 표적과 후속 회전은 계산하지 않습니다. 공략 프리셋과 별개로 보유 니케에서 탐색하는 실험적 후보입니다.",
   "sources": [
@@ -277,6 +277,11 @@
       "id": "viper-treasure",
       "title": "Prydwen viper-treasure 특수 버스트 스킬",
       "url": "https://www.prydwen.gg/nikke/characters/viper-treasure"
+    },
+    {
+      "id": "scarlet-goddeath",
+      "title": "Prydwen Scarlet: Goddeath 출시 후 스킬·PvP 공략",
+      "url": "https://www.prydwen.gg/nikke/characters/scarlet-goddeath"
     }
   ],
   "rules": [
@@ -353,7 +358,7 @@
     },
     {
       "id": "new-unit-limits",
-      "note": "마리안: 퀸과 라푼젤: 생츄어리는 출시 초기 스킬에서 확인한 역할만 보수적으로 반영합니다. 생성 후보를 검증된 아레나 공략 편성이나 실전 우위로 해석하지 않습니다.",
+      "note": "신규 니케의 스킬·출시 후 공략에서 확인한 역할을 상대 가중치에 반영합니다. 생성 후보를 검증된 5인 아레나 공략 편성이나 실전 우위로 해석하지 않습니다.",
       "sourceIds": [
         "marian-queen",
         "rapunzel-sanctuary"
@@ -735,14 +740,14 @@
       "burstStage": 3,
       "generation": 0,
       "passiveOffense": 2,
-      "burstOffense": 4,
+      "burstOffense": 5,
       "passiveSurvival": 0,
       "burstSurvival": 0,
       "tank": 0,
       "burstRule": "standard",
       "notes": [
-        "출시 초기 스킬 기반 평가입니다. 주기적 연속 공격과 자신의 전체 공격 버스트·자가 강화를 구분했으며 코어 관련 효과에는 점수를 주지 않았습니다.",
-        "MG의 초기 수급은 낮게 두었습니다. 공개 아레나 5인 공략·실전 성능 검증을 확보한 상태가 아니므로 생성 조합은 검증된 공략 덱을 의미하지 않습니다."
+        "출시 후 공략에서 자신의 버스트 전체 공격과 이어지는 고유 코어 피해가 코어 없는 PvP 적에게도 적용됨을 확인했습니다. 이 공격은 자신의 버스트를 사용할 때만 반영합니다.",
+        "MG 수급은 낮게 유지합니다. 상대 자칼의 수급·홍련 반격을 돕는 위험이 있어 수급과 보호 동료가 필요하며, 정해진 승률이나 상대 무적 돌파를 보장하지 않습니다."
       ],
       "sourceIds": [
         "marian-queen"
@@ -948,8 +953,8 @@
       "tank": 0,
       "burstRule": "standard",
       "notes": [
-        "출시 초기 스킬 기반 평가입니다. 풀 차지 팀 회복을 비버스트 생존으로 반영하며, 자동으로 1초 이상 차지를 유지한다고 가정하지 않아 보호막 점수는 0입니다.",
-        "전원 생존 첫 버스트 기준이라 3명 이상 전투 불능 시 1회 부활도 0입니다. ‘격전 속으로’ 대상 전용 버프를 모든 아군에게 적용하지 않았습니다."
+        "풀 차지 팀 회복을 비버스트 생존으로 반영합니다. 자동으로 1초 이상 차지를 유지한다고 가정하지 않아 보호막 점수는 0입니다.",
+        "전원 생존 첫 버스트 기준이라 3명 이상 전투 불능 시 부활도 0입니다. 마리안: 퀸·홍련: 신살의 '격전 속으로' 대상 전용 버프를 모든 아군에게 일반화하지 않습니다."
       ],
       "sourceIds": [
         "rapunzel-sanctuary"
@@ -1119,6 +1124,24 @@
       ],
       "sourceIds": [
         "trina"
+      ]
+    },
+    {
+      "name": "Scarlet: Goddeath",
+      "burstStage": 3,
+      "generation": 5,
+      "passiveOffense": 2,
+      "burstOffense": 5,
+      "passiveSurvival": 0,
+      "burstSurvival": 0,
+      "tank": 0,
+      "burstRule": "standard",
+      "notes": [
+        "특수 AR의 관통·추가 타격과 클립 RL 수준의 수급을 설명한 개별 공략을 바탕으로 높은 수급 가중치를 부여했습니다. 실제 게이지량·발수·초를 계산한 값은 아닙니다.",
+        "자신의 버스트 단일 타격과 이후 넓어진 지속 공격은 버스트 사용 시에만 더합니다. 보호 동료·상대 회복·도발·표적 분배에 따라 결과가 달라집니다."
+      ],
+      "sourceIds": [
+        "scarlet-goddeath"
       ]
     }
   ],

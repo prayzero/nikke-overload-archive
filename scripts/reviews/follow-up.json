@@ -81,59 +81,161 @@
   },
   {
     "name": "Marian: Queen",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-09",
     "sources": [
-      { "label": "nikke.gg 출시 전 초기 분석 (2026-10-28)", "url": "https://nikke.gg/marian-queen-early-analysis/" },
-      { "label": "Prydwen 스킬 자료 · 투자 가이드 미공개", "url": "https://www.prydwen.gg/nikke/characters/marian-queen" }
+      {
+        "label": "Prydwen 출시 후 개별 투자·PvP 공략",
+        "url": "https://www.prydwen.gg/nikke/characters/marian-queen"
+      }
     ],
     "overload": {
       "primary": [
-        { "stat": "element", "count": 4, "grade": "ideal" },
-        { "stat": "attack", "count": 4, "grade": "ideal" },
-        { "stat": "maxAmmo", "count": 1, "grade": "essential" }
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
       ],
-      "alternatives": ["critRate"],
+      "alternatives": [
+        "critRate",
+        "critDamage"
+      ],
       "avoid": [],
-      "priority": "high",
-      "mode": "PvE (출시 전 초기 분석)",
-      "note": "10월 28일 초기 분석의 제안으로, 출시 후 확정된 최적 세팅이 아닙니다. 우월·공격력 각 4줄과 장탄 1줄을 제시하며, 장탄은 옵션 수치 단계 Tier 11 이상이라는 조건이 있어 줄 수만 맞춰서는 충분하지 않습니다. 치명타 확률은 남은 줄의 선택지로만 제시되어 수량을 정하지 않았습니다. Prydwen 투자 표는 아직 미공개이며 PvP 분석도 대기 상태입니다.",
+      "priority": "meta",
+      "mode": "PvE",
+      "note": "우월·공격력 각 4줄, 장탄 1~4줄 중 조건부 하한 1줄을 표시합니다. 택티컬 베어 7레벨 이상에서 장탄 68.93% 이상 1줄 또는 재장전 버퍼 2명과 렐릭 베어를 쓰는 조건입니다. 다른 조합은 장탄 2~3줄 등을 비교해야 합니다. 원문 계산은 SR 소장품 15레벨·쿨타임 감소 7.48초·버스트 즉시 사용 기준이므로 자동 지연이나 보스 이탈까지 보장하지 않습니다. 치명타 두 종류는 남는 줄의 선택지입니다.",
       "confidence": "guide",
       "reviewStatus": "reviewed"
     },
     "cube": {
       "primary": "bastion",
-      "alternatives": [],
-      "pvp": [],
-      "mode": "PvE (출시 전 초기 분석)",
-      "note": "10월 28일 초기 분석은 탄환 충전용 택티컬 베어를 제안합니다. 장탄 OL 조건을 함께 확인해야 하며, 큐브 레벨별 최적값이나 무한 사격을 보장하는 결과는 제공하지 않습니다. 출시 후 확정 공략 및 PvP 추천이 아니므로 추가 검증 전 투자 판단의 참고안으로만 사용합니다.",
+      "alternatives": [
+        "resilience",
+        "destruction"
+      ],
+      "pvp": [
+        "tempering",
+        "vigor",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "택티컬 베어를 장탄 목표와 함께 비교합니다. 재장전 버퍼 2명 또는 OL이 없는 초기 육성에서는 렐릭 베어, 오래 유지되는 파츠를 공격할 때는 디스트로이가 대안입니다. 큐브 레벨 차이도 확인해 주세요. PvP는 생존용 템퍼링·비거와 사격 유지용 택티컬 베어를 별도로 제시합니다.",
       "confidence": "guide",
       "reviewStatus": "reviewed"
     }
   },
   {
     "name": "Rapunzel: Sanctuary",
-    "checkedAt": "2026-10-30",
+    "checkedAt": "2026-11-09",
     "sources": [
-      { "label": "GameWith 개별 옵션·큐브 참고안 (출시 초기)", "url": "https://gamewith.jp/nikke/article/show/584270" },
-      { "label": "NikkeHub 개별 큐브 추천 (버퍼 조합·풀투자 가정)", "url": "https://nikkehub.com/nikkes/rapunzel-sanctuary" },
-      { "label": "Prydwen 스킬 자료 · 투자 가이드 미공개", "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary" }
+      {
+        "label": "Prydwen 출시 후 개별 투자·PvP 공략",
+        "url": "https://www.prydwen.gg/nikke/characters/rapunzel-sanctuary"
+      }
     ],
     "overload": {
-      "primary": [],
-      "alternatives": ["chargeSpeed", "element", "maxAmmo", "chargeDamage"],
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "maxAmmo",
+          "count": 1,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critDamage",
+        "critRate"
+      ],
       "avoid": [],
-      "priority": "skip",
-      "mode": "PvE (출시 초기 참고안)",
-      "note": "GameWith의 개별 표에서 차지 속도·우월 코드·최대 장탄 수·차지 대미지를 후보로 확인했습니다. 표는 줄 수와 확정 효율 순위를 제공하지 않아 목표 개수를 지정하지 않습니다. 차지 속도 증가·감소 면역은 풀 차지 상태일 때에 한정되므로 전투 내내 차지 속도가 무효라는 뜻이 아닙니다. 출시 초기 자료이며 Prydwen 투자 표는 아직 미공개입니다. 팀과 공격 주기에 맞춰 옵션을 비교해 주세요.",
+      "priority": "medium",
+      "mode": "PvE (보스)",
+      "note": "출시 후 투자 표의 우월·공격력 각 4줄과 장탄 1줄을 반영했습니다. 장탄 추가·치명타 계열은 선택지입니다. 마리안: 퀸·홍련: 신살을 보조하면서 개인 피해도 확보할 때의 목표로, 모든 팀에서 필수 투자는 아닙니다. 차지 속도 면역은 풀 차지 상태에 한정되지만 최신 투자 표는 차지 속도를 기본 목표로 제시하지 않습니다.",
       "confidence": "guide",
-      "reviewStatus": "no-target"
+      "reviewStatus": "reviewed"
     },
     "cube": {
       "primary": "resilience",
-      "alternatives": ["adjutant", "vigor"],
-      "pvp": [],
-      "mode": "PvE (출시 초기 참고안)",
-      "note": "NikkeHub의 공용 버퍼 조합·풀투자 가정은 렐릭 베어를 제안해 기본 후보로 표시합니다. GameWith는 풀 차지 공격과 회복 빈도를 위한 렐릭 부스트를 우선 소개하고, 회복량을 위한 최대 HP의 비거와 재장전의 베어도 제안합니다. 출처별 우선 후보가 다르므로 큐브 레벨·팀·회복 필요량에 맞춰 비교해야 하며 확정 최적 순위가 아닙니다. 출시 초기 참고안으로 PvP 큐브와 신규 Bezel의 적합성은 아직 지정하지 않습니다.",
+      "alternatives": [
+        "bastion",
+        "destruction"
+      ],
+      "pvp": [
+        "tempering",
+        "vigor",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "보유한 고레벨 큐브를 우선 비교하며 기본 후보는 렐릭 베어입니다. 장탄 OL이 높으면 택티컬 베어, 오래 남는 파츠를 공격하면 디스트로이를 고려합니다. PvP 목록은 큐브 후보이며, 조건부 부활을 활용한 완성 편성이나 효과적인 실전 운용을 보장하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    }
+  },
+  {
+    "name": "Scarlet: Goddeath",
+    "checkedAt": "2026-11-09",
+    "sources": [
+      {
+        "label": "Prydwen 출시 후 개별 투자·PvP 공략",
+        "url": "https://www.prydwen.gg/nikke/characters/scarlet-goddeath"
+      }
+    ],
+    "overload": {
+      "primary": [
+        {
+          "stat": "element",
+          "count": 4,
+          "grade": "ideal"
+        },
+        {
+          "stat": "attack",
+          "count": 4,
+          "grade": "ideal"
+        }
+      ],
+      "alternatives": [
+        "critRate",
+        "critDamage"
+      ],
+      "avoid": [],
+      "priority": "meta",
+      "mode": "PvE",
+      "note": "투자 표의 우월·공격력 각 4줄을 기본 예시로 표시하며, 본문은 공격력과 치명타 옵션을 조합하도록 설명합니다. 발도 추가타와 버스트 단일 타격에는 일반 공격의 치명타 확률 강화가 그대로 적용되지 않으므로 치명타 확률을 일괄 금지하지 않습니다. 애장품 츠바이 동반이나 관통에 유리한 전투는 치명타 대미지를 더 비교합니다. 장탄은 우선 목표로 요구하지 않습니다.",
+      "confidence": "guide",
+      "reviewStatus": "reviewed"
+    },
+    "cube": {
+      "primary": "piercing",
+      "alternatives": [
+        "resilience",
+        "bastion",
+        "destruction"
+      ],
+      "pvp": [
+        "tempering",
+        "vigor",
+        "bastion"
+      ],
+      "mode": "PvE",
+      "note": "충분히 육성한 피어싱이 우선 후보입니다. 피어싱이 13레벨 미만이고 렐릭 베어·택티컬 베어가 15레벨이라면 후자를 사용하라는 조건을 함께 확인해 주세요. 오래 유지되는 파츠에는 디스트로이를 비교합니다. PvP는 생존과 사격 유지 후보를 별도로 선택합니다.",
       "confidence": "guide",
       "reviewStatus": "reviewed"
     }

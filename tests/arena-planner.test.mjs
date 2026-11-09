@@ -143,9 +143,9 @@ test("pending reviews reject missing evidence, ambiguous status and contradictor
 test("anniversary arena reviews keep both units distinct from old Rapunzel and PvE suggestions", async () => {
   const [catalog, realRoster] = await Promise.all(["arena-presets.json", "roster.json"].map(async (file) =>
     JSON.parse(await readFile(new URL(`../app/${file}`, import.meta.url), "utf8"))));
-  const reviewedNames = ["Marian: Queen", "Rapunzel: Sanctuary"];
+  const reviewedNames = ["Marian: Queen", "Rapunzel: Sanctuary", "Scarlet: Goddeath"];
   assert.deepEqual(catalog.pendingReviews.map(({ name }) => name), reviewedNames);
-  assert.ok(catalog.pendingReviews.every(({ checkedAt, status }) => checkedAt === "2026-10-30" && status === "pending-team"));
+  assert.ok(catalog.pendingReviews.every(({ checkedAt, status }) => checkedAt === "2026-11-09" && status === "pending-team"));
   assert.equal(catalog.checkedAt, "2026-10-27", "do not refresh unreviewed team dates");
   assert.equal(catalog.presets.length, 30);
   assert.ok(catalog.presets.every(({ members }) => members.every((name) => !reviewedNames.includes(name))));
@@ -157,7 +157,7 @@ test("anniversary arena reviews keep both units distinct from old Rapunzel and P
   const newUnitsOnly = getPlan(reviewedNames);
   assert.equal(newUnitsOnly.teams.length, 0);
   assert.equal(newUnitsOnly.availableCount, 0);
-  assert.deepEqual(newUnitsOnly.pendingOwned.map(({ nikke }) => [nikke.name, nikke.burst]), [["Marian: Queen", "3"], ["Rapunzel: Sanctuary", "2"]]);
+  assert.deepEqual(newUnitsOnly.pendingOwned.map(({ nikke }) => [nikke.name, nikke.burst]), [["Marian: Queen", "3"], ["Rapunzel: Sanctuary", "2"], ["Scarlet: Goddeath", "3"]]);
 });
 
 test("shipped arena catalog references real roster members, sources, and three compatible teams", async () => {

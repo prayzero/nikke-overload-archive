@@ -73,19 +73,19 @@ test("empty ownership prompts registration without invented teams", async (t) =>
 });
 
 test("owned anniversary units show sourced pending reviews, update on removal and preserve detail focus", async (t) => {
-  const owned = roster.filter(({ name }) => ["Marian: Queen", "Rapunzel: Sanctuary"].includes(name)).map(({ id }) => id);
+  const owned = roster.filter(({ name }) => ["Marian: Queen", "Rapunzel: Sanctuary", "Scarlet: Goddeath"].includes(name)).map(({ id }) => id);
   const page = await session(t, { owned });
   const panel = page.getByRole("region", { name: "보유 니케의 편성 검토" });
   await panel.waitFor();
-  assert.equal(await panel.locator(".arena-review__card").count(), 2);
+  assert.equal(await panel.locator(".arena-review__card").count(), 3);
   assert.equal(await page.locator(".arena-teams .arena-team").count(), 0);
-  assert.match(await page.locator(".arena-readiness").innerText(), /보유 2명 · 조건 충족 0조합/);
+  assert.match(await page.locator(".arena-readiness").innerText(), /보유 3명 · 조건 충족 0조합/);
   for (const review of catalog.pendingReviews) {
     const nikke = roster.find(({ name }) => name === review.name);
     const card = panel.getByRole("article", { name: nikke.nameKo, exact: true });
     await card.getByText("스킬 조건과 확인 자료", { exact: true }).click();
     assert.match(await card.innerText(), /편성 검증 대기/);
-    assert.match(await card.innerText(), /2026\.10\.30/);
+    assert.match(await card.innerText(), /2026\.11\.09/);
     for (const note of review.notes) assert.ok((await card.innerText()).includes(note));
     assert.equal(await card.locator('a[target="_blank"][rel="noreferrer"]').count(), review.sourceIds.length);
   }
@@ -103,15 +103,15 @@ test("owned anniversary units show sourced pending reviews, update on removal an
   await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill("Marian: Queen");
   await page.getByRole("button", { name: "마리안 : 퀸 보유 해제", exact: true }).click();
   await panel.getByRole("article", { name: "마리안 : 퀸", exact: true }).waitFor({ state: "detached" });
-  assert.equal(await panel.locator(".arena-review__card").count(), 1);
+  assert.equal(await panel.locator(".arena-review__card").count(), 2);
   await page.reload({ waitUntil: "domcontentloaded" });
   await panel.getByRole("article", { name: "라푼젤 : 생츄어리", exact: true }).waitFor();
-  assert.equal(await panel.locator(".arena-review__card").count(), 1);
+  assert.equal(await panel.locator(".arena-review__card").count(), 2);
 });
 
 test("released anniversary characters can be found, saved, and opened with their sourced builds", async (t) => {
   const page = await session(t);
-  for (const name of ["Marian: Queen", "Rapunzel: Sanctuary"]) {
+  for (const name of ["Marian: Queen", "Rapunzel: Sanctuary", "Scarlet: Goddeath"]) {
     const nikke = roster.find((entry) => entry.name === name);
     assert.ok(nikke, `${name} is released and present`);
     await page.getByRole("searchbox", { name: "니케 이름 검색" }).fill(name);
@@ -120,19 +120,12 @@ test("released anniversary characters can be found, saved, and opened with their
     await page.getByRole("button", { name: new RegExp(`${nikke.nameKo}.*오버로드와 추천 큐브 세팅 보기`) }).click();
     const drawer = page.getByRole("dialog", { name: nikke.nameKo, exact: true });
     await drawer.waitFor();
-    assert.match(await drawer.innerText(), /2026-10-30/);
-    if (name === "Rapunzel: Sanctuary") {
-      assert.match(await drawer.innerText(), /조건별 검토/);
-      assert.match(await drawer.innerText(), /추천 옵션 · 줄 수 미지정/);
-      assert.match(await drawer.innerText(), /차지 속도 · 우월 코드 · 장탄 수 · 차지 대미지/);
-      assert.match(await drawer.innerText(), /출시 초기 참고안/);
-      assert.deepEqual(await drawer.locator('.cube-option__name strong').allTextContents(), ["렐릭 베어 큐브", "렐릭 부스트 큐브", "렐릭 비거 큐브"]);
-      assert.doesNotMatch(await drawer.innerText(), /재설정 비추천/);
-      assert.equal(await drawer.locator('.gear-matrix article').count(), 0);
-    } else {
-      assert.equal(await drawer.locator('.gear-matrix article').count(), 4);
-      assert.match(await drawer.innerText(), /출시 전 초기 분석/);
-    }
+    assert.match(await drawer.innerText(), /2026-11-09/);
+    assert.match(await drawer.innerText(), /우월 코드/);
+    assert.match(await drawer.innerText(), /공격력/);
+    assert.equal(await drawer.locator('.gear-matrix article').count(), 4);
+    assert.ok(await drawer.locator('.cube-option__name strong').count() > 0);
+    assert.doesNotMatch(await drawer.innerText(), /출시 전 초기 분석|출시 초기 참고안|추천 옵션 · 줄 수 미지정/);
     assert.ok(await drawer.locator('.recommendation-sources a').count() > 0);
     await page.getByRole("button", { name: "상세 닫기", exact: true }).click();
     await page.reload({ waitUntil: "domcontentloaded" });
@@ -205,12 +198,12 @@ test("malformed or blocked favorite storage keeps the roster usable", async (t) 
 test("denied clipboard offers complete text and character details retain focus", async (t) => {
   const pendingIds = roster.filter(({ name }) => catalog.pendingReviews.some((review) => review.name === name)).map(({ id }) => id);
   const page = await session(t, { owned: [...fixtureIds, ...pendingIds], clipboardFails: true });
-  assert.equal(await page.locator(".arena-review__card").count(), 2);
+  assert.equal(await page.locator(".arena-review__card").count(), 3);
   await page.getByRole("button", { name: /추천 3팀 복사/ }).click();
   const text = await page.getByRole("textbox", { name: "직접 복사할 추천 편성" }).inputValue();
   assert.equal((text.match(/\/ P5 /g) ?? []).length, 3);
   assert.equal((text.match(/첫 버스트:/g) ?? []).length, 3);
-  assert.doesNotMatch(text, /마리안 : 퀸|라푼젤 : 생츄어리/);
+  assert.doesNotMatch(text, /마리안 : 퀸|라푼젤 : 생츄어리|홍련 : 신살/);
   const opener = page.locator(".arena-teams .arena-member__button").first();
   await opener.click();
   await page.getByRole("dialog").waitFor();
@@ -244,7 +237,7 @@ test("calculator is opt-in, keyboard accessible, and produces disjoint teams wit
   const guideMode = page.getByRole("radio", { name: "공략 조합", exact: true });
   assert.ok(await guideMode.isChecked());
   assert.equal(await page.locator(".arena-calculator").count(), 0);
-  assert.equal(await page.locator(".arena-review__card").count(), 2);
+  assert.equal(await page.locator(".arena-review__card").count(), 3);
   await guideMode.focus();
   await page.keyboard.press("ArrowRight");
   await page.locator(".arena-calculator").waitFor();
@@ -290,7 +283,7 @@ test("calculator is opt-in, keyboard accessible, and produces disjoint teams wit
   assert.ok(await opener.evaluate((element) => element === document.activeElement));
   await guideMode.check();
   assert.equal(await page.locator(".arena-calculator").count(), 0);
-  assert.equal(await page.locator(".arena-review__card").count(), 2);
+  assert.equal(await page.locator(".arena-review__card").count(), 3);
   assert.equal(await page.locator(".arena-teams .arena-team").count(), 3);
 });
 
@@ -400,4 +393,21 @@ test("calculated mobile cards preserve five slots and disclose their score befor
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
   await team.scrollIntoViewIfNeeded();
   await team.screenshot({ path: fileURLToPath(new URL("../work/arena-browser/calculated-mobile.png", import.meta.url)) });
+});
+
+test("released Goddeath participates in the owned calculator with her individual generation profile", async (t) => {
+  const names = ["Jackal", "Centi", "Scarlet: Goddeath", "Marian: Queen", "Rapunzel: Sanctuary"];
+  const owned = roster.filter(({ name }) => names.includes(name));
+  assert.equal(owned.length, 5);
+  const page = await session(t, { owned: owned.map(({ id }) => id), viewport: { width: 320, height: 1000 } });
+  await page.getByRole("radio", { name: "자체 계산", exact: true }).check();
+  const team = page.locator(".arena-calculated-team");
+  assert.equal(await team.count(), 1);
+  assert.deepEqual(new Set(await team.locator(".arena-member__name").allTextContents()), new Set(owned.map(({ nameKo }) => nameKo)));
+  assert.equal(await team.locator(".arena-calculated-team__unknown").count(), 0);
+  await team.getByText("점수 근거와 니케별 기여", { exact: true }).click();
+  const contribution = team.locator(".arena-contributions > li").filter({ has: page.getByText("홍련 : 신살", { exact: true }) });
+  assert.equal(await contribution.locator("dd").first().innerText(), "5");
+  assert.match(await contribution.innerText(), /개별 역할 프로필/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
 });

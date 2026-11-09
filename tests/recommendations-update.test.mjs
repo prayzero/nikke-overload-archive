@@ -50,32 +50,61 @@ test("bunny builds distinguish fixed burst charge time from ordinary full-charge
   }
 });
 
-test("anniversary guidance preserves early assumptions without inventing Sanctuary line counts", () => {
+test("anniversary follow-up uses published targets while preserving Marian's conditional ammo requirements", () => {
   const marian = byName(overloads, "Marian: Queen");
-  assert.match(marian.mode, /초기 분석/);
-  assert.match(marian.note, /Tier 11/);
+  assert.equal(marian.mode, "PvE");
+  assert.equal(marian.verifiedAt, "2026-11-09");
+  assert.match(marian.note, /1~4줄/);
+  assert.match(marian.note, /68\.93%/);
+  assert.match(marian.note, /SR 소장품 15레벨/);
+  assert.match(marian.note, /자동 지연/);
+  assert.doesNotMatch(marian.note, /출시 전|미공개|Tier 11/);
   assert.equal(marian.primary.reduce((sum, { count }) => sum + count, 0), 9);
-  assert.deepEqual(marian.alternatives, ["critRate"]);
+  assert.deepEqual(marian.alternatives, ["critRate", "critDamage"]);
   assert.equal(byName(cubes, marian.name).primary, "bastion");
-  assert.deepEqual(byName(cubes, marian.name).pvp, []);
+  assert.deepEqual(byName(cubes, marian.name).alternatives, ["resilience", "destruction"]);
+  assert.deepEqual(byName(cubes, marian.name).pvp, ["tempering", "vigor", "bastion"]);
   for (const records of [overloads, cubes]) {
     const rapunzel = byName(records, "Rapunzel: Sanctuary");
-    assert.match(rapunzel.mode, /출시 초기/);
     assert.equal(rapunzel.confidence, "guide");
-    assert.equal(rapunzel.verifiedAt, "2026-10-30");
+    assert.equal(rapunzel.verifiedAt, "2026-11-09");
+    assert.doesNotMatch(rapunzel.note, /미공개|출시 초기/);
   }
   const build = byName(overloads, "Rapunzel: Sanctuary");
-  assert.equal(build.reviewStatus, "no-target");
-  assert.deepEqual(build.primary, []);
-  assert.deepEqual(build.alternatives, ["chargeSpeed", "element", "maxAmmo", "chargeDamage"]);
-  assert.match(build.note, /풀 차지 상태일 때에 한정/);
-  assert.match(build.note, /줄 수와 확정 효율 순위를 제공하지 않아/);
+  assert.equal(build.reviewStatus, "reviewed");
+  assert.deepEqual(build.primary, [
+    { stat: "element", count: 4, grade: "ideal" },
+    { stat: "attack", count: 4, grade: "ideal" },
+    { stat: "maxAmmo", count: 1, grade: "ideal" },
+  ]);
+  assert.deepEqual(build.alternatives, ["critDamage", "critRate"]);
+  assert.match(build.note, /풀 차지 상태에 한정/);
+  assert.match(build.note, /모든 팀에서 필수 투자는 아닙니다/);
   const cube = byName(cubes, build.name);
   assert.equal(cube.reviewStatus, "reviewed");
   assert.equal(cube.primary, "resilience");
-  assert.deepEqual(cube.alternatives, ["adjutant", "vigor"]);
-  assert.deepEqual(cube.pvp, []);
-  assert.match(cube.note, /출처별 우선 후보가 다르므로/);
+  assert.deepEqual(cube.alternatives, ["bastion", "destruction"]);
+  assert.deepEqual(cube.pvp, ["tempering", "vigor", "bastion"]);
+  assert.match(cube.note, /완성 편성.*보장하지 않습니다/);
+});
+
+test("Scarlet Goddeath distinguishes normal-attack crit buffs from skill hits and cube level tradeoffs", () => {
+  const build = byName(overloads, "Scarlet: Goddeath");
+  const cube = byName(cubes, build.name);
+  assert.ok(roster.some(({ name }) => name === build.name));
+  assert.equal(build.verifiedAt, "2026-11-09");
+  assert.equal(cube.verifiedAt, "2026-11-09");
+  assert.equal(build.reviewStatus, "reviewed");
+  assert.equal(build.primary.reduce((sum, { count }) => sum + count, 0), 8);
+  assert.ok(build.alternatives.includes("critRate"));
+  assert.ok(build.alternatives.includes("critDamage"));
+  assert.ok(!build.avoid.includes("critRate"));
+  assert.ok(!build.primary.some(({ stat }) => stat === "maxAmmo" || stat === "chargeSpeed"));
+  assert.match(build.note, /발도 추가타와 버스트 단일 타격/);
+  assert.equal(cube.primary, "piercing");
+  assert.deepEqual(cube.alternatives, ["resilience", "bastion", "destruction"]);
+  assert.match(cube.note, /13레벨 미만.*15레벨/);
+  assert.deepEqual(cube.pvp, ["tempering", "vigor", "bastion"]);
 });
 
 test("mechanic-specific advice replaces misleading weapon defaults", () => {

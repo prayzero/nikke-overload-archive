@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/vendor/fast-glob-compat/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
