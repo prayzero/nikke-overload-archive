@@ -179,13 +179,13 @@ test("Marian Queen and Sanctuary can form a calculated team while untriggered re
   assert.match(team.style, /실전 미검증/);
 });
 
-test("all 205 owned characters finish within a bounded workload with valid non-overlapping teams", async () => {
+test("all released owned characters finish within a bounded workload with valid non-overlapping teams", async () => {
   const roster = JSON.parse(await readFile(rosterPath, "utf8"));
   const model = JSON.parse(await readFile(modelPath, "utf8"));
   const start = performance.now();
   const result = generate(roster, model, { favoriteIds: roster.map(({ id }) => id) });
   const elapsed = performance.now() - start;
-  assert.equal(roster.length, 205);
+  assert.equal(roster.length, 206);
   assert.equal(result.teams.length, 3);
   assert.equal(new Set(result.teams.flatMap(({ members }) => members.map(({ id }) => id))).size, 15);
   assert.ok(result.examinedCount < 150000, `candidate evaluations: ${result.examinedCount}`);
@@ -194,4 +194,22 @@ test("all 205 owned characters finish within a bounded workload with valid non-o
     assert.equal(evaluateCalculatedTeam({ members: team.members, model, favoriteIds: roster.map(({ id }) => id) }).score, team.score);
     assert.ok(Number.isFinite(team.score) && team.score >= 0 && team.score <= 100);
   }
+});
+
+test("Goddeath retains her generation off burst while her own burst damage requires activation", async () => {
+  const roster = JSON.parse(await readFile(rosterPath, "utf8"));
+  const model = JSON.parse(await readFile(modelPath, "utf8"));
+  const names = ["Jackal", "Centi", "Scarlet", "Scarlet: Goddeath", "Rapunzel: Sanctuary"];
+  const members = names.map((name) => roster.find((nikke) => nikke.name === name));
+  assert.ok(members.every(Boolean));
+  const goddeath = model.profiles.find(({ name }) => name === "Scarlet: Goddeath");
+  assert.ok(goddeath, "The released unit needs an individual calculation profile");
+  assert.equal(goddeath.generation, model.profiles.find(({ name }) => name === "Centi").generation);
+  const inactive = evaluateCalculatedTeam({ members, model });
+  const active = evaluateCalculatedTeam({ members: [members[0], members[1], members[3], members[2], members[4]], model });
+  const contribution = (team) => team.contributions.find(({ id }) => id === members[3].id);
+  assert.equal(contribution(inactive).generation, goddeath.generation);
+  assert.equal(contribution(inactive).offense, goddeath.passiveOffense);
+  assert.equal(contribution(active).offense, goddeath.passiveOffense + goddeath.burstOffense);
+  assert.equal(active.burst[2], "Scarlet: Goddeath");
 });

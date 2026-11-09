@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
@@ -24,6 +26,38 @@ test("React, React DOM and RSC use the same exact version", async () => {
 test("the lockfile root matches the dependency declarations", () => {
   for (const kind of ["dependencies", "devDependencies"]) {
     assert.deepEqual(lock.packages[""][kind], manifest[kind], `${kind} must match package-lock.json`);
+  }
+});
+
+test("the patched minimatch preserves typed-parser default-project matching", async () => {
+  const parser = await import("@typescript-eslint/parser");
+  const fixture = await mkdtemp(path.join(os.tmpdir(), "nikke-parser-한글-"));
+  try {
+    await mkdir(path.join(fixture, "src"));
+    await writeFile(path.join(fixture, "src/main.ts"), "export const value = 1;\n");
+    await writeFile(path.join(fixture, "tsconfig.json"), JSON.stringify({
+      compilerOptions: { target: "ES2022", allowJs: true }, include: ["src/**/*.ts"],
+    }));
+    const code = "export const value = 1;\n";
+    for (const name of ["eslint.config.js", ".config.js", "outside.ts"]) {
+      await writeFile(path.join(fixture, name), code);
+    }
+    const options = {
+      sourceType: "module", tsconfigRootDir: fixture,
+      projectService: { allowDefaultProject: ["*.js"] },
+    };
+    // The real consumer uses minimatch's named CJS API with dot:true. Both
+    // ordinary and hidden JS files must match; another extension must not.
+    for (const name of ["eslint.config.js", ".config.js"]) {
+      const result = parser.parseForESLint(code, { ...options, filePath: path.join(fixture, name) });
+      assert.ok(result.services.program, `${name}: expected type-aware default project`);
+    }
+    assert.throws(() => parser.parseForESLint(code, {
+      ...options, filePath: path.join(fixture, "outside.ts"),
+    }), /was not found by the project service|does not match/);
+  } finally {
+    parser.clearCaches();
+    await rm(fixture, { recursive: true, force: true });
   }
 });
 

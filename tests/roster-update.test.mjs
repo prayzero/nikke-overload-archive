@@ -5,7 +5,7 @@ import test from "node:test";
 const roster = JSON.parse(await readFile(new URL("../app/roster.json", import.meta.url), "utf8"));
 
 test("keeps all previously saved ownership IDs stable", async () => {
-  for (const snapshot of ["2026-09-16", "2026-10-28"]) {
+  for (const snapshot of ["2026-09-16", "2026-10-28", "2026-10-30"]) {
     const previous = JSON.parse(await readFile(new URL(`./fixtures/roster-ids-${snapshot}.json`, import.meta.url), "utf8"));
     for (const [name, id] of Object.entries(previous)) {
       assert.equal(roster.find((nikke) => nikke.name === name)?.id, id, `${name}: saved ownership ID changed since ${snapshot}`);
@@ -68,13 +68,29 @@ test("includes the two released fourth-anniversary Nikkes with verified attribut
   assert.equal(new Set(roster.map(({ name }) => name)).size, roster.length, "Names must remain unique");
 });
 
-test("October 30 roster excludes the November 5 release and uses only verified new images", () => {
-  assert.ok(!roster.some(({ name }) => name === "Scarlet: Goddeath"));
+test("anniversary roster uses verified portrait and full-body image sources", () => {
   const marian = roster.find(({ name }) => name === "Marian: Queen");
   const rapunzel = roster.find(({ name }) => name === "Rapunzel: Sanctuary");
-  // A verified portrait is intentional until a full-body asset is available.
-  assert.equal(marian.artwork, marian.image);
-  assert.match(new URL(marian.artwork).pathname, /\/a447f201daaa56f38a438779cc967c77\.webp$/);
+  // The basic full-body asset became available after the October 30 review.
+  assert.notEqual(marian.artwork, marian.image);
+  assert.match(new URL(marian.image).pathname, /\/a447f201daaa56f38a438779cc967c77\.webp$/);
+  assert.match(new URL(marian.artwork).pathname, /\/Marian_Queen_FB\.png\/revision\//);
   assert.match(new URL(rapunzel.artwork).pathname, /\/Rapunzel_Sanctuary_FB\.png\/revision\//);
-  assert.doesNotMatch(marian.artwork, /Marian_Queen_FB|marian-queen_full/);
+  assert.doesNotMatch(marian.artwork, /Last_Affection|marian-queen_full/);
+});
+
+test("November 9 roster includes the released Scarlet Goddeath without replacing earlier Scarlet variants", () => {
+  const scarlet = roster.find(({ name }) => name === "Scarlet: Goddeath");
+  assert.ok(scarlet, "November 5 release must be available by the November 9 review");
+  assert.deepEqual(
+    [scarlet.id, scarlet.nameKo, scarlet.class, scarlet.weapon, scarlet.burst, scarlet.manufacturer, scarlet.code],
+    ["25133", "홍련 : 신살", "attacker", "AR", "3", "pilgrim", "fire"],
+  );
+  assert.equal(new URL(scarlet.image).hostname, "sg-tools-cdn.blablalink.com");
+  assert.match(new URL(scarlet.image).pathname, /\/2668d4ae685fe7ec154f20f2301120d3\.webp$/);
+  assert.match(new URL(scarlet.artwork).pathname, /\/Scarlet_Goddeath_FB\.png\/revision\//);
+  assert.equal(roster.find(({ name }) => name === "Scarlet")?.id, "265");
+  assert.equal(roster.find(({ name }) => name === "Scarlet: Black Shadow")?.id, "8816");
+  assert.equal(roster.length, 206);
+  assert.deepEqual(roster.map(({ name }) => name), roster.map(({ name }) => name).sort((a, b) => a.localeCompare(b)));
 });
